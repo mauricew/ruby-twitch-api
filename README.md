@@ -1,8 +1,6 @@
-# Twitch::Api
+# Ruby Twitch API (work in progress)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/twitch/api`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This library is a Ruby implementation of the [Twitch Helix API](https://dev.twitch.tv/docs/api).
 
 ## Installation
 
@@ -21,8 +19,14 @@ Or install it yourself as:
     $ gem install twitch-api
 
 ## Usage
-
-TODO: Write usage instructions here
+The initially available methods take in a hash equal to the GET parameters of the API endpoint, and return an typed array of the items requested.
+```
+client = Twitch::Client.new client_id: "YOUR_CLIENT_ID"
+# Get top live streams
+client.get_streams
+# Get a single user
+client.get_users({login: "disguisedtoasths"}).first
+```
 
 ## Development
 
@@ -32,7 +36,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/twitch-api.
+Upon reaching version 0.1.0, bug reports and pull requests will be welcome on GitHub at https://github.com/mauricew/ruby-twitch-api.
 
 ## License
 
