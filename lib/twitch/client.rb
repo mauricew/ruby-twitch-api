@@ -3,6 +3,8 @@ require "faraday_middleware"
 
 require "twitch/stream"
 require "twitch/user"
+require "twitch/game"
+require "twitch/video"
 
 module Twitch
   class Client
@@ -33,6 +35,18 @@ module Twitch
       res = get('users', options)
 
       users = res.body['data'].map { |u| User.new(u) }
+    end
+
+    def get_games(options = {})
+      res = get('games', options)
+
+      games = res.body['data'].map { |g| Game.new(g) }
+    end
+
+    def get_videos(options = {})
+      res = get('videos', options)
+
+      videos = res.body['data'].map { |v| Video.new(v) }
     end
 
     private
