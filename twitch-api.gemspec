@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Ruby client for the Twitch Helix API.}
   spec.homepage      = "https://github.com/mauricew/ruby-twitch-api"
   spec.license       = "MIT"
+  spec.required_ruby_version = ">= 2.0"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
