@@ -4,7 +4,8 @@ require "faraday_middleware"
 require "twitch/response"
 require "twitch/api_error"
 require "twitch/stream"
-require "twitch/user"
+require "twitch/stream_metadata"
+require "twitch/user_follow"
 require "twitch/game"
 require "twitch/video"
 
@@ -27,6 +28,14 @@ module Twitch
       end
     end
 
+
+    def get_games(options = {})
+      res = get('games', options)
+
+      games = res[:data].map { |g| Game.new(g) }
+      Response.new(games, res[:rate_limit_headers])
+    end
+
     def get_streams(options = {})
       res = get('streams', options)
 
@@ -34,18 +43,25 @@ module Twitch
       Response.new(streams, res[:rate_limit_headers], res[:pagination])
     end
 
+    def get_streams_metadata(options = {})
+      res = get('streams/metadata', options)
+
+      stream_metadata = res[:data].map { |s| StreamMetadata.new(s) }
+      Response.new(stream_metadata, res[:rate_limit_headers], res[:pagination])
+    end
+
+    def get_users_follows(options = {})
+      res = get('users/follows', options)
+
+      users = res[:data].map { |u| UserFollow.new(u) }
+      Response.new(users, res[:rate_limit_headers], res[:pagination])
+    end
+
     def get_users(options = {})
       res = get('users', options)
 
       users = res[:data].map { |u| User.new(u) }
       Response.new(users, res[:rate_limit_headers])
-    end
-
-    def get_games(options = {})
-      res = get('games', options)
-
-      games = res[:data].map { |g| Game.new(g) }
-      Response.new(games, res[:rate_limit_headers])
     end
 
     def get_videos(options = {})
