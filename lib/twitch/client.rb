@@ -1,6 +1,7 @@
 require "faraday"
 require "faraday_middleware"
 
+require "twitch/response"
 require "twitch/stream"
 require "twitch/user"
 require "twitch/game"
@@ -28,33 +29,37 @@ module Twitch
     def get_streams(options = {})
       res = get('streams', options)
 
-      streams = res.body['data'].map { |s| Stream.new(s) }
+      streams = res[:data].map { |s| Stream.new(s) }
+      Response.new(streams, res[:rate_limit_headers], res[:pagination])
     end
 
     def get_users(options = {})
       res = get('users', options)
 
-      users = res.body['data'].map { |u| User.new(u) }
+      users = res[:data].map { |u| User.new(u) }
+      Response.new(users, res[:rate_limit_headers])
     end
 
     def get_games(options = {})
       res = get('games', options)
 
-      games = res.body['data'].map { |g| Game.new(g) }
+      games = res[:data].map { |g| Game.new(g) }
+      Response.new(games, res[:rate_limit_headers])
     end
 
     def get_videos(options = {})
       res = get('videos', options)
 
-      videos = res.body['data'].map { |v| Video.new(v) }
+      videos = res[:data].map { |v| Video.new(v) }
+      Response.new(videos, res[:rate_limit_headers], res[:pagination])
     end
 
     private
 
       def get(resource, params)
-        res = @conn.get(resource, params)
+        http_res = @conn.get(resource, params)
 
-        unless res.status == 200
+        unless http_res.status == 200
           msg= %Q{The server returned an error.
 #{res.body["error"]}: #{res.body["message"]}
 Status: #{res.body["status"]}}
@@ -62,7 +67,17 @@ Status: #{res.body["status"]}}
           raise Exception.new(msg)
         end
 
-        res
+        rate_limit_headers = Hash[http_res.headers.select { |k,v|
+          k.to_s.downcase.match(/^ratelimit/)
+        }.map { |k,v| [k.gsub('ratelimit-', '').to_sym, v] }]
+
+        pagination = http_res.body['pagination'] if http_res.body.key?('pagination')
+
+        { 
+          data: http_res.body['data'],
+          pagination: pagination,
+          rate_limit_headers: rate_limit_headers
+        }
       end
   end
 end
