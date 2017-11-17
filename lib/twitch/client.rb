@@ -2,6 +2,7 @@ require "faraday"
 require "faraday_middleware"
 
 require "twitch/response"
+require "twitch/api_error"
 require "twitch/stream"
 require "twitch/user"
 require "twitch/game"
@@ -59,12 +60,8 @@ module Twitch
       def get(resource, params)
         http_res = @conn.get(resource, params)
 
-        unless http_res.status == 200
-          msg= %Q{The server returned an error.
-#{res.body["error"]}: #{res.body["message"]}
-Status: #{res.body["status"]}}
-
-          raise Exception.new(msg)
+        unless http_res.success?
+          raise ApiError.new(http_res.status, http_res.body)
         end
 
         rate_limit_headers = Hash[http_res.headers.select { |k,v|
