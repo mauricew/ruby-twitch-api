@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams?user_login=disguisedtoasths
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Client-Id:
+      - "<API KEY>"
+      User-Agent:
+      - twitch-api ruby client 0.0.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Server:
+      - nginx
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, private
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Ratelimit-Limit:
+      - '30'
+      Ratelimit-Remaining:
+      - '29'
+      Ratelimit-Reset:
+      - '1511226560'
+      Twitch-Trace-Id:
+      - abb8886b7843b4b1ccc50877457f1eed
+      X-Ctxlog-Logid:
+      - 1-5a137c88-08d9e58123c8dc79082bedbb
+      Front-End-Https:
+      - 'on'
+      Timing-Allow-Origin:
+      - https://www.twitch.tv
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 21 Nov 2017 01:08:24 GMT
+      Content-Length:
+      - '411'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - AWSALB=qGYwhF5ivzFFyyFRg2HMuMTwVorsbNAxqSjdsdEDOzj3i6nYBlPZr1TCQZ9yRTZHG/e5k4SW6ePt4rjoa0mozxvyTV4sYGFLfui6qfdTKhKGrQ4trWMM2skRr9cE;
+        Expires=Tue, 28 Nov 2017 01:08:24 GMT; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"26781103760","user_id":"87204022","game_id":"138585","community_ids":[],"type":"live","title":"Disguised
+        Toast - !highlights - Meat Wagon Egg Priest","viewer_count":9175,"started_at":"2017-11-20T22:59:14Z","language":"en","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_disguisedtoasths-{width}x{height}.jpg"}],"pagination":{"cursor":"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MX19"}}'
+    http_version: 
+  recorded_at: Tue, 21 Nov 2017 01:08:24 GMT
+recorded_with: VCR 3.0.3

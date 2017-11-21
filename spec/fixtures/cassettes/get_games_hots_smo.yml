@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/games?name%5B%5D=Heroes%20of%20the%20Storm&name%5B%5D=Super%20Mario%20Odyssey
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Client-Id:
+      - "<API KEY>"
+      User-Agent:
+      - twitch-api ruby client 0.0.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Server:
+      - nginx
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, private
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Ratelimit-Limit:
+      - '30'
+      Ratelimit-Remaining:
+      - '29'
+      Ratelimit-Reset:
+      - '1511225880'
+      Twitch-Trace-Id:
+      - 252749297eb241303ee67397d536f34e
+      X-Ctxlog-Logid:
+      - 1-5a1379dd-4c775cfd53837ffc669b634c
+      Front-End-Https:
+      - 'on'
+      Timing-Allow-Origin:
+      - https://www.twitch.tv
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 21 Nov 2017 00:57:01 GMT
+      Content-Length:
+      - '303'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - AWSALB=7xVmDstLRVNab07FKSCxndLEOjqX231TS2Q1RMx7IrXH5GLj/7Zm6eoYwh9lMXnZXmMEht0uXX+muNACaEf4EopS3LO8N0Wrjj4wvcYVwI5yJeufxEGqGaZX16Qy;
+        Expires=Tue, 28 Nov 2017 00:57:01 GMT; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"32959","name":"Heroes of the Storm","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Heroes%20of%20the%20Storm-{width}x{height}.jpg"},{"id":"493997","name":"Super
+        Mario Odyssey","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Super%20Mario%20Odyssey-{width}x{height}.jpg"}]}'
+    http_version: 
+  recorded_at: Tue, 21 Nov 2017 00:57:01 GMT
+recorded_with: VCR 3.0.3

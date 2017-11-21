@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/users?id=18587270
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Client-Id:
+      - "<API KEY>"
+      User-Agent:
+      - twitch-api ruby client 0.0.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Server:
+      - nginx
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, private
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Ratelimit-Limit:
+      - '30'
+      Ratelimit-Remaining:
+      - '29'
+      Ratelimit-Reset:
+      - '1511226270'
+      Twitch-Trace-Id:
+      - c135e2626d8035150cd63a1960d5e7cb
+      X-Ctxlog-Logid:
+      - 1-5a137b64-54f085671f88be33319f05f4
+      Front-End-Https:
+      - 'on'
+      Timing-Allow-Origin:
+      - https://www.twitch.tv
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 21 Nov 2017 01:03:32 GMT
+      Content-Length:
+      - '538'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - AWSALB=tHCFmY8hTIRY173YvePK0zuYCqyH1NtIXr4H9uDui1bkMH2+8rtaTg30uWg/SIcMeO2e30cC5DeB4jKSMzu/anLBIrXbTNTbQ6ONzdle5VYxyPta/uzuNoFVJhvh;
+        Expires=Tue, 28 Nov 2017 01:03:32 GMT; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"18587270","login":"day9tv","display_name":"Day9tv","type":"","broadcaster_type":"partner","description":"A
+        mixture of thoughtful gaming strategy, comedy, and silly fun. Featuring Hearthstone,
+        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-channel_offline_image-56ca9b8a5b0fd49f-1920x1080.jpeg","view_count":76456597}]}'
+    http_version: 
+  recorded_at: Tue, 21 Nov 2017 01:03:32 GMT
+recorded_with: VCR 3.0.3

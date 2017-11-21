@@ -1,4 +1,6 @@
 require "bundler/setup"
+require "webmock/rspec"
+require "vcr"
 require "twitch-api"
 
 RSpec.configure do |config|
@@ -11,4 +13,11 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  VCR.configure do |c|
+    c.cassette_library_dir = 'spec/fixtures/cassettes'
+    c.filter_sensitive_data('<API KEY>') { ENV['TWITCH_CLIENT_ID'] }
+    c.hook_into :webmock
+  end
+
 end
