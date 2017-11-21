@@ -3,9 +3,9 @@ module Twitch
     attr_reader :id, :name, :box_art_url
 
     def initialize(attributes = {})
-      attributes.each do |k, v|
-        instance_variable_set("@#{k}", v)
-      end
+      @id = attributes['id']
+      @name = attributes['name']
+      @box_art_url = attributes['name']
     end
   end
 end

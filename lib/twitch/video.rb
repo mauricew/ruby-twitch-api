@@ -4,7 +4,8 @@ module Twitch
   class Video
     DATE_ATTRIBUTES = [:created_at, :published_at]
 
-    attr_reader :id, :title, :description, :language, :view_count, :created_at, :published_at, :thumbnail_url
+    attr_reader :id, :title, :description, :language, :view_count, :created_at, 
+      :published_at, :thumbnail_url, :type, :url, :user_id, :viewable, :duration
 
     def initialize(attributes = {})
       attributes.each do |k, v|
