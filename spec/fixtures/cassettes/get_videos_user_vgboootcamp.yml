@@ -10,7 +10,7 @@ http_interactions:
       Client-Id:
       - "<API KEY>"
       User-Agent:
-      - twitch-api ruby client 0.0.2
+      - twitch-api ruby client 0.1.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -35,13 +35,13 @@ http_interactions:
       Ratelimit-Limit:
       - '30'
       Ratelimit-Remaining:
-      - '29'
+      - '25'
       Ratelimit-Reset:
-      - '1511226755'
+      - '1511229410'
       Twitch-Trace-Id:
-      - adef343080ef5e29d15dc193f55b51ef
+      - b5a5e8fee51abca4f83a3673a4b67f95
       X-Ctxlog-Logid:
-      - 1-5a137d47-6f4b1fe30cfc897c7ab1339e
+      - 1-5a1387aa-6ca088ed3e52618c6eb9d806
       Front-End-Https:
       - 'on'
       Timing-Allow-Origin:
@@ -49,14 +49,14 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Tue, 21 Nov 2017 01:11:35 GMT
+      - Tue, 21 Nov 2017 01:55:54 GMT
       Content-Length:
       - '10007'
       Connection:
       - keep-alive
       Set-Cookie:
-      - AWSALB=MYTX60aaVn0vp5Pw1Mi34DQUBGv0kyNNPhjrpY1evXVR1+nNwEoPPp80+c5BPAChJzrOiliUEhoYNwLwNpp2KRiFZf+63AEw78j1ZjbM9aLUpsIKJyZxDXLDkGHz;
-        Expires=Tue, 28 Nov 2017 01:11:35 GMT; Path=/
+      - AWSALB=mTl5Yk1ueJlBvhxFriP44jZnBStZeCLp3dkfPcHqhl8HPHq/WORKv6w6J4yL/xwHkBGV3Qi52uBV1yoQ2yf2bxW68ddjo1NNufwpu6DdUjsPXOLXbzol/0trpZwI;
+        Expires=Tue, 28 Nov 2017 01:55:54 GMT; Path=/
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -81,7 +81,7 @@ http_interactions:
         anR2bncubmV0L3MzX3ZvZHMvMmViNmFjNTNhODNhYWY0ODQ2Yzdfdmdib290
         Y2FtcF8yNjc0NjI3NzA4OF83NDAzMTI0OTcvdGh1bWIvdGh1bWIwLSV7d2lk
         dGh9eCV7aGVpZ2h0fS5qcGciLCJ2aWV3YWJsZSI6InB1YmxpYyIsInZpZXdf
-        Y291bnQiOjExMSwibGFuZ3VhZ2UiOiJlbiIsInR5cGUiOiJhcmNoaXZlIiwi
+        Y291bnQiOjExMiwibGFuZ3VhZ2UiOiJlbiIsInR5cGUiOiJhcmNoaXZlIiwi
         ZHVyYXRpb24iOiIyaDI3bTIzcyJ9LHsiaWQiOiIyMDE1NzM5MzgiLCJ1c2Vy
         X2lkIjoiOTg0Njc1OCIsInRpdGxlIjoiU0BYIDIyOCBNZWxlZSBXZWRuZXNk
         YXlzISIsImRlc2NyaXB0aW9uIjoiIiwiY3JlYXRlZF9hdCI6IjIwMTctMTEt
@@ -284,5 +284,5 @@ http_interactions:
         Z2luYXRpb24iOnsiY3Vyc29yIjoiZXlKaUlqcHVkV3hzTENKaElqcDdJazlt
         Wm5ObGRDSTZNakI5ZlEifX0=
     http_version: 
-  recorded_at: Tue, 21 Nov 2017 01:11:35 GMT
+  recorded_at: Tue, 21 Nov 2017 01:55:54 GMT
 recorded_with: VCR 3.0.3

@@ -14,7 +14,9 @@ module Twitch
   class Client
     API_ENDPOINT = "https://api.twitch.tv/helix".freeze
 
-    def initialize(client_id:, access_token: nil)
+    def initialize(client_id: nil, access_token: nil)
+      raise "Client ID is required" if client_id.nil?
+      
       headers = {
         "Client-ID": client_id,
         "User-Agent": "twitch-api ruby client #{Twitch::VERSION}"
