@@ -25,6 +25,7 @@ RSpec.describe Twitch::Client do
       VCR.use_cassette('get_streams_default') do
         res = @client.get_streams({})
 
+        # Expecting the site to have regular use
         expect(res.data.length).to eq(20)
       end
     end
@@ -61,6 +62,17 @@ RSpec.describe Twitch::Client do
         res = @client.get_games({name: ["Heroes of the Storm", "Super Mario Odyssey"]})
 
         expect(res.data.length).to eq(2)
+      end
+    end
+  end
+
+  describe '#get_top_games' do
+    it 'can return the top games by current viewership' do
+      VCR.use_cassette('get_top_games') do
+        res = @client.get_top_games({first: 5})
+
+        # Expecting the site to have regular use
+        expect(res.data.length).to eq(5)
       end
     end
   end

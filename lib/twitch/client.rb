@@ -47,6 +47,13 @@ module Twitch
       Response.new(games, res[:rate_limit_headers])
     end
 
+    def get_top_games(options = {})
+      res = get('games/top', options)
+
+      games = res[:data].map { |g| Game.new(g) }
+      Response.new(games, res[:rate_limit_headers], res[:pagination])
+    end
+
     def get_streams(options = {})
       res = get('streams', options)
 
