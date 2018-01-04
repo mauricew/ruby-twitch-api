@@ -16,13 +16,22 @@ module Twitch
     API_ENDPOINT = "https://api.twitch.tv/helix".freeze
 
     def initialize(client_id: nil, access_token: nil)
-      raise "Client ID is required" if client_id.nil?
-      
+      if client_id.nil? && access_token.nil?
+        raise "An identifier token (client ID or bearer token) is required"
+      elsif !!client_id && !!access_token
+        warn(%{WARNING:
+It is recommended that only one identifier token is specified.
+Unpredictable behavior may follow.})
+      end
+
       headers = {
-        "Client-ID": client_id,
         "User-Agent": "twitch-api ruby client #{Twitch::VERSION}"
       }
+      unless client_id.nil?
+        headers["Client-ID"] = client_id
+      end
       unless access_token.nil?
+        access_token = access_token.gsub(/^Bearer /, "")
         headers["Authorization"] = "Bearer #{access_token}"
       end
       
