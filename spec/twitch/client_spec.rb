@@ -7,6 +7,19 @@ RSpec.describe Twitch::Client do
     @client = Twitch::Client.new(client_id: @api_key)
   end
 
+  describe '#get_clips' do
+    it 'will return information about a clip' do
+      VCR.use_cassette('get_clips_OEHHL') do
+        broadcaster_id_greekgodx = 15310631
+
+        res = @client.get_clips({id: 'ObliqueEncouragingHumanHumbleLife'})
+
+        expect(res.data).to_not be_empty
+        expect(res.data.first.broadcaster_id).to eq(broadcaster_id_greekgodx.to_s)
+      end
+    end
+  end
+
   describe '#get_streams' do
     it 'will return the 20 most concurrently watched streams by default' do
       VCR.use_cassette('get_streams_default') do

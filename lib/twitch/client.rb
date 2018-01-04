@@ -3,11 +3,12 @@ require "faraday_middleware"
 
 require "twitch/response"
 require "twitch/api_error"
+require "twitch/clip"
+require "twitch/game"
 require "twitch/stream"
 require "twitch/stream_metadata"
 require "twitch/user"
 require "twitch/user_follow"
-require "twitch/game"
 require "twitch/video"
 
 module Twitch
@@ -31,6 +32,13 @@ module Twitch
       end
     end
 
+
+    def get_clips(options = {})
+      res = get('clips', options)
+
+      clips = res[:data].map { |c| Clip.new(c) }
+      Response.new(clips, res[:rate_limit_headers])
+    end
 
     def get_games(options = {})
       res = get('games', options)
