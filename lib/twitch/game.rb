@@ -5,7 +5,7 @@ module Twitch
     def initialize(attributes = {})
       @id = attributes['id']
       @name = attributes['name']
-      @box_art_url = attributes['name']
+      @box_art_url = attributes['box_art_url']
     end
   end
 end
