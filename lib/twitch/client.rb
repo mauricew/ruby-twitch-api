@@ -4,6 +4,7 @@ require "faraday_middleware"
 require "twitch/response"
 require "twitch/api_error"
 require "twitch/clip"
+require "twitch/entitlement_grant_url"
 require "twitch/game"
 require "twitch/stream"
 require "twitch/stream_metadata"
@@ -47,6 +48,13 @@ Unpredictable behavior may follow.})
 
       clip = res[:data].map { |c| Clip.new(c) }
       Response.new(clip, res[:rate_limit_headers])
+    end
+
+    def create_entitlement_grant_url(options = {})
+      res = post('entitlements/upload', options)
+
+      entitlement_grant = res[:data].map { |e| EntitlementGrantUrl.new(e) }
+      Response.new(entitlement_grant, res[:rate_limit_headers])
     end
 
     def get_clips(options = {})
