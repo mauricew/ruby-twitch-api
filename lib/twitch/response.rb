@@ -1,8 +1,25 @@
 module Twitch
+  # A compiled response from the API.
   class Response
-    attr_reader :data, :pagination,
-      :rate_limit, :rate_limit_remaining, :rate_limit_resets_at,
-      :clip_rate_limit, :clip_rate_limit_remaining
+    # The requested data.
+    attr_reader :data
+    # A hash containing a pagination token.  
+    # Access it with
+    #    pagination['cursor']
+    attr_reader :pagination
+    # The total amount of calls that can be used in
+    # the rate limit period (one minute by default).
+    attr_reader :rate_limit
+    # The remaining amount of calls for the rate limit period.
+    attr_reader :rate_limit_remaining
+    # The date at which the rate limit is reset.
+    attr_reader :rate_limit_resets_at
+    # The total amount of clips that can be created in
+    # the clip rate limit period (currently unknown).
+    attr_reader :clip_rate_limit
+    # The remaining amount of clips that can be created in 
+    # the clip rate limit period. 
+    attr_reader :clip_rate_limit_remaining
 
     def initialize(data, rate_limit_headers, pagination = nil)
       @data = data

@@ -14,8 +14,16 @@ require "twitch/video"
 
 module Twitch
   class Client
+    # Helix API endpoint.
     API_ENDPOINT = "https://api.twitch.tv/helix".freeze
 
+    # Initializes a Twitch client.
+    # 
+    # - client_id [String] The client ID.
+    # Used as the Client-ID header in a request.
+    # - access_token [String] An access token.
+    # Used as the Authorization header in a request.
+    # Any "Bearer " prefix will be stripped.
     def initialize(client_id: nil, access_token: nil)
       if client_id.nil? && access_token.nil?
         raise "An identifier token (client ID or bearer token) is required"
@@ -142,11 +150,13 @@ Unpredictable behavior may follow.})
           raise ApiError.new(http_res.status, http_res.body)
         end
 
-        rate_limit_headers = Hash[http_res.headers.select { |k,v|
+        rate_limit_headers = Hash[http_res.headers.select do |k,v|
           k.to_s.downcase.match(/^ratelimit/)
-        }.map { |k,v| [k.gsub('ratelimit-', '').to_sym, v] }]
+        end.map { |k,v| [k.gsub('ratelimit-', '').to_sym, v] }]
 
-        pagination = http_res.body['pagination'] if http_res.body.key?('pagination')
+        if http_res.body.key?('pagination')
+          pagination = http_res.body['pagination'] 
+        end
 
         { 
           data: http_res.body['data'],
