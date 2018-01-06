@@ -42,6 +42,12 @@ Unpredictable behavior may follow.})
       end
     end
 
+    def create_clip(options = {})
+      res = post('clips', options)
+
+      clip = res[:data].map { |c| Clip.new(c) }
+      Response.new(clip, res[:rate_limit_headers])
+    end
 
     def get_clips(options = {})
       res = get('clips', options)
@@ -110,6 +116,11 @@ Unpredictable behavior may follow.})
 
       def get(resource, params)
         http_res = @conn.get(resource, params)
+        finish(http_res)
+      end
+
+      def post(resource, params)
+        http_res = @conn.post(resource, params)
         finish(http_res)
       end
 
