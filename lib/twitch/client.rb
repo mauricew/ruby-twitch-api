@@ -36,6 +36,7 @@ Unpredictable behavior may follow.})
       end
       
       @conn = Faraday.new(API_ENDPOINT, { headers: headers }) do |faraday|
+        faraday.request :json
         faraday.response :json
         faraday.adapter Faraday.default_adapter
       end
@@ -91,6 +92,13 @@ Unpredictable behavior may follow.})
       Response.new(users, res[:rate_limit_headers])
     end
 
+    def update_user(options = {})
+      res = put('users', options)
+
+      user = res[:data].map { |u| User.new(u) }
+      Response.new(user, res[:rate_limit_headers])
+    end
+
     def get_videos(options = {})
       res = get('videos', options)
 
@@ -102,7 +110,15 @@ Unpredictable behavior may follow.})
 
       def get(resource, params)
         http_res = @conn.get(resource, params)
+        finish(http_res)
+      end
 
+      def put(resource, params)
+        http_res = @conn.put(resource, params)
+        finish(http_res)
+      end
+
+      def finish(http_res)
         unless http_res.success?
           raise ApiError.new(http_res.status, http_res.body)
         end
