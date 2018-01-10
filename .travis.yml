@@ -1,5 +1,8 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.3.3
+  - 2.3.6
+  - 2.4.3
+env:
+  - TWITCH_CLIENT_ID=test
 before_install: gem install bundler -v 1.16.0

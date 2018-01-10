@@ -1,3 +1,7 @@
+[![Gem](https://img.shields.io/gem/v/twitch-api.svg)]()
+[![Downloads](https://img.shields.io/gem/dt/twitch-api.svg)]()
+[![Travis](https://img.shields.io/travis/mauricew/ruby-twitch-api.svg)]()
+[![License](https://img.shields.io/github/license/mauricew/ruby-twitch-api.svg)]()
 # Ruby Twitch API
 
 This library is a Ruby implementation of the [Twitch Helix API](https://dev.twitch.tv/docs/api).
@@ -72,7 +76,3 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/mauricew/ruby-twitch-api.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
