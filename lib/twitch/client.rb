@@ -3,9 +3,11 @@ require "faraday_middleware"
 
 require "twitch/response"
 require "twitch/api_error"
+require "twitch/bits_leader"
 require "twitch/clip"
 require "twitch/entitlement_grant_url"
 require "twitch/game"
+require "twitch/game_analytic"
 require "twitch/stream"
 require "twitch/stream_metadata"
 require "twitch/user"
@@ -72,6 +74,19 @@ Unpredictable behavior may follow.})
       Response.new(clips, res[:rate_limit_headers])
     end
 
+    def get_bits_leaderboard(options = {})
+      res = get('bits/leaderboard', options)
+
+      bits_leaders = res[:data].map { |bl| BitsLeader.new(bl) }
+      Response.new(
+        bits_leaders, 
+        res[:rate_limit_headers],
+        nil,
+        res[:full_body]['total'], 
+        res[:full_body]['date_range']
+      )
+    end
+
     def get_games(options = {})
       res = get('games', options)
 
@@ -84,6 +99,13 @@ Unpredictable behavior may follow.})
 
       games = res[:data].map { |g| Game.new(g) }
       Response.new(games, res[:rate_limit_headers], res[:pagination])
+    end
+
+    def get_game_analytics
+      res = get('analytics/games'. options)
+
+      game_analytics = res[:data].map { |ga| GameAnalytic.new(ga) }
+      Response.new(game_analytics, res[:rate_limit_headers])
     end
 
     def get_streams(options = {})
@@ -158,8 +180,10 @@ Unpredictable behavior may follow.})
           pagination = http_res.body['pagination'] 
         end
 
+        # TODO: The return object should only contain one instance of the response body.
         { 
           data: http_res.body['data'],
+          full_body: http_res.body,
           pagination: pagination,
           rate_limit_headers: rate_limit_headers
         }
