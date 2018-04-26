@@ -28,9 +28,17 @@ module Twitch
     # The remaining amount of clips that can be created in 
     # the clip rate limit period. 
     attr_reader :clip_rate_limit_remaining
+    # The HTTP raw response
+    attr_reader :raw
 
-    def initialize(data, rate_limit_headers, pagination = nil, total = nil, date_range = nil)
-      @data = data
+    def initialize(data_class, http_res)
+      @raw = http_res
+
+      @data = http_res.body['data'].map { |d| data_class.new(d) }
+
+      rate_limit_headers = Hash[http_res.headers.select do |k,v|
+        k.to_s.downcase.match(/^ratelimit/)
+      end.map { |k,v| [k.gsub('ratelimit-', '').to_sym, v] }]
 
       @rate_limit = rate_limit_headers[:limit].to_i
       @rate_limit_remaining = rate_limit_headers[:remaining].to_i
@@ -41,9 +49,9 @@ module Twitch
         @clip_rate_limit_remaining = rate_limit_headers[:'helixclipscreation-remaining']
       end
 
-      @pagination = pagination
-      @total = total
-      @date_range = date_range
+      @pagination = http_res.body['pagination']
+      @total = http_res.body['total']
+      @date_range = http_res.body['date_range']
     end
   end
 end
