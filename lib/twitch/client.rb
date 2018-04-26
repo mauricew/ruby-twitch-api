@@ -26,7 +26,9 @@ module Twitch
     # - access_token [String] An access token.
     # Used as the Authorization header in a request.
     # Any "Bearer " prefix will be stripped.
-    def initialize(client_id: nil, access_token: nil)
+    # - with_raw [Boolean] Whether to include raw HTTP response
+    # Intended for testing/checking API results
+    def initialize(client_id: nil, access_token: nil, with_raw: false)
       if client_id.nil? && access_token.nil?
         raise "An identifier token (client ID or bearer token) is required"
       elsif !!client_id && !!access_token
@@ -51,6 +53,8 @@ Unpredictable behavior may follow.})
         faraday.response :json
         faraday.adapter Faraday.default_adapter
       end
+
+      @with_raw = with_raw
     end
 
     def create_clip(options = {})
@@ -127,7 +131,10 @@ Unpredictable behavior may follow.})
           raise ApiError.new(http_res.status, http_res.body)
         end
 
-        http_res
+        {
+            http_res: http_res,
+            with_raw: @with_raw
+        }
       end
   end
 end

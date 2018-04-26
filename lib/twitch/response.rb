@@ -31,8 +31,9 @@ module Twitch
     # The HTTP raw response
     attr_reader :raw
 
-    def initialize(data_class, http_res)
-      @raw = http_res
+    def initialize(data_class, res)
+      http_res = res[:http_res]
+      @raw = http_res if res[:with_raw]
 
       @data = http_res.body['data'].map { |d| data_class.new(d) }
 
