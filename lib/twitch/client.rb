@@ -71,7 +71,7 @@ Unpredictable behavior may follow.})
       res = get('clips', options)
 
       clips = res[:data].map { |c| Clip.new(c) }
-      Response.new(clips, res[:rate_limit_headers])
+      Response.new(clips, res[:rate_limit_headers], res[:pagination])
     end
 
     def get_bits_leaderboard(options = {})
