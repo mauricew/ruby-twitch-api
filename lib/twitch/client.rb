@@ -26,7 +26,9 @@ module Twitch
     # - access_token [String] An access token.
     # Used as the Authorization header in a request.
     # Any "Bearer " prefix will be stripped.
-    def initialize(client_id: nil, access_token: nil)
+    # - with_raw [Boolean] Whether to include raw HTTP response
+    # Intended for testing/checking API results
+    def initialize(client_id: nil, access_token: nil, with_raw: false)
       if client_id.nil? && access_token.nil?
         raise "An identifier token (client ID or bearer token) is required"
       elsif !!client_id && !!access_token
@@ -51,103 +53,60 @@ Unpredictable behavior may follow.})
         faraday.response :json
         faraday.adapter Faraday.default_adapter
       end
+
+      @with_raw = with_raw
     end
 
     def create_clip(options = {})
-      res = post('clips', options)
-
-      clip = res[:data].map { |c| Clip.new(c) }
-      Response.new(clip, res[:rate_limit_headers])
+      Response.new(Clip, post('clips', options))
     end
 
     def create_entitlement_grant_url(options = {})
-      res = post('entitlements/upload', options)
-
-      entitlement_grant = res[:data].map { |e| EntitlementGrantUrl.new(e) }
-      Response.new(entitlement_grant, res[:rate_limit_headers])
+      Response.new(EntitlementGrantUrl, post('entitlements/upload', options))
     end
 
     def get_clips(options = {})
-      res = get('clips', options)
-
-      clips = res[:data].map { |c| Clip.new(c) }
-      Response.new(clips, res[:rate_limit_headers], res[:pagination])
+      Response.new(Clip, get('clips', options))
     end
 
     def get_bits_leaderboard(options = {})
-      res = get('bits/leaderboard', options)
-
-      bits_leaders = res[:data].map { |bl| BitsLeader.new(bl) }
-      Response.new(
-        bits_leaders, 
-        res[:rate_limit_headers],
-        nil,
-        res[:full_body]['total'], 
-        res[:full_body]['date_range']
-      )
+      Response.new(BitsLeader, get('bits/leaderboard', options))
     end
 
     def get_games(options = {})
-      res = get('games', options)
-
-      games = res[:data].map { |g| Game.new(g) }
-      Response.new(games, res[:rate_limit_headers])
+      Response.new(Game, get('games', options))
     end
 
     def get_top_games(options = {})
-      res = get('games/top', options)
-
-      games = res[:data].map { |g| Game.new(g) }
-      Response.new(games, res[:rate_limit_headers], res[:pagination])
+      Response.new(Game, get('games/top', options))
     end
 
-    def get_game_analytics
-      res = get('analytics/games'. options)
-
-      game_analytics = res[:data].map { |ga| GameAnalytic.new(ga) }
-      Response.new(game_analytics, res[:rate_limit_headers])
+    def get_game_analytics(options = {})
+      Response.new(GameAnalytic, get('analytics/games', options))
     end
 
     def get_streams(options = {})
-      res = get('streams', options)
-
-      streams = res[:data].map { |s| Stream.new(s) }
-      Response.new(streams, res[:rate_limit_headers], res[:pagination])
+      Response.new(Stream, get('streams', options))
     end
 
     def get_streams_metadata(options = {})
-      res = get('streams/metadata', options)
-
-      stream_metadata = res[:data].map { |s| StreamMetadata.new(s) }
-      Response.new(stream_metadata, res[:rate_limit_headers], res[:pagination])
+      Response.new(StreamMetadata, get('streams/metadata', options))
     end
 
     def get_users_follows(options = {})
-      res = get('users/follows', options)
-
-      users = res[:data].map { |u| UserFollow.new(u) }
-      Response.new(users, res[:rate_limit_headers], res[:pagination])
+      Response.new(UserFollow, get('users/follows', options))
     end
 
     def get_users(options = {})
-      res = get('users', options)
-
-      users = res[:data].map { |u| User.new(u) }
-      Response.new(users, res[:rate_limit_headers])
+      Response.new(User, get('users', options))
     end
 
     def update_user(options = {})
-      res = put('users', options)
-
-      user = res[:data].map { |u| User.new(u) }
-      Response.new(user, res[:rate_limit_headers])
+      Response.new(User, put('users', options))
     end
 
     def get_videos(options = {})
-      res = get('videos', options)
-
-      videos = res[:data].map { |v| Video.new(v) }
-      Response.new(videos, res[:rate_limit_headers], res[:pagination])
+      Response.new(Video, get('videos', options))
     end
 
     private
@@ -172,20 +131,9 @@ Unpredictable behavior may follow.})
           raise ApiError.new(http_res.status, http_res.body)
         end
 
-        rate_limit_headers = Hash[http_res.headers.select do |k,v|
-          k.to_s.downcase.match(/^ratelimit/)
-        end.map { |k,v| [k.gsub('ratelimit-', '').to_sym, v] }]
-
-        if http_res.body.key?('pagination')
-          pagination = http_res.body['pagination'] 
-        end
-
-        # TODO: The return object should only contain one instance of the response body.
-        { 
-          data: http_res.body['data'],
-          full_body: http_res.body,
-          pagination: pagination,
-          rate_limit_headers: rate_limit_headers
+        {
+            http_res: http_res,
+            with_raw: @with_raw
         }
       end
   end
