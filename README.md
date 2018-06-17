@@ -1,6 +1,6 @@
-[![Gem](https://img.shields.io/gem/v/twitch-api.svg)]()
-[![Downloads](https://img.shields.io/gem/dt/twitch-api.svg)]()
-[![Travis](https://img.shields.io/travis/mauricew/ruby-twitch-api.svg)]()
+[![Gem](https://img.shields.io/gem/v/twitch-api.svg)](https://rubygems.org/gems/twitch-api)
+[![Downloads](https://img.shields.io/gem/dt/twitch-api.svg)](https://rubygems.org/gems/twitch-api)
+[![Travis](https://img.shields.io/travis/mauricew/ruby-twitch-api.svg)](https://travis-ci.org/mauricew/ruby-twitch-api)
 [![License](https://img.shields.io/github/license/mauricew/ruby-twitch-api.svg)]()
 # Ruby Twitch API
 
@@ -13,6 +13,7 @@ Guaranteed supported APIs include:
 * Helix Webhooks (coming soon)
 
 The future may bring:
+* Authentication
 * PubSub
 * TMI/chat
 
@@ -43,14 +44,17 @@ Or install it yourself as:
 ## Usage
 A client must be initialized with your client ID or bearer access token.
 ```
-client = Twitch::Client.new client_id: "YOUR_CLIENT_ID"
+client = Twitch::Client.new(client_id: "YOUR_CLIENT_ID")
 # or
-client = Twitch::Client.new access_token: "YOUR_ACCESS_TOKEN"
+client = Twitch::Client.new(access_token: "YOUR_ACCESS_TOKEN")
 ```
-The retrieval methods take in a hash equal to the parameters of the API endpoint, and return a response object containing the data and other associated request information:
+Because data may change for certain endpoints, there is also a keyword parameter called `with_raw` that returns the raw response for any request called.
+
+Retrieval methods take in a hash equal to the parameters of the API endpoint, and return a response object containing the data and other associated request information:
 * **data** is the data you would get back. Even if it's an array of one object, it remains the same as what comes from the API.
 * **rate_limit** and associated fields contain API request limit information. Clip creation counts for a second limit (duration currently unknown).
-* **pagination** is an hash that appears when data can be traversed, and contains one member (*cursor*) which lets you pagniate through certain requests.
+* **pagination** is a hash that appears when data can be traversed, and contains one member (*cursor*) which lets you pagniate through certain requests.
+* **raw** is the raw HTTP response data when `with_raw` is true in the client.
 ```
 # Get top live streams
 client.get_streams.data
