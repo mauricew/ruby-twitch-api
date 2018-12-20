@@ -5,11 +5,13 @@ module Twitch
   class Stream
     # Fields to be converted from ISO 8601 string to a typed date.
     DATE_ATTRIBUTES = [:started_at]
-    
+
     # ID of the stream.
     attr_reader :id
     # ID of the user broadcasting.
     attr_reader :user_id
+    # Username of the user broadcasting.
+    attr_reader :user_name
     # ID of the game being broadcast.
     attr_reader :game_id
     # Associated community IDs for the broadcaster.
