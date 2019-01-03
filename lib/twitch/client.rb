@@ -9,6 +9,7 @@ require "twitch/entitlement_grant_url"
 require "twitch/game"
 require "twitch/game_analytic"
 require "twitch/stream"
+require "twitch/stream_marker"
 require "twitch/stream_metadata"
 require "twitch/user"
 require "twitch/user_follow"
@@ -65,6 +66,10 @@ Unpredictable behavior may follow.})
       Response.new(EntitlementGrantUrl, post('entitlements/upload', options))
     end
 
+    def create_stream_marker(options = {})
+      Response.new(StreamMarker, post('streams/markers', options))
+    end
+
     def get_clips(options = {})
       Response.new(Clip, get('clips', options))
     end
@@ -83,6 +88,10 @@ Unpredictable behavior may follow.})
 
     def get_game_analytics(options = {})
       Response.new(GameAnalytic, get('analytics/games', options))
+    end
+
+    def get_stream_markers(options = {})
+      Response.new(StreamMarkerResponse, get('streams/markers', options))
     end
 
     def get_streams(options = {})
