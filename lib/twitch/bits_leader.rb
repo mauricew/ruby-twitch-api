@@ -3,6 +3,8 @@ module Twitch
   class BitsLeader
     # ID of the user giving bits.
     attr_reader :user_id
+    # Display name of the user giving bits.
+    attr_reader :user_name
     # Ranking of the user giving bits.
     # Reflects the parent object's date range.
     attr_reader :rank
@@ -11,6 +13,7 @@ module Twitch
 
     def initialize(attributes = {})
       @user_id = attributes['user_id']
+      @user_name = attributes['user_name']
       @rank = attributes['rank']
       @score = attributes['score']
     end

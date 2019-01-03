@@ -9,11 +9,14 @@ module Twitch
   class StreamMetadata
     # ID of the streaming user.
     attr_reader :user_id
+    # Display name of the streaming user.
+    attr_reader :user_name
     # ID of the game being playead.
     attr_reader :game_id
 
     def initialize(attributes = {})
       @user_id = attributes['user_id']
+      @user_name = attributes['user_name']
       @game_id = attributes['game_id']
 
       # Since more games can be supported in the future,

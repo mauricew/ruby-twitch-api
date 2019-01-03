@@ -27,6 +27,8 @@ module Twitch
     attr_reader :url
     # ID of the user who uploaded/broadcasted the video.
     attr_reader :user_id
+    # Display name of the user who uploaded/broadcasted the video.
+    attr_reader :user_name
     # Viewability of the video (public or private)
     attr_reader :viewable
     # Duration of the video, in the format

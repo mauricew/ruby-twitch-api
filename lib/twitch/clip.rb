@@ -20,10 +20,14 @@ module Twitch
     attr_reader :view_count
     # Language of the originating broadcast.
     attr_reader :language
-    # (User) ID of the clip's source broadcast.
+    # (User) ID of the clip's source broadcaster.
     attr_reader :broadcaster_id
+    # (User) name of the clip's source broadcaster
+    attr_reader :broadcaster_name
     # (User) ID of the clip's creator.
     attr_reader :creator_id
+    # (User) name of the clip's creator.
+    attr_reader :creator_name
     # ID of the game being played.
     attr_reader :game_id
     # ID of the archived broadcast (may not be available).
