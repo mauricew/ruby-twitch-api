@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A user that is a leader for bits.
   class BitsLeader

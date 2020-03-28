@@ -4,6 +4,4 @@ rvm:
   - 2.3.8
   - 2.4.5
   - 2.5.3
-env:
-  - TWITCH_CLIENT_ID=test
 before_install: gem install bundler -v 1.16.0

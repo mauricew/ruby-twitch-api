@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A URL that can be used to notify users of an entitlement.
   class EntitlementGrantUrl
@@ -8,6 +10,5 @@ module Twitch
     def initialize(attributes = {})
       @url = attributes['url']
     end
-    
   end
 end

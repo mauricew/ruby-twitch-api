@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A point of time in a stream VOD that was marked while it is live.
   class StreamMarker
@@ -31,7 +33,8 @@ module Twitch
     def initialize(attributes = {})
       @user_id = attributes['user_id']
       @user_name = attributes['user_name']
-      @videos = attributes['videos'].map { |v| VideoStreamMarkers.new(v) }
+      @videos =
+        attributes['videos'].map { |video| VideoStreamMarkers.new(video) }
     end
   end
 
@@ -42,7 +45,7 @@ module Twitch
 
     def initialize(attributes = {})
       @video_id = attributes['video_id']
-      @markers = attributes['markers'].map{ |m| StreamMarker.new(m) }
+      @markers = attributes['markers'].map { |marker| StreamMarker.new(marker) }
     end
   end
 end

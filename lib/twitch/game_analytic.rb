@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 module Twitch
-  # A 
   class GameAnalytic
     # ID of the game requested.
     attr_reader :game_id

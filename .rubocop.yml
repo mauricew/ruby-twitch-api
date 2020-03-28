@@ -1,0 +1,10 @@
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Naming/FileName:
+  Exclude:
+    - lib/twitch-api.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb

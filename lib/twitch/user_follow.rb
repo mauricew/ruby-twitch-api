@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # Represents a relationship of one user following another.
   class UserFollow

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 RSpec.describe Twitch::Client do
   before(:all) do
-    @api_key = ENV["TWITCH_CLIENT_ID"]
+    @api_key = ENV['TWITCH_CLIENT_ID']
 
-    raise "API key is required for tests" if @api_key.to_s.empty?
+    raise 'API key is required for tests' if @api_key.to_s.empty?
 
     @client = Twitch::Client.new(client_id: @api_key)
   end
@@ -10,12 +12,13 @@ RSpec.describe Twitch::Client do
   describe '#get_clips' do
     it 'will return information about a clip' do
       VCR.use_cassette('get_clips_OEHHL') do
-        broadcaster_id_greekgodx = 15310631
+        broadcaster_id_greekgodx = 15_310_631
 
-        res = @client.get_clips({id: 'ObliqueEncouragingHumanHumbleLife'})
+        res = @client.get_clips(id: 'ObliqueEncouragingHumanHumbleLife')
 
         expect(res.data).to_not be_empty
-        expect(res.data.first.broadcaster_id).to eq(broadcaster_id_greekgodx.to_s)
+        expect(res.data.first.broadcaster_id)
+          .to eq(broadcaster_id_greekgodx.to_s)
       end
     end
   end
@@ -33,7 +36,7 @@ RSpec.describe Twitch::Client do
       test_user_login = 'disguisedtoasths'
 
       VCR.use_cassette('get_streams_disguisedtoasths') do
-        res = @client.get_streams({user_login: test_user_login})
+        res = @client.get_streams(user_login: test_user_login)
 
         expect(res.data).to_not be_empty
         expect(res.data[0].viewer_count).to be_an(Integer)
@@ -43,10 +46,10 @@ RSpec.describe Twitch::Client do
 
   describe '#get_users' do
     it 'can retrive a user by id' do
-      test_user_id = 18587270
+      test_user_id = 18_587_270
 
       VCR.use_cassette('get_users_day9tv') do
-        res = @client.get_users({id: test_user_id})
+        res = @client.get_users(id: test_user_id)
 
         expect(res.data).to_not be_empty
         expect(res.data[0].login).to eq('day9tv')
@@ -59,7 +62,9 @@ RSpec.describe Twitch::Client do
   describe '#get_games' do
     it 'can retrieve multiple games by name' do
       VCR.use_cassette('get_games_hots_smo') do
-        res = @client.get_games({name: ["Heroes of the Storm", "Super Mario Odyssey"]})
+        res = @client.get_games(
+          name: ['Heroes of the Storm', 'Super Mario Odyssey']
+        )
 
         expect(res.data.length).to eq(2)
       end
@@ -69,7 +74,7 @@ RSpec.describe Twitch::Client do
   describe '#get_top_games' do
     it 'can return the top games by current viewership' do
       VCR.use_cassette('get_top_games') do
-        res = @client.get_top_games({first: 5})
+        res = @client.get_top_games(first: 5)
 
         # Expecting the site to have regular use
         expect(res.data.length).to eq(5)
@@ -79,15 +84,14 @@ RSpec.describe Twitch::Client do
 
   describe '#get_videos' do
     it 'can retrieve videos for a user' do
-      test_video_user_id = 9846758
+      test_video_user_id = 9_846_758
 
       VCR.use_cassette('get_videos_user_vgboootcamp') do
-        res = @client.get_videos({user_id: test_video_user_id})
+        res = @client.get_videos(user_id: test_video_user_id)
 
         expect(res.data).to_not be_empty
         expect(res.pagination['cursor']).to_not be_nil
       end
     end
   end
-    
 end
