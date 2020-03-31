@@ -57,7 +57,6 @@ module Twitch
       @conn = Faraday.new(API_ENDPOINT, { headers: headers }) do |faraday|
         faraday.request :json
         faraday.response :json
-        faraday.adapter Faraday.default_adapter
       end
 
       @with_raw = with_raw
