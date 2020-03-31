@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   class User
     # ID of the user.
@@ -23,8 +25,8 @@ module Twitch
     attr_reader :view_count
 
     def initialize(attributes = {})
-      attributes.each do |k, v|
-        instance_variable_set("@#{k}", v)
+      attributes.each do |key, value|
+        instance_variable_set("@#{key}", value)
       end
     end
   end

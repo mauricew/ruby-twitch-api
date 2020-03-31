@@ -1,9 +1,11 @@
-require "time"
+# frozen_string_literal: true
+
+require 'time'
 
 module Twitch
   # A captured broadcast or portion of a broadcast.
   class Video
-    DATE_ATTRIBUTES = [:created_at, :published_at]
+    DATE_ATTRIBUTES = %i[created_at published_at].freeze
 
     # ID of the video.
     attr_reader :id
@@ -13,7 +15,7 @@ module Twitch
     attr_reader :description
     # Language of the video.
     attr_reader :language
-    # Number of views 
+    # Number of views
     attr_reader :view_count
     # Date the video was created.
     attr_reader :created_at
@@ -36,14 +38,13 @@ module Twitch
     attr_reader :duration
 
     def initialize(attributes = {})
-      attributes.each do |k, v|
-        if DATE_ATTRIBUTES.include?(k.to_sym)
-          instance_variable_set("@#{k}", Time.parse(v))
+      attributes.each do |key, value|
+        if DATE_ATTRIBUTES.include?(key.to_sym)
+          instance_variable_set("@#{key}", Time.parse(value))
         else
-          instance_variable_set("@#{k}", v)
+          instance_variable_set("@#{key}", value)
         end
       end
     end
-    
   end
 end

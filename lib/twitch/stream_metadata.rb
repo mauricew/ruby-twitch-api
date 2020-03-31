@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Twitch
   # A set of metadata to provide additional information about a
-  # game being streamed.  
+  # game being streamed.
   # Additional getters are assigned at initialization time, e.g.
   #    self.hearthstone
-  # has data when Hearthstone is being streamed.  
+  # has data when Hearthstone is being streamed.
   # Other games may be included, but will be set to nil
   # if they aren't the game currently being streamed.
   class StreamMetadata
@@ -21,10 +23,10 @@ module Twitch
 
       # Since more games can be supported in the future,
       # this will ensure they will all be available.
-      attributes.each do |k, v|
-        unless instance_variables.include?("@#{k}".to_sym)
-          self.class.send(:attr_reader, k.to_sym)
-          instance_variable_set("@#{k}", v)
+      attributes.each do |key, value|
+        unless instance_variables.include?("@#{key}".to_sym)
+          self.class.send(:attr_reader, key.to_sym)
+          instance_variable_set("@#{key}", value)
         end
       end
     end

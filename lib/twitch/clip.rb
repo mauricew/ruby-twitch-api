@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Twitch
   # A small segment of a broadcast captured by another user.
   class Clip
     # Fields to be converted from ISO 8601 string to a typed date.
-    DATE_ATTRIBUTES = [:created_at]
+    DATE_ATTRIBUTES = %i[created_at].freeze
 
     # ID of the clip.
     attr_reader :id
@@ -34,14 +36,13 @@ module Twitch
     attr_reader :video_id
 
     def initialize(attributes = {})
-      attributes.each do |k, v|
-        if DATE_ATTRIBUTES.include?(k.to_sym)
-          instance_variable_set("@#{k}", Time.parse(v))
+      attributes.each do |key, value|
+        if DATE_ATTRIBUTES.include?(key.to_sym)
+          instance_variable_set("@#{key}", Time.parse(value))
         else
-          instance_variable_set("@#{k}", v)
+          instance_variable_set("@#{key}", value)
         end
       end
     end
-    
   end
 end

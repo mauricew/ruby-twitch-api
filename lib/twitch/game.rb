@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Twitch
-  # A filterable category for a stream.  
+  # A filterable category for a stream.
   # (not necessarily limited to games, e.g. 'IRL')
   class Game
     # ID of the game.
@@ -8,7 +10,7 @@ module Twitch
     attr_reader :name
     # Box art URL template.
     #
-    # Substitute the {width} and {height} string tokens 
+    # Substitute the {width} and {height} string tokens
     # with your desired numeric values.
     attr_reader :box_art_url
 

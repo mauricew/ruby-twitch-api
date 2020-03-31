@@ -1,27 +1,29 @@
-require "faraday"
-require "faraday_middleware"
+# frozen_string_literal: true
 
-require "twitch/response"
-require "twitch/api_error"
-require "twitch/bits_leader"
-require "twitch/clip"
-require "twitch/entitlement_grant_url"
-require "twitch/game"
-require "twitch/game_analytic"
-require "twitch/stream"
-require "twitch/stream_marker"
-require "twitch/stream_metadata"
-require "twitch/user"
-require "twitch/user_follow"
-require "twitch/video"
+require 'faraday'
+require 'faraday_middleware'
+
+require_relative 'response'
+require_relative 'api_error'
+require_relative 'bits_leader'
+require_relative 'clip'
+require_relative 'entitlement_grant_url'
+require_relative 'game'
+require_relative 'game_analytic'
+require_relative 'stream'
+require_relative 'stream_marker'
+require_relative 'stream_metadata'
+require_relative 'user'
+require_relative 'user_follow'
+require_relative 'video'
 
 module Twitch
   class Client
     # Helix API endpoint.
-    API_ENDPOINT = "https://api.twitch.tv/helix".freeze
+    API_ENDPOINT = 'https://api.twitch.tv/helix'
 
     # Initializes a Twitch client.
-    # 
+    #
     # - client_id [String] The client ID.
     # Used as the Client-ID header in a request.
     # - access_token [String] An access token.
@@ -31,24 +33,27 @@ module Twitch
     # Intended for testing/checking API results
     def initialize(client_id: nil, access_token: nil, with_raw: false)
       if client_id.nil? && access_token.nil?
-        raise "An identifier token (client ID or bearer token) is required"
-      elsif !!client_id && !!access_token
-        warn(%{WARNING:
-It is recommended that only one identifier token is specified.
-Unpredictable behavior may follow.})
+        raise 'An identifier token (client ID or bearer token) is required'
+      end
+
+      if client_id && access_token
+        warn <<~TEXT
+          WARNING:
+          It is recommended that only one identifier token is specified.
+          Unpredictable behavior may follow.
+        TEXT
       end
 
       headers = {
         "User-Agent": "twitch-api ruby client #{Twitch::VERSION}"
       }
-      unless client_id.nil?
-        headers["Client-ID"] = client_id
-      end
+      headers['Client-ID'] = client_id unless client_id.nil?
+
       unless access_token.nil?
-        access_token = access_token.gsub(/^Bearer /, "")
-        headers["Authorization"] = "Bearer #{access_token}"
+        access_token = access_token.gsub(/^Bearer /, '')
+        headers['Authorization'] = "Bearer #{access_token}"
       end
-      
+
       @conn = Faraday.new(API_ENDPOINT, { headers: headers }) do |faraday|
         faraday.request :json
         faraday.response :json
@@ -120,30 +125,30 @@ Unpredictable behavior may follow.})
 
     private
 
-      def get(resource, params)
-        http_res = @conn.get(resource, params)
-        finish(http_res)
+    def get(resource, params)
+      http_res = @conn.get(resource, params)
+      finish(http_res)
+    end
+
+    def post(resource, params)
+      http_res = @conn.post(resource, params)
+      finish(http_res)
+    end
+
+    def put(resource, params)
+      http_res = @conn.put(resource, params)
+      finish(http_res)
+    end
+
+    def finish(http_res)
+      unless http_res.success?
+        raise ApiError.new(http_res.status, http_res.body)
       end
 
-      def post(resource, params)
-        http_res = @conn.post(resource, params)
-        finish(http_res)
-      end
-
-      def put(resource, params)
-        http_res = @conn.put(resource, params)
-        finish(http_res)
-      end
-
-      def finish(http_res)
-        unless http_res.success?
-          raise ApiError.new(http_res.status, http_res.body)
-        end
-
-        {
-            http_res: http_res,
-            with_raw: @with_raw
-        }
-      end
+      {
+        http_res: http_res,
+        with_raw: @with_raw
+      }
+    end
   end
 end

@@ -1,10 +1,12 @@
-require "time"
+# frozen_string_literal: true
+
+require 'time'
 
 module Twitch
   # A user's broadcasting session.
   class Stream
     # Fields to be converted from ISO 8601 string to a typed date.
-    DATE_ATTRIBUTES = [:started_at]
+    DATE_ATTRIBUTES = %i[started_at].freeze
 
     # ID of the stream.
     attr_reader :id
@@ -30,13 +32,12 @@ module Twitch
     # URL of the latest thumbnail image for the broadcast.
     attr_reader :thumbnail_url
 
-
     def initialize(attributes = {})
-      attributes.each do |k, v|
-        if DATE_ATTRIBUTES.include?(k.to_sym)
-          instance_variable_set("@#{k}", Time.parse(v))
+      attributes.each do |key, value|
+        if DATE_ATTRIBUTES.include?(key.to_sym)
+          instance_variable_set("@#{key}", Time.parse(value))
         else
-          instance_variable_set("@#{k}", v)
+          instance_variable_set("@#{key}", value)
         end
       end
     end
