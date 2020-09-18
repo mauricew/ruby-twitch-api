@@ -2,6 +2,15 @@
 
 require 'webmock/rspec'
 require 'vcr'
+
+require 'simplecov'
+SimpleCov.start
+
+if ENV['CODECOV_TOKEN']
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
 require_relative '../lib/twitch-api'
 
 ENV['TWITCH_CLIENT_ID'] ||= 'test'

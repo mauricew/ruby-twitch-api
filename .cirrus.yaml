@@ -60,8 +60,8 @@ rspec_task:
       image: ruby:2.7
   <<: *bundle_cache
 
-  # environment:
-  #   CODECOV_TOKEN: ENCRYPTED[...]
+  environment:
+    CODECOV_TOKEN: ENCRYPTED[112171f047148669318b81ebaf5210bd7bc59a7c9e1179e1aff636a206f07269f5698eb06f31f8b07450570ae13a66a6]
 
   test_script: bundle exec rspec --format=json --out=rspec.json
 
