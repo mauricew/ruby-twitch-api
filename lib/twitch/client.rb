@@ -134,7 +134,7 @@ module Twitch
       define_method http_method do |resource, params|
         http_response = CONNECTION.public_send http_method, resource, params
 
-        raise ApiError.new(http_response.status, http_response.body) unless http_response.success?
+        raise APIError.new(http_response.status, http_response.body) unless http_response.success?
 
         http_response
       end

@@ -2,7 +2,7 @@
 
 module Twitch
   # An error returned by the API.
-  class ApiError < StandardError
+  class APIError < StandardError
     # HTTP status code of the response.
     attr_reader :status_code
     # Body content of the response.

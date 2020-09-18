@@ -86,7 +86,7 @@ client.get_games({name: ["Heroes of the Storm", "Super Mario Odyssey"]}).data
 
 ### Error handling
 
-An `ApiError` is raised whenever an HTTP error response is returned.
+An `APIError` is raised whenever an HTTP error response is returned.
 Rescue it to access the body of the response, which should include an error message.
 
 ## Development
