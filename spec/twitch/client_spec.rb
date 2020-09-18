@@ -45,7 +45,7 @@ RSpec.describe Twitch::Client do
   end
 
   describe '#get_users' do
-    it 'can retrive a user by id' do
+    it 'can retrieve a user by id' do
       test_user_id = 18_587_270
 
       VCR.use_cassette('get_users_day9tv') do

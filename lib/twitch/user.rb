@@ -13,7 +13,7 @@ module Twitch
     # (global mod, admin, staff)
     attr_reader :type
     # Represents a special broadcaster role of a user.
-    # (partner, affilaite)
+    # (partner, affiliate)
     attr_reader :broadcaster_type
     # Description/biographical info of a user.
     attr_reader :description

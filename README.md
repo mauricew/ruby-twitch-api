@@ -6,7 +6,7 @@
 
 This library is a Ruby implementation of the [Twitch Helix API](https://dev.twitch.tv/docs/api).
 
-The goal is to provide access for the newest supported APIs provided by Twitch, while keeping extensiblity for their future expansion. These are still in development, as is this library which should remain in pace with changes made.
+The goal is to provide access for the newest supported APIs provided by Twitch, while keeping extensibility for their future expansion. These are still in development, as is this library which should remain in pace with changes made.
 
 Guaranteed supported APIs include:
 *   Helix REST (full rolling support)
@@ -70,7 +70,7 @@ client.get_games({name: ["Heroes of the Storm", "Super Mario Odyssey"]}).data
 ```
 
 ### Error handling
-An *ApiError* is raised whenever an HTTP error response is returned.
+An `ApiError` is raised whenever an HTTP error response is returned.
 Rescue it to access the body of the response, which should include an error message.
 
 ## Development

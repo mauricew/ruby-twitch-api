@@ -13,7 +13,7 @@ module Twitch
     attr_reader :user_id
     # Display name of the streaming user.
     attr_reader :user_name
-    # ID of the game being playead.
+    # ID of the game being played.
     attr_reader :game_id
 
     def initialize(attributes = {})
