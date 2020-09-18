@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Twitch
+  # Data object for Twitch users
   class User
     # ID of the user.
     attr_reader :id

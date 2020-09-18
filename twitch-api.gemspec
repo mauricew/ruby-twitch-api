@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mauricew/ruby-twitch-api'
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 2.4'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.80.0'
+  spec.add_development_dependency 'rubocop', '~> 0.91.0'
   spec.add_development_dependency 'vcr', '~> 5.0'
   spec.add_development_dependency 'webmock', '~> 3.1'
 end

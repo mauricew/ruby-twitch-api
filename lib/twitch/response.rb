@@ -34,32 +34,36 @@ module Twitch
     attr_reader :raw
 
     def initialize(data_class, res)
-      http_res = res[:http_res]
-      @raw = http_res if res[:with_raw]
+      @http_res = res[:http_res]
+      @raw = @http_res if res[:with_raw]
+      body = @http_res.body
 
-      @data = http_res.body['data'].map { |d| data_class.new(d) }
+      @data = body['data'].map { |d| data_class.new(d) }
 
-      rate_limit_headers =
-        http_res.headers
-          .select { |key, _value| key.to_s.downcase.match(/^ratelimit/) }
-          .map { |key, value| [key.gsub('ratelimit-', '').to_sym, value] }
-          .to_h
+      parse_rate_limits
 
+      @pagination = body['pagination']
+      @total = body['total']
+      @date_range = body['date_range']
+    end
+
+    private
+
+    def parse_rate_limits
       @rate_limit = rate_limit_headers[:limit].to_i
       @rate_limit_remaining = rate_limit_headers[:remaining].to_i
       @rate_limit_resets_at = Time.at(rate_limit_headers[:reset].to_i)
 
-      if rate_limit_headers.keys.any? do |key|
-        key.to_s.start_with?('helixclipscreation')
-      end
-        @clip_rate_limit = rate_limit_headers[:'helixclipscreation-limit']
-        @clip_rate_limit_remaining =
-          rate_limit_headers[:'helixclipscreation-remaining']
-      end
+      @clip_rate_limit = rate_limit_headers[:'helixclipscreation-limit']
+      @clip_rate_limit_remaining = rate_limit_headers[:'helixclipscreation-remaining']
+    end
 
-      @pagination = http_res.body['pagination']
-      @total = http_res.body['total']
-      @date_range = http_res.body['date_range']
+    def rate_limit_headers
+      @rate_limit_headers ||=
+        @http_res.headers
+          .select { |key, _value| key.to_s.downcase.match(/^ratelimit/) }
+          .map { |key, value| [key.gsub('ratelimit-', '').to_sym, value] }
+          .to_h
     end
   end
 end
