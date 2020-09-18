@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mauricew/ruby-twitch-api'
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = '>= 2.4'
+  spec.required_ruby_version = '~> 2.5'
 
   spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt']
 

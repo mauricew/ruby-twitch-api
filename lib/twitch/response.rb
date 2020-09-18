@@ -62,8 +62,7 @@ module Twitch
       @rate_limit_headers ||=
         @http_response.headers
           .select { |key, _value| key.to_s.downcase.match(/^ratelimit/) }
-          .map { |key, value| [key.gsub('ratelimit-', '').to_sym, value] }
-          .to_h
+          .transform_keys { |key| key.gsub('ratelimit-', '').to_sym }
     end
   end
 end
