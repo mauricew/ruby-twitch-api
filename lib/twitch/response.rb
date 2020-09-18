@@ -33,12 +33,12 @@ module Twitch
     # The HTTP raw response
     attr_reader :raw
 
-    def initialize(data_class, res)
-      @http_res = res[:http_res]
-      @raw = @http_res if res[:with_raw]
-      body = @http_res.body
+    def initialize(data_class, http_response:, with_raw:)
+      @http_response = http_response
+      @raw = @http_response if with_raw
+      body = @http_response.body
 
-      @data = body['data'].map { |d| data_class.new(d) }
+      @data = body['data'].map { |data_element| data_class.new(data_element) }
 
       parse_rate_limits
 
@@ -60,7 +60,7 @@ module Twitch
 
     def rate_limit_headers
       @rate_limit_headers ||=
-        @http_res.headers
+        @http_response.headers
           .select { |key, _value| key.to_s.downcase.match(/^ratelimit/) }
           .map { |key, value| [key.gsub('ratelimit-', '').to_sym, value] }
           .to_h

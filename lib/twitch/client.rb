@@ -48,15 +48,15 @@ module Twitch
     # - with_raw [Boolean] Whether to include raw HTTP response
     # Intended for testing/checking API results
     def initialize(client_id: nil, access_token: nil, with_raw: false)
-      if client_id.nil? && access_token.nil?
+      unless client_id || access_token
         raise 'An identifier token (client ID or bearer token) is required'
       end
 
       warn TOKENS_CONFLICT_WARNING if client_id && access_token
 
-      CONNECTION.headers['Client-ID'] = client_id unless client_id.nil?
+      CONNECTION.headers['Client-ID'] = client_id if client_id
 
-      unless access_token.nil?
+      if access_token
         access_token = access_token.gsub(/^Bearer /, '')
         CONNECTION.headers['Authorization'] = "Bearer #{access_token}"
       end
@@ -65,89 +65,79 @@ module Twitch
     end
 
     def create_clip(options = {})
-      Response.new(Clip, post('clips', options))
+      initialize_response Clip, post('clips', options)
     end
 
     def create_entitlement_grant_url(options = {})
-      Response.new(EntitlementGrantUrl, post('entitlements/upload', options))
+      initialize_response EntitlementGrantUrl, post('entitlements/upload', options)
     end
 
     def create_stream_marker(options = {})
-      Response.new(StreamMarker, post('streams/markers', options))
+      initialize_response StreamMarker, post('streams/markers', options)
     end
 
     def get_clips(options = {})
-      Response.new(Clip, get('clips', options))
+      initialize_response Clip, get('clips', options)
     end
 
     def get_bits_leaderboard(options = {})
-      Response.new(BitsLeader, get('bits/leaderboard', options))
+      initialize_response BitsLeader, get('bits/leaderboard', options)
     end
 
     def get_games(options = {})
-      Response.new(Game, get('games', options))
+      initialize_response Game, get('games', options)
     end
 
     def get_top_games(options = {})
-      Response.new(Game, get('games/top', options))
+      initialize_response Game, get('games/top', options)
     end
 
     def get_game_analytics(options = {})
-      Response.new(GameAnalytic, get('analytics/games', options))
+      initialize_response GameAnalytic, get('analytics/games', options)
     end
 
     def get_stream_markers(options = {})
-      Response.new(StreamMarkerResponse, get('streams/markers', options))
+      initialize_response StreamMarkerResponse, get('streams/markers', options)
     end
 
     def get_streams(options = {})
-      Response.new(Stream, get('streams', options))
+      initialize_response Stream, get('streams', options)
     end
 
     def get_streams_metadata(options = {})
-      Response.new(StreamMetadata, get('streams/metadata', options))
+      initialize_response StreamMetadata, get('streams/metadata', options)
     end
 
     def get_users_follows(options = {})
-      Response.new(UserFollow, get('users/follows', options))
+      initialize_response UserFollow, get('users/follows', options)
     end
 
     def get_users(options = {})
-      Response.new(User, get('users', options))
+      initialize_response User, get('users', options)
     end
 
     def update_user(options = {})
-      Response.new(User, put('users', options))
+      initialize_response User, put('users', options)
     end
 
     def get_videos(options = {})
-      Response.new(Video, get('videos', options))
+      initialize_response Video, get('videos', options)
     end
 
     private
 
-    def get(resource, params)
-      http_res = CONNECTION.get(resource, params)
-      finish(http_res)
+    def initialize_response(data_class, http_response)
+      Response.new(data_class, http_response: http_response, with_raw: @with_raw)
     end
 
-    def post(resource, params)
-      http_res = CONNECTION.post(resource, params)
-      finish(http_res)
-    end
+    %w[get post put].each do |http_method|
+      define_method http_method do |resource, params|
+        http_response = CONNECTION.public_send http_method, resource, params
 
-    def put(resource, params)
-      http_res = CONNECTION.put(resource, params)
-      finish(http_res)
-    end
+        raise ApiError.new(http_response.status, http_response.body) unless http_response.success?
 
-    def finish(http_res)
-      raise ApiError.new(http_res.status, http_res.body) unless http_res.success?
-
-      {
-        http_res: http_res,
-        with_raw: @with_raw
-      }
+        http_response
+      end
     end
   end
 end

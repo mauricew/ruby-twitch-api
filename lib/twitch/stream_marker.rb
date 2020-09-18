@@ -31,8 +31,7 @@ module Twitch
     def initialize(attributes = {})
       @user_id = attributes['user_id']
       @user_name = attributes['user_name']
-      @videos =
-        attributes['videos'].map { |video| VideoStreamMarkers.new(video) }
+      @videos = attributes['videos'].map { |video| VideoStreamMarkers.new(video) }
     end
   end
 
