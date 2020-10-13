@@ -31,6 +31,8 @@ module Twitch
     attr_reader :language
     # URL of the latest thumbnail image for the broadcast.
     attr_reader :thumbnail_url
+    # Ids of tags on the live stream
+    attr_reader :tag_ids
 
     def initialize(attributes = {})
       attributes.each do |key, value|
