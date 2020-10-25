@@ -13,22 +13,31 @@ module Twitch
     attr_reader :user_id
     # Display name of the streaming user.
     attr_reader :user_name
-    # ID of the game being playead.
+    # ID of the game being played.
     attr_reader :game_id
 
     def initialize(attributes = {})
-      @user_id = attributes['user_id']
-      @user_name = attributes['user_name']
-      @game_id = attributes['game_id']
+      @attributes = attributes
 
-      # Since more games can be supported in the future,
-      # this will ensure they will all be available.
-      attributes.each do |key, value|
-        unless instance_variables.include?("@#{key}".to_sym)
-          self.class.send(:attr_reader, key.to_sym)
-          instance_variable_set("@#{key}", value)
-        end
-      end
+      @user_id = @attributes['user_id']
+      @user_name = @attributes['user_name']
+      @game_id = @attributes['game_id']
+    end
+
+    # Since more games can be supported in the future,
+    # this will ensure they will all be available.
+    def method_missing(name, *args)
+      name = name.to_s
+
+      return super unless @attributes.key?(name)
+
+      @attributes[name]
+    end
+
+    def respond_to_missing?(name)
+      name = name.to_s
+
+      @attributes.key?(name) ? true : super
     end
   end
 end

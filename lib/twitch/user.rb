@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Twitch
+  # Data object for Twitch users
   class User
     # ID of the user.
     attr_reader :id
@@ -12,7 +13,7 @@ module Twitch
     # (global mod, admin, staff)
     attr_reader :type
     # Represents a special broadcaster role of a user.
-    # (partner, affilaite)
+    # (partner, affiliate)
     attr_reader :broadcaster_type
     # Description/biographical info of a user.
     attr_reader :description
@@ -26,7 +27,7 @@ module Twitch
 
     def initialize(attributes = {})
       attributes.each do |key, value|
-        instance_variable_set("@#{key}", value)
+        instance_variable_set "@#{key}", value
       end
     end
   end

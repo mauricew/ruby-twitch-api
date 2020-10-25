@@ -33,8 +33,7 @@ module Twitch
     attr_reader :user_name
     # Viewability of the video (public or private)
     attr_reader :viewable
-    # Duration of the video, in the format
-    # 0h0m0s
+    # Duration of the video, in the format `0h0m0s`
     attr_reader :duration
 
     def initialize(attributes = {})

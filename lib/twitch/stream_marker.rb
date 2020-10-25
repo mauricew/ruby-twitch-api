@@ -26,22 +26,18 @@ module Twitch
 
   # The response envelope for the "Get Stream Markers" endpoint.
   class StreamMarkerResponse
-    attr_reader :user_id
-    attr_reader :user_name
-    attr_reader :videos
+    attr_reader :user_id, :user_name, :videos
 
     def initialize(attributes = {})
       @user_id = attributes['user_id']
       @user_name = attributes['user_name']
-      @videos =
-        attributes['videos'].map { |video| VideoStreamMarkers.new(video) }
+      @videos = attributes['videos'].map { |video| VideoStreamMarkers.new(video) }
     end
   end
 
   # A video with a list of markers.
   class VideoStreamMarkers
-    attr_reader :video_id
-    attr_reader :markers
+    attr_reader :video_id, :markers
 
     def initialize(attributes = {})
       @video_id = attributes['video_id']

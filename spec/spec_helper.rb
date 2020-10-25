@@ -2,6 +2,15 @@
 
 require 'webmock/rspec'
 require 'vcr'
+
+require 'simplecov'
+SimpleCov.start
+
+if ENV['CODECOV_TOKEN']
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
 require_relative '../lib/twitch-api'
 
 ENV['TWITCH_CLIENT_ID'] ||= 'test'
@@ -13,13 +22,9 @@ RSpec.configure do |config|
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
 
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
-
-  VCR.configure do |c|
-    c.cassette_library_dir = 'spec/fixtures/cassettes'
-    c.filter_sensitive_data('<API KEY>') { ENV['TWITCH_CLIENT_ID'] }
-    c.hook_into :webmock
+  VCR.configure do |vcr_config|
+    vcr_config.cassette_library_dir = 'spec/fixtures/cassettes'
+    vcr_config.filter_sensitive_data('<API KEY>') { ENV['TWITCH_CLIENT_ID'] }
+    vcr_config.hook_into :webmock
   end
 end
