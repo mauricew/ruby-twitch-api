@@ -25,7 +25,7 @@ remark_task:
 
   only_if: ($CIRRUS_BRANCH == 'master') ||
     changesInclude(
-      '.cirrus.yml', '.gitignore', 'package.json', '.remarkrc.yaml', '**.md'
+      '.cirrus.yaml', '.gitignore', 'package.json', '.remarkrc.yaml', '**.md'
     )
 
 rubocop_task:
@@ -43,7 +43,7 @@ rubocop_task:
 
   only_if: ($CIRRUS_BRANCH == 'master') ||
     changesInclude(
-      '.cirrus.yml', '.gitignore', 'Gemfile', 'Rakefile', '.rubocop.yml', '*.gemspec',
+      '.cirrus.yaml', '.gitignore', 'Gemfile', 'Rakefile', '.rubocop.yml', '*.gemspec',
       '**.rb', '**.ru'
     )
 
@@ -72,6 +72,6 @@ rspec_task:
 
   only_if: ($CIRRUS_BRANCH == 'master') ||
     changesInclude(
-      '.cirrus.yml', '.gitignore', 'Gemfile', 'Rakefile', '.rspec', '*.gemspec', 'lib/**',
+      '.cirrus.yaml', '.gitignore', 'Gemfile', 'Rakefile', '.rspec', '*.gemspec', 'lib/**',
       'spec/**'
     )
