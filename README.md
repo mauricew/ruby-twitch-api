@@ -1,6 +1,6 @@
 [![Gem](https://img.shields.io/gem/v/twitch-api.svg)](https://rubygems.org/gems/twitch-api)
 [![Downloads](https://img.shields.io/gem/dt/twitch-api.svg)](https://rubygems.org/gems/twitch-api)
-[![Travis](https://img.shields.io/travis/mauricew/ruby-twitch-api.svg)](https://travis-ci.org/mauricew/ruby-twitch-api)
+[![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/mauricew/ruby-twitch-api)](https://cirrus-ci.com/github/mauricew/ruby-twitch-api)
 [![License](https://img.shields.io/github/license/mauricew/ruby-twitch-api.svg)](LICENSE.txt)
 
 # Ruby Twitch API
