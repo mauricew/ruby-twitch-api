@@ -1,0 +1,102 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 04 Nov 2020 19:51:02 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5fa30625-4b5101574d4aab033e8f95a3
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":4995536,"token_type":"bearer"}
+
+        '
+  recorded_at: Wed, 04 Nov 2020 19:51:02 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/clips?id=ObliqueEncouragingHumanHumbleLife
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '551'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1604519463'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - 53f9ce6363308b659bc7defbd0d65735
+      x-ctxlog-logid:
+      - 1-5fa30626-752be4a2443ce8af0d0a08ee
+      date:
+      - Wed, 04 Nov 2020 19:51:02 GMT
+      x-served-by:
+      - cache-sea4474-SEA, cache-bma1625-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1604519462.355402,VS0,VS0,VE205
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"ObliqueEncouragingHumanHumbleLife","url":"https://clips.twitch.tv/ObliqueEncouragingHumanHumbleLife","embed_url":"https://clips.twitch.tv/embed?clip=ObliqueEncouragingHumanHumbleLife","broadcaster_id":"15310631","broadcaster_name":"Greekgodx","creator_id":"39950897","creator_name":"KillaTwitch","video_id":"","game_id":"","language":"en-gb","title":"wrong
+        place wrong time","view_count":178485,"created_at":"2017-12-28T21:37:52Z","thumbnail_url":"https://clips-media-assets2.twitch.tv/168564772-preview-480x272.jpg"}],"pagination":{}}'
+  recorded_at: Wed, 04 Nov 2020 19:51:02 GMT
+recorded_with: VCR 6.0.0

@@ -2,6 +2,7 @@
 
 require 'faraday'
 require 'faraday_middleware'
+require 'twitch_oauth2'
 
 require_relative 'response'
 require_relative 'api_error'
@@ -38,42 +39,55 @@ module Twitch
 
     private_constant :TOKENS_CONFLICT_WARNING
 
+    attr_reader :tokens
+
     # Initializes a Twitch client.
     #
     # - client_id [String] The client ID.
     # Used as the Client-ID header in a request.
+    # - client_secret [String] The client secret.
+    # Used for generation access tokens.
+    # - redirect_uri [String] A redirect URI.
+    # Used for redirection after successful authentication.
+    # - scopes [Array<String>] Required scopes.
+    # Used for possibility to make planned requests.
+    # - token_type [Symbol] Access Token type.
+    # Used for behavior with given tokens and on requests.
     # - access_token [String] An access token.
     # Used as the Authorization header in a request.
-    # Any "Bearer " prefix will be stripped.
-    # - with_raw [Boolean] Whether to include raw HTTP response
-    # Intended for testing/checking API results
-    def initialize(client_id: nil, access_token: nil, with_raw: false)
-      unless client_id || access_token
-        raise 'An identifier token (client ID or bearer token) is required'
-      end
+    # - refresh_token [String] A refresh token.
+    # Used for refreshing User Access Token.
+    def initialize(options = {})
+      client_id = options[:client_id]
 
-      warn TOKENS_CONFLICT_WARNING if client_id && access_token
+      @oauth2_client = TwitchOAuth2::Client.new(
+        client_id: client_id, **options.slice(:client_secret, :redirect_uri, :scopes)
+      )
 
-      CONNECTION.headers['Client-ID'] = client_id if client_id
+      @tokens = @oauth2_client.check_tokens(
+        **options.slice(:access_token, :refresh_token),
+        token_type: options.fetch(:token_type, :application)
+      )
 
-      if access_token
-        access_token = access_token.gsub(/^Bearer /, '')
-        CONNECTION.headers['Authorization'] = "Bearer #{access_token}"
-      end
+      CONNECTION.headers['Client-ID'] = client_id
 
-      @with_raw = with_raw
+      renew_authorization_header if access_token
+    end
+
+    %i[access_token refresh_token].each do |key|
+      define_method(key) { tokens[key] }
     end
 
     def create_clip(options = {})
-      initialize_response Clip, post('clips', options)
+      require_access_token do
+        initialize_response Clip, post('clips', options)
+      end
     end
 
     def create_entitlement_grant_url(options = {})
-      initialize_response EntitlementGrantUrl, post('entitlements/upload', options)
-    end
-
-    def create_stream_marker(options = {})
-      initialize_response StreamMarker, post('streams/markers', options)
+      require_access_token do
+        initialize_response EntitlementGrantUrl, post('entitlements/upload', options)
+      end
     end
 
     def get_clips(options = {})
@@ -81,53 +95,28 @@ module Twitch
     end
 
     def get_bits_leaderboard(options = {})
-      initialize_response BitsLeader, get('bits/leaderboard', options)
+      require_access_token do
+        initialize_response BitsLeader, get('bits/leaderboard', options)
+      end
     end
 
-    def get_games(options = {})
-      initialize_response Game, get('games', options)
-    end
+    require_relative 'client/games'
+    include Games
 
-    def get_top_games(options = {})
-      initialize_response Game, get('games/top', options)
-    end
-
-    def get_game_analytics(options = {})
-      initialize_response GameAnalytic, get('analytics/games', options)
-    end
-
-    def get_stream_markers(options = {})
-      initialize_response StreamMarkerResponse, get('streams/markers', options)
-    end
-
-    def get_streams(options = {})
-      initialize_response Stream, get('streams', options)
-    end
-
-    def get_streams_metadata(options = {})
-      initialize_response StreamMetadata, get('streams/metadata', options)
-    end
-
-    def get_users_follows(options = {})
-      initialize_response UserFollow, get('users/follows', options)
-    end
-
-    def get_users(options = {})
-      initialize_response User, get('users', options)
-    end
-
-    def update_user(options = {})
-      initialize_response User, put('users', options)
-    end
+    require_relative 'client/streams'
+    include Streams
 
     def get_videos(options = {})
       initialize_response Video, get('videos', options)
     end
 
+    require_relative 'client/users'
+    include Users
+
     private
 
     def initialize_response(data_class, http_response)
-      Response.new(data_class, http_response: http_response, with_raw: @with_raw)
+      Response.new(data_class, http_response: http_response)
     end
 
     %w[get post put].each do |http_method|
@@ -138,6 +127,30 @@ module Twitch
 
         http_response
       end
+    end
+
+    def renew_authorization_header
+      CONNECTION.headers['Authorization'] = "Bearer #{access_token}"
+    end
+
+    def request(http_method, *args)
+      Retriable.with_context(:twitch) do
+        CONNECTION.public_send http_method, *args
+      end
+    end
+
+    def require_access_token
+      response = yield
+      if response.success? ||
+          response.status != 401 ||
+          ## Here can be another error, like "missing required oauth scope"
+          response.body[:message] != 'invalid oauth token'
+        return response
+      end
+
+      @tokens = @oauth2_client.refreshed_tokens(refresh_token: refresh_token)
+      renew_authorization_header
+      yield
     end
   end
 end

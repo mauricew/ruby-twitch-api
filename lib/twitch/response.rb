@@ -3,6 +3,9 @@
 module Twitch
   # A compiled response from the API.
   class Response
+    extend Forwardable
+    def_delegators :@http_response, :body, :success?
+
     # The requested data.
     attr_reader :data
     # A total amount of entities.
@@ -33,10 +36,9 @@ module Twitch
     # The HTTP raw response
     attr_reader :raw
 
-    def initialize(data_class, http_response:, with_raw:)
+    def initialize(data_class, http_response:)
       @http_response = http_response
-      @raw = @http_response if with_raw
-      body = @http_response.body
+      @raw = @http_response
 
       @data = body['data'].map { |data_element| data_class.new(data_element) }
 

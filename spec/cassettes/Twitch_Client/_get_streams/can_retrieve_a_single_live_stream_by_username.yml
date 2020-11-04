@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 04 Nov 2020 19:51:04 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5fa30628-05d38e715fdabe70186258fd
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":5585799,"token_type":"bearer"}
+
+        '
+  recorded_at: Wed, 04 Nov 2020 19:51:05 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams?user_login=AlexWayfer
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '490'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1604519466'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - 92926039d320f562e01fdb300ba38e77
+      x-ctxlog-logid:
+      - 1-5fa30629-3c45b5db6702f6dc0d536878
+      date:
+      - Wed, 04 Nov 2020 19:51:05 GMT
+      x-served-by:
+      - cache-sea4471-SEA, cache-bma1625-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1604519465.172341,VS0,VS0,VE193
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"39875526524","user_id":"117474239","user_name":"AlexWayfer","game_id":"509670","type":"live","title":"Разное.","viewer_count":1,"started_at":"2020-11-04T16:34:53Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_alexwayfer-{width}x{height}.jpg","tag_ids":["0569b171-2a2b-476e-a596-5bdfb45a1327","a59f1e4e-257b-4bd0-90c7-189c3efbf917","6f86127d-6051-4a38-94bb-f7b475dde109","c23ce252-cf78-4b98-8c11-8769801aaf3a"]}],"pagination":{}}'
+  recorded_at: Wed, 04 Nov 2020 19:51:05 GMT
+recorded_with: VCR 6.0.0

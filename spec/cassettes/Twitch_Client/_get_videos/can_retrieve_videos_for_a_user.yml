@@ -1,0 +1,127 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 04 Nov 2020 19:51:10 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5fa3062e-5eac908722d4063b41fae332
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":5373219,"token_type":"bearer"}
+
+        '
+  recorded_at: Wed, 04 Nov 2020 19:51:10 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/videos?user_id=9846758
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1604519471'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - '0942c15ad4f073df69d5581303a075fb'
+      x-ctxlog-logid:
+      - 1-5fa3062e-2c300a4b554e0abd4b0322df
+      date:
+      - Wed, 04 Nov 2020 19:51:11 GMT
+      x-served-by:
+      - cache-sea4436-SEA, cache-bma1623-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1604519471.885875,VS0,VS0,VE308
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+      transfer-encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"791267553","user_id":"9846758","user_name":"VGBootCamp","title":"S@X
+        378 ONLINE ULTIMATE TUESDAYS at Laurel Park, MD! Anybody can enter! !bracket
+        !sub","description":"","created_at":"2020-11-04T00:30:20Z","published_at":"2020-11-04T00:30:20Z","url":"https://www.twitch.tv/videos/791267553","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/3357fc4c4af4d0f762cc_vgbootcamp_39647423901_1604449808//thumb/thumb0-%{width}x%{height}.jpg","viewable":"public","view_count":7168,"language":"en","type":"archive","duration":"4h3m54s"},{"id":"790828947","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Rifu Kong (Wario) Vs. Hero (Bowser) Smash Ultimate GRAND FINALS","description":"","created_at":"2020-11-03T16:51:47Z","published_at":"2020-11-03T16:51:47Z","url":"https://www.twitch.tv/videos/790828947","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/f0c572368419c408bd27_vgbootcamp_54403679366_1550984863//thumb/thumb790828947-%{width}x%{height}.jpg","viewable":"public","view_count":28,"language":"en","type":"highlight","duration":"20m54s"},{"id":"790827972","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Chonren (Pac-Man) Vs. Hero (Bowser) Smash Ultimate Semifinals","description":"","created_at":"2020-11-03T16:50:36Z","published_at":"2020-11-03T16:50:36Z","url":"https://www.twitch.tv/videos/790827972","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/1737f49ed18a076ed970_vgbootcamp_18992631046_7760874148//thumb/thumb790827972-%{width}x%{height}.jpg","viewable":"public","view_count":5,"language":"en","type":"highlight","duration":"13m16s"},{"id":"790827459","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Rifu Kong (Wario) Vs. Lea (Greninja) Smash Ultimate Semifinals","description":"","created_at":"2020-11-03T16:49:58Z","published_at":"2020-11-03T16:49:58Z","url":"https://www.twitch.tv/videos/790827459","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/7fcf43834aa9bcf7460b_vgbootcamp_72042829761_4157333045//thumb/thumb790827459-%{width}x%{height}.jpg","viewable":"public","view_count":3,"language":"en","type":"highlight","duration":"9m18s"},{"id":"790826900","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Rizeasu (Marth) Vs. Lea (Greninja) Smash Ultimate Quarterfinals","description":"","created_at":"2020-11-03T16:49:17Z","published_at":"2020-11-03T16:49:17Z","url":"https://www.twitch.tv/videos/790826900","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/45b3617aea183f0bb1ee_vgbootcamp_67649834112_9480299431//thumb/thumb790826900-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"10m25s"},{"id":"790826407","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Hero (Bowser) Vs. Nao (Mario) Smash Ultimate Top 16","description":"","created_at":"2020-11-03T16:48:36Z","published_at":"2020-11-03T16:48:36Z","url":"https://www.twitch.tv/videos/790826407","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/5cee7c5b94be12bb8675_vgbootcamp_87584591336_2243382269//thumb/thumb790826407-%{width}x%{height}.jpg","viewable":"public","view_count":2,"language":"en","type":"highlight","duration":"9m26s"},{"id":"790825928","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Sho Limit (Pikachu) Vs. Hiro (Bayonetta) Smash Ultimate Round 4","description":"","created_at":"2020-11-03T16:47:57Z","published_at":"2020-11-03T16:47:57Z","url":"https://www.twitch.tv/videos/790825928","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/bb97117d4888693e0eba_vgbootcamp_21776585055_3558747343//thumb/thumb790825928-%{width}x%{height}.jpg","viewable":"public","view_count":1,"language":"en","type":"highlight","duration":"12m26s"},{"id":"790825293","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - AyaLin (Daisy) Vs. Umeki (Daisy) Smash Ultimate Round 3","description":"","created_at":"2020-11-03T16:47:08Z","published_at":"2020-11-03T16:47:08Z","url":"https://www.twitch.tv/videos/790825293","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/2ef0318f5c761a413eb6_vgbootcamp_95216549275_4800487224//thumb/thumb790825293-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"11m37s"},{"id":"790824791","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Nata (Pit) Vs. Ashimo (Ryu) Smash Ultimate Round 2","description":"","created_at":"2020-11-03T16:46:29Z","published_at":"2020-11-03T16:46:29Z","url":"https://www.twitch.tv/videos/790824791","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/4c1a374f2b3cb253f754_vgbootcamp_87490276248_7563091201//thumb/thumb790824791-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"8m57s"},{"id":"790824266","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 SSBU - Mokumoku (Yoshi) Vs. Omuatsu (Min Min) Smash Ultimate Round 1","description":"","created_at":"2020-11-03T16:45:44Z","published_at":"2020-11-03T16:45:44Z","url":"https://www.twitch.tv/videos/790824266","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/cc8675a0d77b6c5a0281_vgbootcamp_30782103235_6052024903//thumb/thumb790824266-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"10m55s"},{"id":"789701785","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - Rizeasu (Mii Brawler, Robin) Vs. SG8 Kome (Shulk) Smash Ultimate
+        Grand Finals","description":"","created_at":"2020-11-02T13:25:06Z","published_at":"2020-11-02T13:25:06Z","url":"https://www.twitch.tv/videos/789701785","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/4731042a81f02e54e9d7_vgbootcamp_80091051656_6901521553//thumb/thumb789701785-%{width}x%{height}.jpg","viewable":"public","view_count":51,"language":"en","type":"highlight","duration":"28m50s"},{"id":"789701362","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - SG8 Tea (Pac-Man) Vs. SG8 Kome (Shulk) Smash Ultimate Losers
+        Finals","description":"","created_at":"2020-11-02T13:24:09Z","published_at":"2020-11-02T13:24:09Z","url":"https://www.twitch.tv/videos/789701362","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/07b9042c1ed99ef8153b_vgbootcamp_19742821075_1018112126//thumb/thumb789701362-%{width}x%{height}.jpg","viewable":"public","view_count":10,"language":"en","type":"highlight","duration":"26m24s"},{"id":"789700968","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - SG8 Kome (Shulk) Vs. repo (Mega Man) Smash Ultimate Losers Semis","description":"","created_at":"2020-11-02T13:23:18Z","published_at":"2020-11-02T13:23:18Z","url":"https://www.twitch.tv/videos/789700968","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/132324c5155db7e1175a_vgbootcamp_40987577257_6641789495//thumb/thumb789700968-%{width}x%{height}.jpg","viewable":"public","view_count":5,"language":"en","type":"highlight","duration":"16m4s"},{"id":"789700648","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - ZAKI (Dedede) Vs. Repo (Mega Man) Smash Ultimate Losers Quarters","description":"","created_at":"2020-11-02T13:22:36Z","published_at":"2020-11-02T13:22:36Z","url":"https://www.twitch.tv/videos/789700648","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/317d4df46ab8ae3e45a6_vgbootcamp_59857187403_8863651318//thumb/thumb789700648-%{width}x%{height}.jpg","viewable":"public","view_count":5,"language":"en","type":"highlight","duration":"13m40s"},{"id":"789700397","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - Rizeasu (Mii Brawler) Vs. SG8 tea (Pac-Man) Smash Ultimate Winners
+        Finals","description":"","created_at":"2020-11-02T13:22:01Z","published_at":"2020-11-02T13:22:01Z","url":"https://www.twitch.tv/videos/789700397","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/44992e9c778f941a5106_vgbootcamp_37701651482_3707776459//thumb/thumb789700397-%{width}x%{height}.jpg","viewable":"public","view_count":1,"language":"en","type":"highlight","duration":"31m50s"},{"id":"789699839","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - ZAKI (Dedede, Banjo) Vs. Tea (Pac-Man) Smash Ultimate Winners
+        Semis","description":"","created_at":"2020-11-02T13:20:48Z","published_at":"2020-11-02T13:20:48Z","url":"https://www.twitch.tv/videos/789699839","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/c90bb5b481981959bdde_vgbootcamp_62126205447_2627706772//thumb/thumb789699839-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"13m30s"},{"id":"789698956","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - Rizeasu (Mii Brawler) Vs. kuro (ZSS) Smash Ultimate Winners
+        Semis","description":"","created_at":"2020-11-02T13:18:47Z","published_at":"2020-11-02T13:18:47Z","url":"https://www.twitch.tv/videos/789698956","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/92a497f5f627c2e7e93b_vgbootcamp_65090477836_2163279491//thumb/thumb789698956-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"21m42s"},{"id":"789696761","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - Tea (Pac-Man) Vs. Sigma (Toon Link) Smash Ultimate Winners Quarters","description":"","created_at":"2020-11-02T13:14:03Z","published_at":"2020-11-02T13:14:03Z","url":"https://www.twitch.tv/videos/789696761","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/f8fb1b210f4c643773b1_vgbootcamp_50707424415_4726671878//thumb/thumb789696761-%{width}x%{height}.jpg","viewable":"public","view_count":1,"language":"en","type":"highlight","duration":"21m15s"},{"id":"789696308","user_id":"9846758","user_name":"VGBootCamp","title":"Maesuma
+        Top #4 SSBU - Kuro (ZSS) Vs. Gackt (Ness) Smash Ultimate Winners Quarters","description":"","created_at":"2020-11-02T13:13:03Z","published_at":"2020-11-02T13:13:03Z","url":"https://www.twitch.tv/videos/789696308","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/447f5503b361395483c3_vgbootcamp_81902759926_7406025267//thumb/thumb789696308-%{width}x%{height}.jpg","viewable":"public","view_count":5,"language":"en","type":"highlight","duration":"21m20s"},{"id":"789641980","user_id":"9846758","user_name":"VGBootCamp","title":"TAMISUMA
+        191 JAPAN ONLINE ULTIMATE\nFeat:Hero, Rizeasu, Lea rido and more!\n","description":"","created_at":"2020-11-02T11:01:21Z","published_at":"2020-11-02T11:01:21Z","url":"https://www.twitch.tv/videos/789641980","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/d2nvs31859zcd8/f535f83ed228dbf1419d_vgbootcamp_40318477598_1604314864//thumb/thumb0-%{width}x%{height}.jpg","viewable":"public","view_count":3546,"language":"en","type":"archive","duration":"2h29m14s"}],"pagination":{"cursor":"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MjB9fQ"}}'
+  recorded_at: Wed, 04 Nov 2020 19:51:11 GMT
+recorded_with: VCR 6.0.0

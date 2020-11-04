@@ -18,13 +18,12 @@ Guaranteed supported APIs include:
 
 The future may bring:
 
-*   Authentication
 *   PubSub
 *   TMI/chat
 
 These will not be considered:
 
-*   Twitch kraken API
+*   [Twitch Kraken API](https://github.com/dustinlakin/twitch-rb)
 *   [Twitch GraphQL API](https://github.com/mauricew/twitch-graphql-api)
 
 ## Installation
@@ -52,16 +51,49 @@ $ gem install twitch-api
 
 ## Usage
 
-A client must be initialized with your client ID or bearer access token.
+### Authentication
+
+You can initialize `Twitch::Client` with or without `:access_token` and `:refresh_token`,
+but Twitch requires User or Application Access Token.
+Default is Application (it will not require additional actions),
+but if you want to make requests depending on User Access Token — you have to specify this:
 
 ```ruby
-client = Twitch::Client.new(client_id: "YOUR_CLIENT_ID")
-# or
-client = Twitch::Client.new(access_token: "YOUR_ACCESS_TOKEN")
+twitch_client = Twitch::Client.new(
+  client_id: client_id,
+  client_secret: client_secret,
+  # redirect_uri: redirect_uri,
+  # scopes: scopes,
+  # token_type: :application,
+  # access_token: access_token,
+  # refresh_token: refresh_token
+)
 ```
 
-Because data may change for certain endpoints, there is also a keyword parameter called `with_raw`
-that returns the raw response for any request called.
+```ruby
+twitch_client.check_tokens! # old tokens if they're actual or new tokens
+```
+
+It works like authentication (with a link to login in console)
+if there were no tokens.
+
+Otherwise, `TwitchOAuth2::Error` will be raised.
+
+If you've passed `refresh_token` to initialization and your `access_token`
+is invalid, requests that require `access_token` will automatically refresh it.
+
+Later you can access tokens:
+
+```ruby
+twitch_client.tokens # => { access_token: 'abcdef', refresh_token: 'ghijkl' }
+twitch_client.access_token # => 'abcdef'
+twitch_client.refresh_token # => 'ghijkl'
+```
+
+### Calls
+
+Because data may change for certain endpoints, there is also the raw response
+for any request called.
 
 Retrieval methods take in a hash equal to the parameters of the API endpoint,
 and return a response object containing the data and other associated request information:

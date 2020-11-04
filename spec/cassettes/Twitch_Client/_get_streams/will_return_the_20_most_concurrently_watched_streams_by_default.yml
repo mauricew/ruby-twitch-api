@@ -1,0 +1,123 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 04 Nov 2020 19:51:03 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5fa30627-46da0cb65f066c9b5af7336a
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":5343319,"token_type":"bearer"}
+
+        '
+  recorded_at: Wed, 04 Nov 2020 19:51:03 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1604519464'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - d77aab5ba2e4ac721a6080f5054a9259
+      x-ctxlog-logid:
+      - 1-5fa30627-59bdc50c677347e07615c8da
+      date:
+      - Wed, 04 Nov 2020 19:51:03 GMT
+      x-served-by:
+      - cache-sea4470-SEA, cache-bma1635-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1604519464.759793,VS0,VS0,VE194
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+      transfer-encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "{\"data\":[{\"id\":\"40345176990\",\"user_id\":\"207813352\",\"user_name\":\"HasanAbi\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"2020
+        US PRESIDENTIAL ELECTION - BEDLAM\",\"viewer_count\":112364,\"started_at\":\"2020-11-04T19:01:22Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_hasanabi-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"77017b7b-6b98-4f0d-bd39-3ba96b66ec7a\",\"cea7bc0c-75a5-4446-8743-6db031b71550\",\"ab45fcb7-a22d-4a07-b0ac-fb3940566fa7\",\"67259b26-ff83-444e-9d3c-faab390df16f\"]},{\"id\":\"39649784973\",\"user_id\":\"181077473\",\"user_name\":\"Gaules\",\"game_id\":\"32399\",\"type\":\"live\",\"title\":\"Astralis
+        vs G2 BLAST Premier Fall 2020 @Gaules nas Redes Sociais !premio !prime !Sorteio
+        PC\",\"viewer_count\":73351,\"started_at\":\"2020-11-04T14:17:45Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_gaules-{width}x{height}.jpg\",\"tag_ids\":[\"c2839af5-f1d2-46c4-8edc-1d0bfbd85070\",\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"40344270254\",\"user_id\":\"26261471\",\"user_name\":\"Asmongold\",\"game_id\":\"18122\",\"type\":\"live\",\"title\":\"SHADOWLANDS
+        SOON--MULTIBOXERS BANNED--WE GOT A LOT TO TALK ABOUT LOL--MOUNT RUNS--FARMING
+        ITEMS--SWORD TODAY\",\"viewer_count\":68267,\"started_at\":\"2020-11-04T16:32:21Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_asmongold-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39877834204\",\"user_id\":\"83232866\",\"user_name\":\"ibai\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"probablemente
+        el mejor miércoles de tu vida\",\"viewer_count\":60777,\"started_at\":\"2020-11-04T19:17:57Z\",\"language\":\"es\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_ibai-{width}x{height}.jpg\",\"tag_ids\":[\"d4bb9c58-2141-4881-bcdc-3fe0505457d1\"]},{\"id\":\"40344371806\",\"user_id\":\"15564828\",\"user_name\":\"NICKMERCS\",\"game_id\":\"512710\",\"type\":\"live\",\"title\":\"Fraggin'
+        | Code: MFAM | @NICKMERCS \",\"viewer_count\":54089,\"started_at\":\"2020-11-04T16:52:05Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_nickmercs-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39875696188\",\"user_id\":\"48878319\",\"user_name\":\"TheGrefg\",\"game_id\":\"33214\",\"type\":\"live\",\"title\":\"\U0001F60E\U0001F3C6
+        TORNEO PARA CONSEGUIR SKIN EXCLUSIVA CON AGUS Y VICENS \U0001F3C6\U0001F60E\",\"viewer_count\":53461,\"started_at\":\"2020-11-04T16:48:49Z\",\"language\":\"es\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_thegrefg-{width}x{height}.jpg\",\"tag_ids\":[\"d4bb9c58-2141-4881-bcdc-3fe0505457d1\"]},{\"id\":\"40343727182\",\"user_id\":\"163299585\",\"user_name\":\"BLASTPremier\",\"game_id\":\"32399\",\"type\":\"live\",\"title\":\"G2
+        vs MIBR, FINAL Astralis vs Winner \U0001F4A5 BLAST Premier Fall Series Group
+        3 Day 3\",\"viewer_count\":50155,\"started_at\":\"2020-11-04T14:31:08Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_blastpremier-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"36a89a80-4fcd-4b74-b3d2-2c6fd9b30c95\"]},{\"id\":\"39650683741\",\"user_id\":\"38244180\",\"user_name\":\"alanzoka\",\"game_id\":\"494082\",\"type\":\"live\",\"title\":\"O
+        MELHOR ARROZ DO PRÉDIO — INTRUDER COM OS AMIGOS DEPOIS\",\"viewer_count\":32666,\"started_at\":\"2020-11-04T18:21:52Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_alanzoka-{width}x{height}.jpg\",\"tag_ids\":[\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"39877958764\",\"user_id\":\"603696416\",\"user_name\":\"sadsaadsadsasdasa54s\",\"game_id\":\"\",\"type\":\"live\",\"title\":\"\",\"viewer_count\":28075,\"started_at\":\"2020-11-04T19:28:24Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_sadsaadsadsasdasa54s-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39874326364\",\"user_id\":\"22484632\",\"user_name\":\"forsen\",\"game_id\":\"27471\",\"type\":\"live\",\"title\":\"@forsen,
+        Doubters finally silenced!\",\"viewer_count\":26826,\"started_at\":\"2020-11-04T14:46:17Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_forsen-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"adb55316-f1ab-4f81-9ff5-17da7719d0ee\"]},{\"id\":\"39875604380\",\"user_id\":\"86277097\",\"user_name\":\"buster\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"ПРОХОДИМ
+        ТЕСТ НА IQ \",\"viewer_count\":26427,\"started_at\":\"2020-11-04T16:41:16Z\",\"language\":\"ru\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_buster-{width}x{height}.jpg\",\"tag_ids\":[\"0569b171-2a2b-476e-a596-5bdfb45a1327\"]},{\"id\":\"39876688204\",\"user_id\":\"12875057\",\"user_name\":\"GRONKH\",\"game_id\":\"518184\",\"type\":\"live\",\"title\":\"Hoide
+        #METTWOCH ab so Neunzehn Uhr rum ✶ !ff6\",\"viewer_count\":24453,\"started_at\":\"2020-11-04T18:00:00Z\",\"language\":\"de\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_gronkh-{width}x{height}.jpg\",\"tag_ids\":[\"9166ad14-41f1-4b04-a3b8-c8eb838c6be6\",\"2a14b52e-d459-4c92-be11-5d86b898f6b6\"]},{\"id\":\"39649551373\",\"user_id\":\"47071880\",\"user_name\":\"YoDa\",\"game_id\":\"21779\",\"type\":\"live\",\"title\":\"6
+        DIAS APENAS. LIVE DO FEIKINHO EXTREMAMENTGE TRYHARD\",\"viewer_count\":22805,\"started_at\":\"2020-11-04T11:55:19Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_yoda-{width}x{height}.jpg\",\"tag_ids\":[\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"40344264910\",\"user_id\":\"52091823\",\"user_name\":\"Castro_1021\",\"game_id\":\"518204\",\"type\":\"live\",\"title\":\"LOVE.
+        \  @Castro1021     \",\"viewer_count\":22655,\"started_at\":\"2020-11-04T16:31:21Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_castro_1021-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39876056444\",\"user_id\":\"66983298\",\"user_name\":\"benjyfishy\",\"game_id\":\"33214\",\"type\":\"live\",\"title\":\"$5K
+        AMAR DUO CUP | !discord\",\"viewer_count\":22132,\"started_at\":\"2020-11-04T17:13:50Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_benjyfishy-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39876219948\",\"user_id\":\"99899949\",\"user_name\":\"bratishkinoff\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"\U0001F534ВИДИВА
+        И НОВАСТИ (ПРИСОЕДИНЯЙСЯ К ТЁМНОЙ СТОРОНЕ)\",\"viewer_count\":21557,\"started_at\":\"2020-11-04T17:26:19Z\",\"language\":\"ru\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_bratishkinoff-{width}x{height}.jpg\",\"tag_ids\":[\"0569b171-2a2b-476e-a596-5bdfb45a1327\"]},{\"id\":\"39650903869\",\"user_id\":\"491822536\",\"user_name\":\"Navajas_Barbershop\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"EL
+        DEMENTE FT CARRERA CAMBIO DE LOOK\",\"viewer_count\":21271,\"started_at\":\"2020-11-04T19:05:46Z\",\"language\":\"es\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_navajas_barbershop-{width}x{height}.jpg\",\"tag_ids\":[\"d4bb9c58-2141-4881-bcdc-3fe0505457d1\"]},{\"id\":\"39875633356\",\"user_id\":\"67931625\",\"user_name\":\"Amar\",\"game_id\":\"33214\",\"type\":\"live\",\"title\":\"VIEWINGPARTY
+        BOSS AMAR DUO CUP !pc !giveaway !yfood !sub !prime\",\"viewer_count\":21125,\"started_at\":\"2020-11-04T16:43:45Z\",\"language\":\"de\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_amar-{width}x{height}.jpg\",\"tag_ids\":[\"9166ad14-41f1-4b04-a3b8-c8eb838c6be6\",\"1eba3cfe-51cc-460a-8259-bc8bb987f904\"]},{\"id\":\"39650565213\",\"user_id\":\"569325723\",\"user_name\":\"loud_coringa\",\"game_id\":\"510218\",\"type\":\"live\",\"title\":\"AO
+        VIVO - JOGANDO OQ \",\"viewer_count\":20762,\"started_at\":\"2020-11-04T17:58:10Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_loud_coringa-{width}x{height}.jpg\",\"tag_ids\":[\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"40344310894\",\"user_id\":\"7601562\",\"user_name\":\"Chess\",\"game_id\":\"743\",\"type\":\"live\",\"title\":\"SCC
+        - GM Firouzja vs GM Fedoseev - Hosts GM Giri and IM Rensch #speedchess\",\"viewer_count\":20646,\"started_at\":\"2020-11-04T16:40:04Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_chess-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"36a89a80-4fcd-4b74-b3d2-2c6fd9b30c95\"]}],\"pagination\":{\"cursor\":\"eyJiIjp7IkN1cnNvciI6ImV5SnpJam94TVRJek5qUXVOREF4TmpRNU16VTJORFFzSW1RaU9tWmhiSE5sTENKMElqcDBjblZsZlE9PSJ9LCJhIjp7IkN1cnNvciI6ImV5SnpJam95TURZME5pNHhNall5TkRJeE9ETTBOek1zSW1RaU9tWmhiSE5sTENKMElqcDBjblZsZlE9PSJ9fQ\"}}"
+  recorded_at: Wed, 04 Nov 2020 19:51:03 GMT
+recorded_with: VCR 6.0.0
