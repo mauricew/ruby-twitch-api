@@ -17,7 +17,7 @@ http_interactions:
       message: Unauthorized
     headers:
       date:
-      - Fri, 13 Nov 2020 16:03:16 GMT
+      - Fri, 13 Nov 2020 16:02:37 GMT
       content-type:
       - application/json
       content-length:
@@ -29,19 +29,19 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5faeae44-44647e17170029c91f1b013c
+      - 1-5faeae1d-2023e99d25d5ff0573fe6492
     body:
       encoding: UTF-8
       string: '{"status":401,"message":"invalid access token"}
 
         '
-  recorded_at: Fri, 13 Nov 2020 16:03:16 GMT
+  recorded_at: Fri, 13 Nov 2020 16:02:37 GMT
 - request:
     method: post
     uri: https://id.twitch.tv/oauth2/token
     body:
       encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","grant_type":"refresh_token","refresh_token":"<ACTUAL_REFRESH_TOKEN>"}'
     headers:
       User-Agent:
       - Faraday v1.1.0
@@ -53,11 +53,11 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 13 Nov 2020 16:03:17 GMT
+      - Fri, 13 Nov 2020 16:02:38 GMT
       content-type:
       - application/json
       content-length:
-      - '93'
+      - '301'
       connection:
       - keep-alive
       server:
@@ -65,16 +65,16 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5faeae45-23c7dd4f67a8997223444f54
+      - 1-5faeae1e-0207bfdc71b461511acc78d2
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":4679636,"token_type":"bearer"}
+      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":14953,"refresh_token":"<ACTUAL_REFRESH_TOKEN>","scope":["bits:read","channel_commercial","channel_editor","channel_read","channel_stream","user:read:email","user_blocks_edit","user_read"],"token_type":"bearer"}
 
         '
-  recorded_at: Fri, 13 Nov 2020 16:03:17 GMT
+  recorded_at: Fri, 13 Nov 2020 16:02:38 GMT
 - request:
     method: get
-    uri: https://api.twitch.tv/helix/games?name%5B%5D=Heroes+of+the+Storm&name%5B%5D=Super+Mario+Odyssey
+    uri: https://api.twitch.tv/helix/bits/leaderboard
     body:
       encoding: US-ASCII
       string: ''
@@ -93,7 +93,7 @@ http_interactions:
       connection:
       - keep-alive
       content-length:
-      - '303'
+      - '66'
       content-type:
       - application/json; charset=utf-8
       access-control-allow-origin:
@@ -109,30 +109,29 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1605283398'
+      - '1605283359'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - e455cc31172e25593d9c240f5211f7dc
+      - fe0adc5a513c06e58266f8fc5b114506
       x-ctxlog-logid:
-      - 1-5faeae45-79bd9383329294ab23d02bc8
+      - 1-5faeae1e-072affc15b4e494d0fa18535
       date:
-      - Fri, 13 Nov 2020 16:03:18 GMT
+      - Fri, 13 Nov 2020 16:02:38 GMT
       x-served-by:
-      - cache-sea4438-SEA, cache-bma1647-BMA
+      - cache-sea4443-SEA, cache-bma1647-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1605283398.860510,VS0,VS0,VE205
+      - S1605283359.728780,VS0,VS0,VE200
       vary:
       - Accept-Encoding
       strict-transport-security:
       - max-age=300
     body:
       encoding: UTF-8
-      string: '{"data":[{"id":"32959","name":"Heroes of the Storm","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Heroes%20of%20the%20Storm-{width}x{height}.jpg"},{"id":"493997","name":"Super
-        Mario Odyssey","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Super%20Mario%20Odyssey-{width}x{height}.jpg"}]}'
-  recorded_at: Fri, 13 Nov 2020 16:03:18 GMT
+      string: '{"data":[],"date_range":{"started_at":"","ended_at":""},"total":0}'
+  recorded_at: Fri, 13 Nov 2020 16:02:38 GMT
 recorded_with: VCR 6.0.0

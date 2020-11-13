@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Fri, 13 Nov 2020 16:02:41 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5faeae21-23b648a025fbb32a5a605f08
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Fri, 13 Nov 2020 16:02:42 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","grant_type":"refresh_token","refresh_token":null}'
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      date:
+      - Fri, 13 Nov 2020 16:02:42 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '49'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5faeae22-73c9961d523ad98840482043
+    body:
+      encoding: UTF-8
+      string: '{"status":400,"message":"missing refresh token"}
+
+        '
+  recorded_at: Fri, 13 Nov 2020 16:02:43 GMT
+recorded_with: VCR 6.0.0

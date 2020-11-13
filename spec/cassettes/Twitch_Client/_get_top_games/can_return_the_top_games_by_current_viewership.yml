@@ -1,6 +1,42 @@
 ---
 http_interactions:
 - request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Fri, 13 Nov 2020 16:03:18 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5faeae46-6eba8c6a3f6e9cd56a41b99b
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Fri, 13 Nov 2020 16:03:18 GMT
+- request:
     method: post
     uri: https://id.twitch.tv/oauth2/token
     body:
@@ -17,7 +53,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Wed, 04 Nov 2020 19:51:09 GMT
+      - Fri, 13 Nov 2020 16:03:19 GMT
       content-type:
       - application/json
       content-length:
@@ -29,13 +65,13 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5fa3062c-26f59e90313d19247546f34a
+      - 1-5faeae47-0b2b7324425a84b62bef7154
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":5150963,"token_type":"bearer"}
+      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":4757477,"token_type":"bearer"}
 
         '
-  recorded_at: Wed, 04 Nov 2020 19:51:09 GMT
+  recorded_at: Fri, 13 Nov 2020 16:03:19 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/games/top?first=5
@@ -57,7 +93,7 @@ http_interactions:
       connection:
       - keep-alive
       content-length:
-      - '808'
+      - '820'
       content-type:
       - application/json; charset=utf-8
       access-control-allow-origin:
@@ -73,32 +109,32 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1604519470'
+      - '1605283401'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - 0e0a8df93ad343c57655355e01b2b3c5
+      - a917cd3fbf41c0f7caf071775c653ad7
       x-ctxlog-logid:
-      - 1-5fa3062d-5f567afb4ccfbe414fb5d4e3
+      - 1-5faeae48-50e713ac3c2b1596403776b1
       date:
-      - Wed, 04 Nov 2020 19:51:09 GMT
+      - Fri, 13 Nov 2020 16:03:20 GMT
       x-served-by:
-      - cache-sea4473-SEA, cache-bma1643-BMA
+      - cache-sea4476-SEA, cache-bma1637-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1604519469.441468,VS0,VS0,VE191
+      - S1605283400.101705,VS0,VS0,VE198
       vary:
       - Accept-Encoding
       strict-transport-security:
       - max-age=300
     body:
       encoding: UTF-8
-      string: '{"data":[{"id":"509658","name":"Just Chatting","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-{width}x{height}.jpg"},{"id":"33214","name":"Fortnite","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Fortnite-{width}x{height}.jpg"},{"id":"32399","name":"Counter-Strike:
-        Global Offensive","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/./Counter-Strike:%20Global%20Offensive-{width}x{height}.jpg"},{"id":"21779","name":"League
-        of Legends","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-{width}x{height}.jpg"},{"id":"512710","name":"Call
-        Of Duty: Modern Warfare","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/./Call%20Of%20Duty:%20Modern%20Warfare-{width}x{height}.jpg"}],"pagination":{"cursor":"eyJzIjo1LCJkIjpmYWxzZSwidCI6dHJ1ZX0="}}'
-  recorded_at: Wed, 04 Nov 2020 19:51:09 GMT
+      string: '{"data":[{"id":"512709","name":"Call of Duty: Black Ops Cold War","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/./Call%20of%20Duty:%20Black%20Ops%20Cold%20War-{width}x{height}.jpg"},{"id":"509658","name":"Just
+        Chatting","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-{width}x{height}.jpg"},{"id":"21779","name":"League
+        of Legends","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-{width}x{height}.jpg"},{"id":"32399","name":"Counter-Strike:
+        Global Offensive","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/./Counter-Strike:%20Global%20Offensive-{width}x{height}.jpg"},{"id":"33214","name":"Fortnite","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Fortnite-{width}x{height}.jpg"}],"pagination":{"cursor":"eyJzIjo1LCJkIjpmYWxzZSwidCI6dHJ1ZX0="}}'
+  recorded_at: Fri, 13 Nov 2020 16:03:20 GMT
 recorded_with: VCR 6.0.0

@@ -50,8 +50,22 @@ VCR.configure do |vcr_config|
     ENV['TWITCH_APPLICATION_ACCESS_TOKEN']
   end
 
-  vcr_config.filter_sensitive_data('<NEW_APPLICATION_ACCESS_TOKEN>') do |interaction|
-    JSON.parse(interaction.response.body)['access_token']
+  vcr_config.filter_sensitive_data('<NEW_ACCESS_TOKEN>') do |interaction|
+    if interaction.response.headers['content-type'].include? 'application/json'
+      JSON.parse(interaction.response.body)['access_token']
+    end
+  end
+
+  vcr_config.filter_sensitive_data('<NEW_REFRESH_TOKEN>') do |interaction|
+    if interaction.response.headers['content-type'].include? 'application/json'
+      JSON.parse(interaction.response.body)['refresh_token']
+    end
+  end
+
+  vcr_config.filter_sensitive_data('<CODE>') do |interaction|
+    if interaction.request.uri == 'https://id.twitch.tv/oauth2/token'
+      JSON.parse(interaction.request.body)['code']
+    end
   end
 
   vcr_config.filter_sensitive_data('<AUTHORIZATION_HEADER>') do |interaction|

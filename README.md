@@ -104,7 +104,7 @@ and return a response object containing the data and other associated request in
     Clip creation counts for a second limit (duration currently unknown).
 *   **pagination** is a hash that appears when data can be traversed,
     and contains one member (*cursor*) which lets you paginate through certain requests.
-*   **raw** is the raw HTTP response data when `with_raw` is true in the client.
+*   **raw** is the raw HTTP response data.
 
 ```ruby
 # Get top live streams

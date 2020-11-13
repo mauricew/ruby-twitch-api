@@ -1,6 +1,42 @@
 ---
 http_interactions:
 - request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Fri, 13 Nov 2020 16:03:08 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5faeae3c-3a510e130db610b530b5b0a1
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Fri, 13 Nov 2020 16:03:08 GMT
+- request:
     method: post
     uri: https://id.twitch.tv/oauth2/token
     body:
@@ -17,7 +53,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Wed, 04 Nov 2020 19:51:03 GMT
+      - Fri, 13 Nov 2020 16:03:09 GMT
       content-type:
       - application/json
       content-length:
@@ -29,13 +65,13 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5fa30627-46da0cb65f066c9b5af7336a
+      - 1-5faeae3d-3c94c56b46c47ce4537ed3f3
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":5343319,"token_type":"bearer"}
+      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":4869256,"token_type":"bearer"}
 
         '
-  recorded_at: Wed, 04 Nov 2020 19:51:03 GMT
+  recorded_at: Fri, 13 Nov 2020 16:03:09 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/streams
@@ -71,23 +107,23 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1604519464'
+      - '1605283390'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - d77aab5ba2e4ac721a6080f5054a9259
+      - b446d68f47a6685c989ae5c3f3981b68
       x-ctxlog-logid:
-      - 1-5fa30627-59bdc50c677347e07615c8da
+      - 1-5faeae3d-2ec5211a3f0bdc715b8dbcb1
       date:
-      - Wed, 04 Nov 2020 19:51:03 GMT
+      - Fri, 13 Nov 2020 16:03:09 GMT
       x-served-by:
-      - cache-sea4470-SEA, cache-bma1635-BMA
+      - cache-sea4431-SEA, cache-bma1630-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1604519464.759793,VS0,VS0,VE194
+      - S1605283390.520372,VS0,VS0,VE215
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -95,29 +131,8 @@ http_interactions:
       transfer-encoding:
       - chunked
     body:
-      encoding: UTF-8
-      string: "{\"data\":[{\"id\":\"40345176990\",\"user_id\":\"207813352\",\"user_name\":\"HasanAbi\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"2020
-        US PRESIDENTIAL ELECTION - BEDLAM\",\"viewer_count\":112364,\"started_at\":\"2020-11-04T19:01:22Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_hasanabi-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"77017b7b-6b98-4f0d-bd39-3ba96b66ec7a\",\"cea7bc0c-75a5-4446-8743-6db031b71550\",\"ab45fcb7-a22d-4a07-b0ac-fb3940566fa7\",\"67259b26-ff83-444e-9d3c-faab390df16f\"]},{\"id\":\"39649784973\",\"user_id\":\"181077473\",\"user_name\":\"Gaules\",\"game_id\":\"32399\",\"type\":\"live\",\"title\":\"Astralis
-        vs G2 BLAST Premier Fall 2020 @Gaules nas Redes Sociais !premio !prime !Sorteio
-        PC\",\"viewer_count\":73351,\"started_at\":\"2020-11-04T14:17:45Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_gaules-{width}x{height}.jpg\",\"tag_ids\":[\"c2839af5-f1d2-46c4-8edc-1d0bfbd85070\",\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"40344270254\",\"user_id\":\"26261471\",\"user_name\":\"Asmongold\",\"game_id\":\"18122\",\"type\":\"live\",\"title\":\"SHADOWLANDS
-        SOON--MULTIBOXERS BANNED--WE GOT A LOT TO TALK ABOUT LOL--MOUNT RUNS--FARMING
-        ITEMS--SWORD TODAY\",\"viewer_count\":68267,\"started_at\":\"2020-11-04T16:32:21Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_asmongold-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39877834204\",\"user_id\":\"83232866\",\"user_name\":\"ibai\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"probablemente
-        el mejor miércoles de tu vida\",\"viewer_count\":60777,\"started_at\":\"2020-11-04T19:17:57Z\",\"language\":\"es\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_ibai-{width}x{height}.jpg\",\"tag_ids\":[\"d4bb9c58-2141-4881-bcdc-3fe0505457d1\"]},{\"id\":\"40344371806\",\"user_id\":\"15564828\",\"user_name\":\"NICKMERCS\",\"game_id\":\"512710\",\"type\":\"live\",\"title\":\"Fraggin'
-        | Code: MFAM | @NICKMERCS \",\"viewer_count\":54089,\"started_at\":\"2020-11-04T16:52:05Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_nickmercs-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39875696188\",\"user_id\":\"48878319\",\"user_name\":\"TheGrefg\",\"game_id\":\"33214\",\"type\":\"live\",\"title\":\"\U0001F60E\U0001F3C6
-        TORNEO PARA CONSEGUIR SKIN EXCLUSIVA CON AGUS Y VICENS \U0001F3C6\U0001F60E\",\"viewer_count\":53461,\"started_at\":\"2020-11-04T16:48:49Z\",\"language\":\"es\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_thegrefg-{width}x{height}.jpg\",\"tag_ids\":[\"d4bb9c58-2141-4881-bcdc-3fe0505457d1\"]},{\"id\":\"40343727182\",\"user_id\":\"163299585\",\"user_name\":\"BLASTPremier\",\"game_id\":\"32399\",\"type\":\"live\",\"title\":\"G2
-        vs MIBR, FINAL Astralis vs Winner \U0001F4A5 BLAST Premier Fall Series Group
-        3 Day 3\",\"viewer_count\":50155,\"started_at\":\"2020-11-04T14:31:08Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_blastpremier-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"36a89a80-4fcd-4b74-b3d2-2c6fd9b30c95\"]},{\"id\":\"39650683741\",\"user_id\":\"38244180\",\"user_name\":\"alanzoka\",\"game_id\":\"494082\",\"type\":\"live\",\"title\":\"O
-        MELHOR ARROZ DO PRÉDIO — INTRUDER COM OS AMIGOS DEPOIS\",\"viewer_count\":32666,\"started_at\":\"2020-11-04T18:21:52Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_alanzoka-{width}x{height}.jpg\",\"tag_ids\":[\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"39877958764\",\"user_id\":\"603696416\",\"user_name\":\"sadsaadsadsasdasa54s\",\"game_id\":\"\",\"type\":\"live\",\"title\":\"\",\"viewer_count\":28075,\"started_at\":\"2020-11-04T19:28:24Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_sadsaadsadsasdasa54s-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39874326364\",\"user_id\":\"22484632\",\"user_name\":\"forsen\",\"game_id\":\"27471\",\"type\":\"live\",\"title\":\"@forsen,
-        Doubters finally silenced!\",\"viewer_count\":26826,\"started_at\":\"2020-11-04T14:46:17Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_forsen-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"adb55316-f1ab-4f81-9ff5-17da7719d0ee\"]},{\"id\":\"39875604380\",\"user_id\":\"86277097\",\"user_name\":\"buster\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"ПРОХОДИМ
-        ТЕСТ НА IQ \",\"viewer_count\":26427,\"started_at\":\"2020-11-04T16:41:16Z\",\"language\":\"ru\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_buster-{width}x{height}.jpg\",\"tag_ids\":[\"0569b171-2a2b-476e-a596-5bdfb45a1327\"]},{\"id\":\"39876688204\",\"user_id\":\"12875057\",\"user_name\":\"GRONKH\",\"game_id\":\"518184\",\"type\":\"live\",\"title\":\"Hoide
-        #METTWOCH ab so Neunzehn Uhr rum ✶ !ff6\",\"viewer_count\":24453,\"started_at\":\"2020-11-04T18:00:00Z\",\"language\":\"de\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_gronkh-{width}x{height}.jpg\",\"tag_ids\":[\"9166ad14-41f1-4b04-a3b8-c8eb838c6be6\",\"2a14b52e-d459-4c92-be11-5d86b898f6b6\"]},{\"id\":\"39649551373\",\"user_id\":\"47071880\",\"user_name\":\"YoDa\",\"game_id\":\"21779\",\"type\":\"live\",\"title\":\"6
-        DIAS APENAS. LIVE DO FEIKINHO EXTREMAMENTGE TRYHARD\",\"viewer_count\":22805,\"started_at\":\"2020-11-04T11:55:19Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_yoda-{width}x{height}.jpg\",\"tag_ids\":[\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"40344264910\",\"user_id\":\"52091823\",\"user_name\":\"Castro_1021\",\"game_id\":\"518204\",\"type\":\"live\",\"title\":\"LOVE.
-        \  @Castro1021     \",\"viewer_count\":22655,\"started_at\":\"2020-11-04T16:31:21Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_castro_1021-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39876056444\",\"user_id\":\"66983298\",\"user_name\":\"benjyfishy\",\"game_id\":\"33214\",\"type\":\"live\",\"title\":\"$5K
-        AMAR DUO CUP | !discord\",\"viewer_count\":22132,\"started_at\":\"2020-11-04T17:13:50Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_benjyfishy-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"]},{\"id\":\"39876219948\",\"user_id\":\"99899949\",\"user_name\":\"bratishkinoff\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"\U0001F534ВИДИВА
-        И НОВАСТИ (ПРИСОЕДИНЯЙСЯ К ТЁМНОЙ СТОРОНЕ)\",\"viewer_count\":21557,\"started_at\":\"2020-11-04T17:26:19Z\",\"language\":\"ru\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_bratishkinoff-{width}x{height}.jpg\",\"tag_ids\":[\"0569b171-2a2b-476e-a596-5bdfb45a1327\"]},{\"id\":\"39650903869\",\"user_id\":\"491822536\",\"user_name\":\"Navajas_Barbershop\",\"game_id\":\"509658\",\"type\":\"live\",\"title\":\"EL
-        DEMENTE FT CARRERA CAMBIO DE LOOK\",\"viewer_count\":21271,\"started_at\":\"2020-11-04T19:05:46Z\",\"language\":\"es\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_navajas_barbershop-{width}x{height}.jpg\",\"tag_ids\":[\"d4bb9c58-2141-4881-bcdc-3fe0505457d1\"]},{\"id\":\"39875633356\",\"user_id\":\"67931625\",\"user_name\":\"Amar\",\"game_id\":\"33214\",\"type\":\"live\",\"title\":\"VIEWINGPARTY
-        BOSS AMAR DUO CUP !pc !giveaway !yfood !sub !prime\",\"viewer_count\":21125,\"started_at\":\"2020-11-04T16:43:45Z\",\"language\":\"de\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_amar-{width}x{height}.jpg\",\"tag_ids\":[\"9166ad14-41f1-4b04-a3b8-c8eb838c6be6\",\"1eba3cfe-51cc-460a-8259-bc8bb987f904\"]},{\"id\":\"39650565213\",\"user_id\":\"569325723\",\"user_name\":\"loud_coringa\",\"game_id\":\"510218\",\"type\":\"live\",\"title\":\"AO
-        VIVO - JOGANDO OQ \",\"viewer_count\":20762,\"started_at\":\"2020-11-04T17:58:10Z\",\"language\":\"pt\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_loud_coringa-{width}x{height}.jpg\",\"tag_ids\":[\"39ee8140-901a-4762-bfca-8260dea1310f\"]},{\"id\":\"40344310894\",\"user_id\":\"7601562\",\"user_name\":\"Chess\",\"game_id\":\"743\",\"type\":\"live\",\"title\":\"SCC
-        - GM Firouzja vs GM Fedoseev - Hosts GM Giri and IM Rensch #speedchess\",\"viewer_count\":20646,\"started_at\":\"2020-11-04T16:40:04Z\",\"language\":\"en\",\"thumbnail_url\":\"https://static-cdn.jtvnw.net/previews-ttv/live_user_chess-{width}x{height}.jpg\",\"tag_ids\":[\"6ea6bca4-4712-4ab9-a906-e3336a9d8039\",\"36a89a80-4fcd-4b74-b3d2-2c6fd9b30c95\"]}],\"pagination\":{\"cursor\":\"eyJiIjp7IkN1cnNvciI6ImV5SnpJam94TVRJek5qUXVOREF4TmpRNU16VTJORFFzSW1RaU9tWmhiSE5sTENKMElqcDBjblZsZlE9PSJ9LCJhIjp7IkN1cnNvciI6ImV5SnpJam95TURZME5pNHhNall5TkRJeE9ETTBOek1zSW1RaU9tWmhiSE5sTENKMElqcDBjblZsZlE9PSJ9fQ\"}}"
-  recorded_at: Wed, 04 Nov 2020 19:51:03 GMT
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJkYXRhIjpbeyJpZCI6IjM5OTY5NTcxMjI4IiwidXNlcl9pZCI6IjMxMjM5NTAzIiwidXNlcl9uYW1lIjoiRVNMX0NTR08iLCJnYW1lX2lkIjoiMzIzOTkiLCJnYW1lX25hbWUiOiJDb3VudGVyLVN0cmlrZTogR2xvYmFsIE9mZmVuc2l2ZSIsInR5cGUiOiJsaXZlIiwidGl0bGUiOiJMSVZFOiBBc3RyYWxpcyB2cy4gRU5DRSAtIElFTSBCZWlqaW5nIDIwMjAgLSBHcm91cCBCIC0gRVUiLCJ2aWV3ZXJfY291bnQiOjQ1OTUzLCJzdGFydGVkX2F0IjoiMjAyMC0xMS0xM1QxMzowMDozOVoiLCJsYW5ndWFnZSI6ImVuIiwidGh1bWJuYWlsX3VybCI6Imh0dHBzOi8vc3RhdGljLWNkbi5qdHZudy5uZXQvcHJldmlld3MtdHR2L2xpdmVfdXNlcl9lc2xfY3Nnby17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiNmVhNmJjYTQtNDcxMi00YWI5LWE5MDYtZTMzMzZhOWQ4MDM5IiwiMzZhODlhODAtNGZjZC00Yjc0LWIzZDItMmM2ZmQ5YjMwYzk1Il19LHsiaWQiOiIzOTk3MDU3MzQ2OCIsInVzZXJfaWQiOiI0ODg3ODMxOSIsInVzZXJfbmFtZSI6IlRoZUdyZWZnIiwiZ2FtZV9pZCI6IjMzMjE0IiwiZ2FtZV9uYW1lIjoiRm9ydG5pdGUiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoi8J+OrvCfkpsgSlVHQU5ETyBDT04gTEFDSExBTiBZIFNVIFNLSU4gRFVPUyAqTUkgSU5HTMOJUyBFUyBNVVkgTEFNRU5UQUJMRSog8J+Sm/Cfjq4iLCJ2aWV3ZXJfY291bnQiOjQ0MTUzLCJzdGFydGVkX2F0IjoiMjAyMC0xMS0xM1QxNDozNzoxNVoiLCJsYW5ndWFnZSI6ImVzIiwidGh1bWJuYWlsX3VybCI6Imh0dHBzOi8vc3RhdGljLWNkbi5qdHZudy5uZXQvcHJldmlld3MtdHR2L2xpdmVfdXNlcl90aGVncmVmZy17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiZDRiYjljNTgtMjE0MS00ODgxLWJjZGMtM2ZlMDUwNTQ1N2QxIl19LHsiaWQiOiIzOTk3MDE5NTkzMiIsInVzZXJfaWQiOiI4NjI3NzA5NyIsInVzZXJfbmFtZSI6ImJ1c3RlciIsImdhbWVfaWQiOiIzMjM5OSIsImdhbWVfbmFtZSI6IkNvdW50ZXItU3RyaWtlOiBHbG9iYWwgT2ZmZW5zaXZlIiwidHlwZSI6ImxpdmUiLCJ0aXRsZSI6IkJJRyBEVUNLIENVUC4gVEVBTSBTVFJPR08gdnMgVEVBTSBQT0tBIFtibzMsIDE6MCwgMTAwayBwcml6ZSBwb29sXSIsInZpZXdlcl9jb3VudCI6MzgyMzgsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDE0OjAzOjI1WiIsImxhbmd1YWdlIjoicnUiLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX2J1c3Rlci17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiMDU2OWIxNzEtMmEyYi00NzZlLWE1OTYtNWJkZmI0NWExMzI3Il19LHsiaWQiOiIzOTk3MTExMDQxMiIsInVzZXJfaWQiOiI1Nzc4MTkzNiIsInVzZXJfbmFtZSI6IlJvY2tldExlYWd1ZSIsImdhbWVfaWQiOiIzMDkyMSIsImdhbWVfbmFtZSI6IlJvY2tldCBMZWFndWUiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoiUHJlLVNob3cgfCBSTENTIFggV2ludGVyIFNwbGl0IHwgRXVyb3BlYW4gUmVnaW9uYWwgIzEgfCBEYXkgMiIsInZpZXdlcl9jb3VudCI6MzYzNTgsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDE1OjE5OjQ2WiIsImxhbmd1YWdlIjoiZW4iLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX3JvY2tldGxlYWd1ZS17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiMzZhODlhODAtNGZjZC00Yjc0LWIzZDItMmM2ZmQ5YjMwYzk1IiwiNmVhNmJjYTQtNDcxMi00YWI5LWE5MDYtZTMzMzZhOWQ4MDM5Il19LHsiaWQiOiI0MDQ2NTY4ODc2NiIsInVzZXJfaWQiOiIxMDA4MTQzOTciLCJ1c2VyX25hbWUiOiJEb3RhMlJ1SHViIiwiZ2FtZV9pZCI6IjI5NTk1IiwiZ2FtZV9uYW1lIjoiRG90YSAyIiwidHlwZSI6ImxpdmUiLCJ0aXRsZSI6IlRlYW0gTGlxdWlkIFsxOjFdIFZpS2luLmdnIHwgQk8zIHwgRXBpYyBMZWFndWUgU2Vhc29uIDIgfCBHcm91cCBTdGFnZSB8IGJ5IE1pbGEgXHUwMDI2IElubWF0ZSIsInZpZXdlcl9jb3VudCI6MzA2ODUsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDEyOjM0OjUyWiIsImxhbmd1YWdlIjoicnUiLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX2RvdGEycnVodWIte3dpZHRofXh7aGVpZ2h0fS5qcGciLCJ0YWdfaWRzIjpbIjM2YTg5YTgwLTRmY2QtNGI3NC1iM2QyLTJjNmZkOWIzMGM5NSIsIjA1NjliMTcxLTJhMmItNDc2ZS1hNTk2LTViZGZiNDVhMTMyNyJdfSx7ImlkIjoiMzk3MDU0Mzc5MDEiLCJ1c2VyX2lkIjoiMTgxMDc3NDczIiwidXNlcl9uYW1lIjoiR2F1bGVzIiwiZ2FtZV9pZCI6IjMyMzk5IiwiZ2FtZV9uYW1lIjoiQ291bnRlci1TdHJpa2U6IEdsb2JhbCBPZmZlbnNpdmUiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoiQXN0cmFsaXMgdnMgRU5DRSBJRU0gQmVpamluZy1IYWlkaWFuIDIwMjAgQEdhdWxlcyBuYXMgUmVkZXMgU29jaWFpcyAhcHJlbWlvICFwcmltZSAhU29ydGVpbyBQQyIsInZpZXdlcl9jb3VudCI6MjgzOTYsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDEzOjI2OjUwWiIsImxhbmd1YWdlIjoicHQiLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX2dhdWxlcy17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiMzllZTgxNDAtOTAxYS00NzYyLWJmY2EtODI2MGRlYTEzMTBmIl19LHsiaWQiOiIzOTcwNTM2NDc4MSIsInVzZXJfaWQiOiI0Nzk0ODMxIiwidXNlcl9uYW1lIjoiTWlicnR2IiwiZ2FtZV9pZCI6IjMyMzk5IiwiZ2FtZV9uYW1lIjoiQ291bnRlci1TdHJpa2U6IEdsb2JhbCBPZmZlbnNpdmUiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoiKEJSKSBGTEFTSFBPSU5UIERJQSA0IC0gR1JVUE8gQiAtIEVOVlkgWCBNSUJSICFzb3J0ZWlvICF0YWJlbGEiLCJ2aWV3ZXJfY291bnQiOjI0NjU2LCJzdGFydGVkX2F0IjoiMjAyMC0xMS0xM1QxMjo1MDoxMVoiLCJsYW5ndWFnZSI6InB0IiwidGh1bWJuYWlsX3VybCI6Imh0dHBzOi8vc3RhdGljLWNkbi5qdHZudy5uZXQvcHJldmlld3MtdHR2L2xpdmVfdXNlcl9taWJydHYte3dpZHRofXh7aGVpZ2h0fS5qcGciLCJ0YWdfaWRzIjpbIjM5ZWU4MTQwLTkwMWEtNDc2Mi1iZmNhLTgyNjBkZWExMzEwZiJdfSx7ImlkIjoiNDA0NjY3ODcwMjIiLCJ1c2VyX2lkIjoiMzY3NjkwMTYiLCJ1c2VyX25hbWUiOiJUaW1UaGVUYXRtYW4iLCJnYW1lX2lkIjoiNTA5NjU4IiwiZ2FtZV9uYW1lIjoiSnVzdCBDaGF0dGluZyIsInR5cGUiOiJsaXZlIiwidGl0bGUiOiJDT0xEIFdBUiBUT0RBWSBMRVRTIEdFVCBJVCIsInZpZXdlcl9jb3VudCI6MjM4MjUsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDE1OjQwOjQ4WiIsImxhbmd1YWdlIjoiZW4iLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX3RpbXRoZXRhdG1hbi17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiNmVhNmJjYTQtNDcxMi00YWI5LWE5MDYtZTMzMzZhOWQ4MDM5Il19LHsiaWQiOiIzOTcwNTI4NDAyOSIsInVzZXJfaWQiOiIxNTYwMzc4NTYiLCJ1c2VyX25hbWUiOiJGZXh0cmFsaWZlIiwiZ2FtZV9pZCI6IjIxODEyIiwiZ2FtZV9uYW1lIjoiRGVtb24ncyBTb3VscyIsInR5cGUiOiJsaXZlIiwidGl0bGUiOiJQUzUgR0FNRVBMQVkgV0lUSCBDQVMhICFkZW1vbnNzb3VscyAiLCJ2aWV3ZXJfY291bnQiOjIyNjMyLCJzdGFydGVkX2F0IjoiMjAyMC0xMS0xM1QxMTo1NDoxN1oiLCJsYW5ndWFnZSI6ImVuIiwidGh1bWJuYWlsX3VybCI6Imh0dHBzOi8vc3RhdGljLWNkbi5qdHZudy5uZXQvcHJldmlld3MtdHR2L2xpdmVfdXNlcl9mZXh0cmFsaWZlLXt3aWR0aH14e2hlaWdodH0uanBnIiwidGFnX2lkcyI6WyI2ZWE2YmNhNC00NzEyLTRhYjktYTkwNi1lMzMzNmE5ZDgwMzkiLCJiYTJjOTY4Yi04NjdhLTQ5Y2UtYWViYy0zZDk3OGEyMDRmNGEiXX0seyJpZCI6IjM5NzA1MzY0NjA1IiwidXNlcl9pZCI6IjQ3MDcxODgwIiwidXNlcl9uYW1lIjoiWW9EYSIsImdhbWVfaWQiOiIyMTc3OSIsImdhbWVfbmFtZSI6IkxlYWd1ZSBvZiBMZWdlbmRzIiwidHlwZSI6ImxpdmUiLCJ0aXRsZSI6IkxFQUdVRSBZT01FVEEgLSBCQVRBTEhBIERFIFJBUCBCWSBQTEFZTElTVCBBUyAyMkgiLCJ2aWV3ZXJfY291bnQiOjIyNTIxLCJzdGFydGVkX2F0IjoiMjAyMC0xMS0xM1QxMjo1MDowNloiLCJsYW5ndWFnZSI6InB0IiwidGh1bWJuYWlsX3VybCI6Imh0dHBzOi8vc3RhdGljLWNkbi5qdHZudy5uZXQvcHJldmlld3MtdHR2L2xpdmVfdXNlcl95b2RhLXt3aWR0aH14e2hlaWdodH0uanBnIiwidGFnX2lkcyI6WyIzOWVlODE0MC05MDFhLTQ3NjItYmZjYS04MjYwZGVhMTMxMGYiXX0seyJpZCI6IjQwNDY0OTIwMzUwIiwidXNlcl9pZCI6IjMxNjg4MzY2IiwidXNlcl9uYW1lIjoiU3ltZnVobnkiLCJnYW1lX2lkIjoiNTEyNzA5IiwiZ2FtZV9uYW1lIjoiQ2FsbCBvZiBEdXR5OiBCbGFjayBPcHMgQ29sZCBXYXIiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoiSGlnaCBLaWxsIFdpbnMgT24gQ29sZCBXYXIgfCBAU3ltZnVobnkgT24gQWxsIFNvY2lhbHMgfCAhY29kZSAhdmlkIiwidmlld2VyX2NvdW50IjoyMTc4OSwic3RhcnRlZF9hdCI6IjIwMjAtMTEtMTNUMTA6MDI6NTFaIiwibGFuZ3VhZ2UiOiJlbiIsInRodW1ibmFpbF91cmwiOiJodHRwczovL3N0YXRpYy1jZG4uanR2bncubmV0L3ByZXZpZXdzLXR0di9saXZlX3VzZXJfc3ltZnVobnkte3dpZHRofXh7aGVpZ2h0fS5qcGciLCJ0YWdfaWRzIjpbIjZlYTZiY2E0LTQ3MTItNGFiOS1hOTA2LWUzMzM2YTlkODAzOSJdfSx7ImlkIjoiNDA0NjEyMjAxOTAiLCJ1c2VyX2lkIjoiODg5NDY1NDgiLCJ1c2VyX25hbWUiOiJhY2V1IiwiZ2FtZV9pZCI6IjUxMTIyNCIsImdhbWVfbmFtZSI6IkFwZXggTGVnZW5kcyIsInR5cGUiOiJsaXZlIiwidGl0bGUiOiJOUkcgYWNldSAvLyBzYXkgbGVzcyAvLyAhc29jaWFscyAhYWltbGFiIiwidmlld2VyX2NvdW50IjoyMTA3NSwic3RhcnRlZF9hdCI6IjIwMjAtMTEtMTNUMDQ6MzQ6MjdaIiwibGFuZ3VhZ2UiOiJlbiIsInRodW1ibmFpbF91cmwiOiJodHRwczovL3N0YXRpYy1jZG4uanR2bncubmV0L3ByZXZpZXdzLXR0di9saXZlX3VzZXJfYWNldS17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiNmVhNmJjYTQtNDcxMi00YWI5LWE5MDYtZTMzMzZhOWQ4MDM5Il19LHsiaWQiOiI0MDQ1MDU0MTQ4NiIsInVzZXJfaWQiOiIxMTgxNzA0ODgiLCJ1c2VyX25hbWUiOiJlcGljZW50ZXJfZW4xIiwiZ2FtZV9pZCI6IjI5NTk1IiwiZ2FtZV9uYW1lIjoiRG90YSAyIiwidHlwZSI6ImxpdmUiLCJ0aXRsZSI6IkxpcXVpZCB2cyBWaWtpbi5nZyAoQm8zKSAtIEVQSUMgTGVhZ3VlOiBEaXZpc2lvbiAxIEdyb3VwIFN0YWdlIHcvIE5vbWFkIFx1MDAyNiAxNDM3Iiwidmlld2VyX2NvdW50IjoyMDE0NCwic3RhcnRlZF9hdCI6IjIwMjAtMTEtMTJUMTI6MTA6NTJaIiwibGFuZ3VhZ2UiOiJlbiIsInRodW1ibmFpbF91cmwiOiJodHRwczovL3N0YXRpYy1jZG4uanR2bncubmV0L3ByZXZpZXdzLXR0di9saXZlX3VzZXJfZXBpY2VudGVyX2VuMS17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiMzZhODlhODAtNGZjZC00Yjc0LWIzZDItMmM2ZmQ5YjMwYzk1IiwiNmVhNmJjYTQtNDcxMi00YWI5LWE5MDYtZTMzMzZhOWQ4MDM5Il19LHsiaWQiOiIzOTk2OTc3OTgwNCIsInVzZXJfaWQiOiIxMjkyODE5MzkiLCJ1c2VyX25hbWUiOiJjYXBzIiwiZ2FtZV9pZCI6IjIxNzc5IiwiZ2FtZV9uYW1lIjoiTGVhZ3VlIG9mIExlZ2VuZHMiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoiRzIgQ2FwcyAtIEkgYW0gYmFjayB0byBzdHJlYW1pbmcgYW5kIGp1c3QgZ290IG1hc3RlciA6KSAhZGlzY29yZCIsInZpZXdlcl9jb3VudCI6MTgyODgsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDEzOjIyOjQ3WiIsImxhbmd1YWdlIjoiZW4iLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX2NhcHMte3dpZHRofXh7aGVpZ2h0fS5qcGciLCJ0YWdfaWRzIjpbIjgwYThlZjU0LTI5Y2EtNGM4NC1hY2E1LTliODk1ODFiMzBlMSIsIjZlYTZiY2E0LTQ3MTItNGFiOS1hOTA2LWUzMzM2YTlkODAzOSIsImIxNTdlOGQ2LWI3YmEtNDlmNC04MzZmLTA5ODg2YzA3MmYxZiJdfSx7ImlkIjoiNDA0NjUwNjk4MDYiLCJ1c2VyX2lkIjoiNTA5ODg3NTAiLCJ1c2VyX25hbWUiOiJzdHlsaXNobm9vYjQiLCJnYW1lX2lkIjoiNTExMjI0IiwiZ2FtZV9uYW1lIjoiQXBleCBMZWdlbmRzIiwidHlwZSI6ImxpdmUiLCJ0aXRsZSI6IltEVE5dIHdpdGgg44KJ44GN44GV44KTIOOBnOOBi+OBmeOBleOCkyAiLCJ2aWV3ZXJfY291bnQiOjE3OTg5LCJzdGFydGVkX2F0IjoiMjAyMC0xMS0xM1QxMDozMTo0OVoiLCJsYW5ndWFnZSI6ImphIiwidGh1bWJuYWlsX3VybCI6Imh0dHBzOi8vc3RhdGljLWNkbi5qdHZudy5uZXQvcHJldmlld3MtdHR2L2xpdmVfdXNlcl9zdHlsaXNobm9vYjQte3dpZHRofXh7aGVpZ2h0fS5qcGciLCJ0YWdfaWRzIjpbIjhiNzNiYzViLTVmNzQtNGQ0OS1hYTU1LWUzMjM3ZTlmMzYxMCIsIjZiYTFkMjMwLWU1MmYtNGQ4MS1iMWUwLTQxZjI1YThhOWY1ZCJdfSx7ImlkIjoiNDA0NjQxNzA1MjYiLCJ1c2VyX2lkIjoiNDA5NzI4OTAiLCJ1c2VyX25hbWUiOiJBZG1pcmFsQmFocm9vIiwiZ2FtZV9pZCI6IjUxMjcwOSIsImdhbWVfbmFtZSI6IkNhbGwgb2YgRHV0eTogQmxhY2sgT3BzIENvbGQgV2FyIiwidHlwZSI6ImxpdmUiLCJ0aXRsZSI6IlpvbWJpZXMgRUUgSHVudCAoSXQgdW5sb2NrcyBAIDEwOjMwQU0gQ1NUKSIsInZpZXdlcl9jb3VudCI6MTc0MTgsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDA4OjAxOjAxWiIsImxhbmd1YWdlIjoiZW4iLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX2FkbWlyYWxiYWhyb28te3dpZHRofXh7aGVpZ2h0fS5qcGciLCJ0YWdfaWRzIjpbIjZlYTZiY2E0LTQ3MTItNGFiOS1hOTA2LWUzMzM2YTlkODAzOSJdfSx7ImlkIjoiMzk5Njk3NTEyMjgiLCJ1c2VyX2lkIjoiMjEzNzQ4NjQxIiwidXNlcl9uYW1lIjoiY3Nnb21jX3J1IiwiZ2FtZV9pZCI6IjMyMzk5IiwiZ2FtZV9uYW1lIjoiQ291bnRlci1TdHJpa2U6IEdsb2JhbCBPZmZlbnNpdmUiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoiW1JVXSBBc3RyYWxpcyB2cyBFTkNFICgxLTApIEJPMyB8IElFTSBCZWlqaW5nLUhhaWRpYW4gMjAyMCAgQHRhZmF0diBcdTAwMjYgQExlbmluaXdUdiIsInZpZXdlcl9jb3VudCI6MTU0MjMsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDEzOjE5OjM3WiIsImxhbmd1YWdlIjoicnUiLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX2NzZ29tY19ydS17d2lkdGh9eHtoZWlnaHR9LmpwZyIsInRhZ19pZHMiOlsiMzZhODlhODAtNGZjZC00Yjc0LWIzZDItMmM2ZmQ5YjMwYzk1IiwiMDU2OWIxNzEtMmEyYi00NzZlLWE1OTYtNWJkZmI0NWExMzI3Il19LHsiaWQiOiI0MDQ2NDk3Mjc1MCIsInVzZXJfaWQiOiIxMDM4MjUxMjciLCJ1c2VyX25hbWUiOiLtko3sm5Trn4kiLCJnYW1lX2lkIjoiNTEyNzA5IiwiZ2FtZV9uYW1lIjoiQ2FsbCBvZiBEdXR5OiBCbGFjayBPcHMgQ29sZCBXYXIiLCJ0eXBlIjoibGl2ZSIsInRpdGxlIjoi7Iug7J6RICDsvZwg7Jik67iMIOuTgO2LsCDruJTrnpnsmLXsiqQg7L2c65Oc7JuMICAg7ZKN7JuU65+JIiwidmlld2VyX2NvdW50IjoxNTIyOCwic3RhcnRlZF9hdCI6IjIwMjAtMTEtMTNUMTA6MTI6NDlaIiwibGFuZ3VhZ2UiOiJrbyIsInRodW1ibmFpbF91cmwiOiJodHRwczovL3N0YXRpYy1jZG4uanR2bncubmV0L3ByZXZpZXdzLXR0di9saXZlX3VzZXJfaGFucnlhbmcxMTI1LXt3aWR0aH14e2hlaWdodH0uanBnIiwidGFnX2lkcyI6WyJhYjI5NzVlMy1iOWNhLTRiMWEtYTkzZS1mYjYxYTVkNWMzYTQiXX0seyJpZCI6IjQwNDY1ODMwNjIyIiwidXNlcl9pZCI6IjI2NjEwMjM0IiwidXNlcl9uYW1lIjoiQ29oaENhcm5hZ2UiLCJnYW1lX2lkIjoiNTEyMTIxIiwiZ2FtZV9uYW1lIjoiWWFrdXphOiBMaWtlIGEgRHJhZ29uIiwidHlwZSI6ImxpdmUiLCJ0aXRsZSI6IllBS1VaQTogTGlrZSBhIERyYWdvbiEgLSBEZW1vbiBTb3VscyAoRklSU1QgVElNRSkgdG9tb3Jyb3cgYXQgOGFtIEVUIT8gLSBBQzpWIFNPT04hIC0gQ3JlYXRvciBDb2RlOiBDb2hoICgjRXBpY1BhcnRuZXIpIC0gIUNvZmZlZSAtICFEaXNjb3JkIiwidmlld2VyX2NvdW50IjoxMzE1MCwic3RhcnRlZF9hdCI6IjIwMjAtMTEtMTNUMTM6MDE6MjlaIiwibGFuZ3VhZ2UiOiJlbiIsInRodW1ibmFpbF91cmwiOiJodHRwczovL3N0YXRpYy1jZG4uanR2bncubmV0L3ByZXZpZXdzLXR0di9saXZlX3VzZXJfY29oaGNhcm5hZ2Ute3dpZHRofXh7aGVpZ2h0fS5qcGciLCJ0YWdfaWRzIjpbIjZlYTZiY2E0LTQ3MTItNGFiOS1hOTA2LWUzMzM2YTlkODAzOSIsIjk2YjYwNzNmLTQ1MGQtNDI0OC04ZWQ0LTk4OGUyOGYzZjc1OSIsImVhYmEwYWQ3LWM0ZTEtNDg3OC1iMzdmLTAxMzA4ZGJiNjVjOCJdfSx7ImlkIjoiMzk5Njc2NTY0MTIiLCJ1c2VyX2lkIjoiMTM1Mzc3Njg3IiwidXNlcl9uYW1lIjoiUG9zdHkiLCJnYW1lX2lkIjoiMjYzNDkwIiwiZ2FtZV9uYW1lIjoiUnVzdCIsInR5cGUiOiJsaXZlIiwidGl0bGUiOiJCRVNUIEVVIERST1BTIFJJR0hUIEhFUkUgUklHSFQgTk9XIE9IIE1ZIEdPRCIsInZpZXdlcl9jb3VudCI6MTMxMzMsInN0YXJ0ZWRfYXQiOiIyMDIwLTExLTEzVDA3OjAxOjQ1WiIsImxhbmd1YWdlIjoiZW4iLCJ0aHVtYm5haWxfdXJsIjoiaHR0cHM6Ly9zdGF0aWMtY2RuLmp0dm53Lm5ldC9wcmV2aWV3cy10dHYvbGl2ZV91c2VyX3Bvc3R5LXt3aWR0aH14e2hlaWdodH0uanBnIiwidGFnX2lkcyI6WyI2ZWE2YmNhNC00NzEyLTRhYjktYTkwNi1lMzMzNmE5ZDgwMzkiLCJjMjU0MmQ2ZC1jZDEwLTQ1MzItOTE5Yi0zZDE5ZjMwYTc2OGIiXX1dLCJwYWdpbmF0aW9uIjp7ImN1cnNvciI6ImV5SmlJanA3SWtOMWNuTnZjaUk2SW1WNVNucEphbTh3VGxSck1VMTVOREpPVkVFeVRXcEJORTVxV1RWT1UzZHBXa05KTmxwdFJuTmpNbFZ6U1c1UmFVOXVVbmxrVjFZNUluMHNJbUVpT25zaVEzVnljMjl5SWpvaVpYbEtla2xxYjNoTmVrVjZUWGswZWs1cVNYZE9WR3Q0VG1wbk5FOVVaM05KYlZGcFQyMWFhR0pJVG14TVEwb3dTV3B3TUdOdVZteG1VVDA5SW4xOSJ9fQ==
+  recorded_at: Fri, 13 Nov 2020 16:03:09 GMT
 recorded_with: VCR 6.0.0

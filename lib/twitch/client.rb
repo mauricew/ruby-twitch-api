@@ -50,7 +50,7 @@ module Twitch
     # - redirect_uri [String] A redirect URI.
     # Used for redirection after successful authentication.
     # - scopes [Array<String>] Required scopes.
-    # Used for possibility to make planned requests.
+    # Used to specify permissions for the token.
     # - token_type [Symbol] Access Token type.
     # Used for behavior with given tokens and on requests.
     # - access_token [String] An access token.
