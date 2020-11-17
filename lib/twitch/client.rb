@@ -124,6 +124,10 @@ module Twitch
       initialize_response Video, get('videos', options)
     end
 
+    def search(options = {})
+      initialize_response User, get('search/channels', options)
+    end
+
     private
 
     def initialize_response(data_class, http_response)
