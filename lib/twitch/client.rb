@@ -64,9 +64,10 @@ module Twitch
         client_id: client_id, **options.slice(:client_secret, :redirect_uri, :scopes)
       )
 
+      @token_type = options.fetch(:token_type, :application)
+
       @tokens = @oauth2_client.check_tokens(
-        **options.slice(:access_token, :refresh_token),
-        token_type: options.fetch(:token_type, :application)
+        **options.slice(:access_token, :refresh_token), token_type: @token_type
       )
 
       CONNECTION.headers['Client-ID'] = client_id
@@ -142,6 +143,7 @@ module Twitch
     def require_access_token
       response = yield
       if response.success? ||
+          @token_type != :user ||
           response.status != 401 ||
           ## Here can be another error, like "missing required oauth scope"
           response.body[:message] != 'invalid oauth token'

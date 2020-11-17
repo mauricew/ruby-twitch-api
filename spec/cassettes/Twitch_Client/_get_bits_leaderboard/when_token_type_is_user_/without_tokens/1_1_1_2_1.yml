@@ -15,7 +15,7 @@ http_interactions:
       message: Found
     headers:
       date:
-      - Fri, 13 Nov 2020 16:10:46 GMT
+      - Mon, 16 Nov 2020 23:56:14 GMT
       content-type:
       - text/html; charset=utf-8
       content-length:
@@ -47,13 +47,13 @@ http_interactions:
         _twitch_session_id=; Path=/; Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00
         GMT; Max-Age=0; Secure
       x-ctxlog-logid:
-      - 1-5faeb006-6d537e6916fa975f52df3960
+      - 1-5fb3119e-7a53e5ba0ac8e93e1feaad29
       x-frame-options:
       - DENY
     body:
       encoding: UTF-8
       string: "<a href=\"https://www.twitch.tv/login?client_id=<CLIENT_ID>&amp;redirect_params=client_id%3D<CLIENT_ID>%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%26response_type%3Dcode%26scope%3Dbits%253Aread\">Found</a>.\n\n"
-  recorded_at: Fri, 13 Nov 2020 16:10:46 GMT
+  recorded_at: Mon, 16 Nov 2020 23:56:14 GMT
 - request:
     method: post
     uri: https://id.twitch.tv/oauth2/token
@@ -71,7 +71,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 13 Nov 2020 16:11:01 GMT
+      - Mon, 16 Nov 2020 23:56:59 GMT
       content-type:
       - application/json
       content-length:
@@ -83,13 +83,13 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5faeb015-604eedab4ac634a900ed7c02
+      - 1-5fb311cb-269d6d1b399e1e7c202bd4ee
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":13958,"refresh_token":"<NEW_REFRESH_TOKEN>","scope":["bits:read"],"token_type":"bearer"}
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":14517,"refresh_token":"<NEW_REFRESH_TOKEN>","scope":["bits:read"],"token_type":"bearer"}
 
         '
-  recorded_at: Fri, 13 Nov 2020 16:11:01 GMT
+  recorded_at: Mon, 16 Nov 2020 23:56:59 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/bits/leaderboard
@@ -127,23 +127,23 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1605283862'
+      - '1605571020'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - 516d48ca9c37363f3a5cedf719a9efec
+      - 10022a560b378fa8941cb11c404bdc8e
       x-ctxlog-logid:
-      - 1-5faeb015-38b6a8034461d4802ed1b526
+      - 1-5fb311cb-3c4ea36f2f072c8c413bb9ac
       date:
-      - Fri, 13 Nov 2020 16:11:01 GMT
+      - Mon, 16 Nov 2020 23:56:59 GMT
       x-served-by:
-      - cache-sea4435-SEA, cache-bma1645-BMA
+      - cache-sea4448-SEA, cache-bma1632-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1605283862.733255,VS0,VS0,VE193
+      - S1605571019.446457,VS0,VS0,VE198
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -151,5 +151,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"data":[],"date_range":{"started_at":"","ended_at":""},"total":0}'
-  recorded_at: Fri, 13 Nov 2020 16:11:01 GMT
+  recorded_at: Mon, 16 Nov 2020 23:56:59 GMT
 recorded_with: VCR 6.0.0

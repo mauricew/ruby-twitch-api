@@ -26,65 +26,79 @@ RSpec.describe Twitch::Client, :vcr do
   describe '#get_bits_leaderboard' do
     subject { super().get_bits_leaderboard.body }
 
-    let(:token_type) { :user }
     let(:scopes) { %w[bits:read] }
 
-    let(:expected_result) do
-      { 'data' => [], 'date_range' => { 'ended_at' => '', 'started_at' => '' }, 'total' => 0 }
-    end
+    context 'when `token_type` is `user`' do
+      let(:token_type) { :user }
 
-    context 'with `access_token`' do
-      context 'when `access_token` is actual' do
-        it { is_expected.to eq expected_result }
+      let(:expected_result) do
+        { 'data' => [], 'date_range' => { 'ended_at' => '', 'started_at' => '' }, 'total' => 0 }
       end
 
-      context 'when `access_token` is outdated' do
-        let(:access_token) { outdated_access_token }
-
-        context 'with `refresh_token`' do
+      context 'with `access_token`' do
+        context 'when `access_token` is actual' do
           it { is_expected.to eq expected_result }
         end
 
-        context 'without `refresh_token`' do
-          let(:refresh_token) { nil }
+        context 'when `access_token` is outdated' do
+          let(:access_token) { outdated_access_token }
 
-          it { expect { subject }.to raise_error TwitchOAuth2::Error, 'missing refresh token' }
+          context 'with `refresh_token`' do
+            it { is_expected.to eq expected_result }
+          end
+
+          context 'without `refresh_token`' do
+            let(:refresh_token) { nil }
+
+            it { expect { subject }.to raise_error TwitchOAuth2::Error, 'missing refresh token' }
+          end
         end
+      end
+
+      context 'without tokens' do
+        let(:access_token) { nil }
+        let(:refresh_token) { nil }
+
+        let(:redirect_params) do
+          URI.encode_www_form_component URI.encode_www_form(
+            client_id: client_id,
+            redirect_uri: redirect_uri,
+            response_type: :code,
+            scope: scopes.join(' ')
+          )
+        end
+
+        let(:expected_instructions) do
+          <<~TEXT
+            1. Open URL in your browser:
+            	https://www.twitch.tv/login?client_id=#{client_id}&redirect_params=#{redirect_params}
+            2. Login to Twitch.
+            3. Copy the `code` parameter from redirected URL.
+            4. Insert below:
+          TEXT
+        end
+
+        before do
+          unless VCR.current_cassette.recording?
+            allow($stdout).to receive(:puts).with(expected_instructions)
+            allow($stdin).to receive(:gets).and_return 'any_code'
+          end
+        end
+
+        ## Without cassettes it will require authentication in CLI
+        it { is_expected.to eq expected_result }
       end
     end
 
-    context 'without tokens' do
-      let(:access_token) { nil }
-      let(:refresh_token) { nil }
+    context 'when `token_type` is `application`' do
+      let(:token_type) { :application }
 
-      let(:redirect_params) do
-        URI.encode_www_form_component URI.encode_www_form(
-          client_id: client_id,
-          redirect_uri: redirect_uri,
-          response_type: :code,
-          scope: scopes.join(' ')
-        )
+      context 'without tokens' do
+        let(:access_token) { nil }
+        let(:refresh_token) { nil }
+
+        it { expect { subject }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
       end
-
-      let(:expected_instructions) do
-        <<~TEXT
-          1. Open URL in your browser:
-          	https://www.twitch.tv/login?client_id=#{client_id}&redirect_params=#{redirect_params}
-          2. Login to Twitch.
-          3. Copy the `code` parameter from redirected URL.
-          4. Insert below:
-        TEXT
-      end
-
-      before do
-        unless VCR.current_cassette.recording?
-          allow($stdout).to receive(:puts).with(expected_instructions)
-          allow($stdin).to receive(:gets).and_return 'any_code'
-        end
-      end
-
-      ## Without cassettes it will require authentication in CLI
-      it { is_expected.to eq expected_result }
     end
   end
 
