@@ -60,7 +60,7 @@ rspec_task:
   <<: *bundle_cache
 
   environment:
-    CODECOV_TOKEN: ENCRYPTED[112171f047148669318b81ebaf5210bd7bc59a7c9e1179e1aff636a206f07269f5698eb06f31f8b07450570ae13a66a6]
+    CODECOV_TOKEN: ENCRYPTED[041d9ca090dbea8e126b8e29c2823661f2e5c0a1f415f15619793c26c9c20c93b4a8e7df479697a7edef94ca5fa509f5]
 
   test_script: bundle exec rspec --format=json --out=rspec.json
 
