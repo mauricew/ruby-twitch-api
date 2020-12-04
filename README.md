@@ -53,31 +53,66 @@ $ gem install twitch-api
 
 ### Authentication
 
-You can initialize `Twitch::Client` with or without `:access_token` and `:refresh_token`,
-but Twitch requires User or Application Access Token.
-Default is Application (it will not require additional actions),
-but if you want to make requests depending on User Access Token — you have to specify this:
+[Twitch documentation](https://dev.twitch.tv/docs/authentication).
+
+#### Client (application) flow
+
+This is default flow (`:token_type`).
 
 ```ruby
 twitch_client = Twitch::Client.new(
   client_id: client_id,
   client_secret: client_secret,
-  # redirect_uri: redirect_uri,
-  # scopes: scopes,
+
+  ## this is default
   # token_type: :application,
+
+  ## this can be required by some Twitch end-points
+  # scopes: scopes,
+
+  ## if you already have one
+  # access_token: access_token
+)
+```
+
+#### Authorization (user) flow
+
+This is flow required for user-specific actions.
+
+If there are no `access_token` and `refresh_token`, `TwitchOAuth2::Error` will be raised
+with `#metadata[:link]`.
+
+If you have a web-application with N users, you can redirect them to this link
+and use `redirect_uri` to your application for callbacks.
+
+Otherwise, if you have something like CLI tool, you can print instructions with a link for user.
+
+Then you can use `#token(token_type: :user, code: 'a code from params in redirect uri')`
+and get your `:access_token` and `:refresh_token`.
+
+```ruby
+twitch_client = Twitch::Client.new(
+  client_id: client_id,
+  client_secret: client_secret,
+  token_type: :user,
+
+  ## `localhost` by default, can be your application end-point
+  # redirect_uri: redirect_uri,
+
+  ## this can be required by some Twitch end-points
+  # scopes: scopes,
+
+  ## if you already have these
   # access_token: access_token,
   # refresh_token: refresh_token
 )
 ```
 
+#### After initialization
+
 ```ruby
-twitch_client.check_tokens! # old tokens if they're actual or new tokens
+twitch_client.check_tokens! # old tokens, if they're actual, or new tokens
 ```
-
-It works like authentication (with a link to login in console)
-if there were no tokens.
-
-Otherwise, `TwitchOAuth2::Error` will be raised.
 
 If you've passed `refresh_token` to initialization and your `access_token`
 is invalid, requests that require `access_token` will automatically refresh it.

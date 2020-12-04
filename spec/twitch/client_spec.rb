@@ -68,25 +68,17 @@ RSpec.describe Twitch::Client, :vcr do
           )
         end
 
-        let(:expected_instructions) do
-          <<~TEXT
-            1. Open URL in your browser:
-            	https://www.twitch.tv/login?client_id=#{client_id}&redirect_params=#{redirect_params}
-            2. Login to Twitch.
-            3. Copy the `code` parameter from redirected URL.
-            4. Insert below:
-          TEXT
+        let(:expected_login_url) do
+          "https://www.twitch.tv/login?client_id=#{client_id}&redirect_params=#{redirect_params}"
         end
 
-        before do
-          unless VCR.current_cassette.recording?
-            allow($stdout).to receive(:puts).with(expected_instructions)
-            allow($stdin).to receive(:gets).and_return 'any_code'
-          end
+        it do
+          expect { subject }.to raise_error an_instance_of(TwitchOAuth2::Error)
+            .and having_attributes(
+              message: 'Use `error.metadata[:link]` for getting new tokens',
+              metadata: { link: expected_login_url }
+            )
         end
-
-        ## Without cassettes it will require authentication in CLI
-        it { is_expected.to eq expected_result }
       end
     end
 
