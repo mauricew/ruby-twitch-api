@@ -18,13 +18,12 @@ Guaranteed supported APIs include:
 
 The future may bring:
 
-*   Authentication
 *   PubSub
 *   TMI/chat
 
 These will not be considered:
 
-*   Twitch kraken API
+*   [Twitch Kraken API](https://github.com/dustinlakin/twitch-rb)
 *   [Twitch GraphQL API](https://github.com/mauricew/twitch-graphql-api)
 
 ## Installation
@@ -52,16 +51,84 @@ $ gem install twitch-api
 
 ## Usage
 
-A client must be initialized with your client ID or bearer access token.
+### Authentication
+
+[Twitch documentation](https://dev.twitch.tv/docs/authentication).
+
+#### Client (application) flow
+
+This is default flow (`:token_type`).
 
 ```ruby
-client = Twitch::Client.new(client_id: "YOUR_CLIENT_ID")
-# or
-client = Twitch::Client.new(access_token: "YOUR_ACCESS_TOKEN")
+twitch_client = Twitch::Client.new(
+  client_id: client_id,
+  client_secret: client_secret,
+
+  ## this is default
+  # token_type: :application,
+
+  ## this can be required by some Twitch end-points
+  # scopes: scopes,
+
+  ## if you already have one
+  # access_token: access_token
+)
 ```
 
-Because data may change for certain endpoints, there is also a keyword parameter called `with_raw`
-that returns the raw response for any request called.
+#### Authorization (user) flow
+
+This is flow required for user-specific actions.
+
+If there are no `access_token` and `refresh_token`, `TwitchOAuth2::Error` will be raised
+with `#metadata[:link]`.
+
+If you have a web-application with N users, you can redirect them to this link
+and use `redirect_uri` to your application for callbacks.
+
+Otherwise, if you have something like CLI tool, you can print instructions with a link for user.
+
+Then you can use `#token(token_type: :user, code: 'a code from params in redirect uri')`
+and get your `:access_token` and `:refresh_token`.
+
+```ruby
+twitch_client = Twitch::Client.new(
+  client_id: client_id,
+  client_secret: client_secret,
+  token_type: :user,
+
+  ## `localhost` by default, can be your application end-point
+  # redirect_uri: redirect_uri,
+
+  ## this can be required by some Twitch end-points
+  # scopes: scopes,
+
+  ## if you already have these
+  # access_token: access_token,
+  # refresh_token: refresh_token
+)
+```
+
+#### After initialization
+
+```ruby
+twitch_client.check_tokens! # old tokens, if they're actual, or new tokens
+```
+
+If you've passed `refresh_token` to initialization and your `access_token`
+is invalid, requests that require `access_token` will automatically refresh it.
+
+Later you can access tokens:
+
+```ruby
+twitch_client.tokens # => { access_token: 'abcdef', refresh_token: 'ghijkl' }
+twitch_client.access_token # => 'abcdef'
+twitch_client.refresh_token # => 'ghijkl'
+```
+
+### Calls
+
+Because data may change for certain endpoints, there is also the raw response
+for any request called.
 
 Retrieval methods take in a hash equal to the parameters of the API endpoint,
 and return a response object containing the data and other associated request information:
@@ -72,7 +139,7 @@ and return a response object containing the data and other associated request in
     Clip creation counts for a second limit (duration currently unknown).
 *   **pagination** is a hash that appears when data can be traversed,
     and contains one member (*cursor*) which lets you paginate through certain requests.
-*   **raw** is the raw HTTP response data when `with_raw` is true in the client.
+*   **raw** is the raw HTTP response data.
 
 ```ruby
 # Get top live streams

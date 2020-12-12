@@ -1,46 +1,126 @@
 # frozen_string_literal: true
 
-RSpec.describe Twitch::Client do
-  before(:all) do
-    @api_key = ENV['TWITCH_CLIENT_ID']
+RSpec.describe Twitch::Client, :vcr do
+  subject(:client) do
+    Twitch::Client.new(
+      client_id: client_id,
+      client_secret: client_secret,
+      ## Optional parameters below
+      access_token: access_token,
+      refresh_token: refresh_token,
+      token_type: token_type,
+      scopes: scopes,
+      redirect_uri: redirect_uri
+    )
+  end
 
-    raise 'API key is required for tests' if @api_key.to_s.empty?
+  let(:client_id) { ENV['TWITCH_CLIENT_ID'] }
+  let(:client_secret) { ENV['TWITCH_CLIENT_SECRET'] }
+  let(:access_token) { ENV['TWITCH_ACCESS_TOKEN'] }
+  let(:outdated_access_token) { '9y7bf00r4fof71czggal1e2wlo50q3' }
+  let(:refresh_token) { ENV['TWITCH_REFRESH_TOKEN'] }
+  let(:token_type) { :application }
+  let(:scopes) { [] }
+  let(:redirect_uri) { 'http://localhost' }
 
-    @client = Twitch::Client.new(client_id: @api_key)
+  describe '#get_bits_leaderboard' do
+    subject { super().get_bits_leaderboard.body }
+
+    let(:scopes) { %w[bits:read] }
+
+    context 'when `token_type` is `user`' do
+      let(:token_type) { :user }
+
+      let(:expected_result) do
+        { 'data' => [], 'date_range' => { 'ended_at' => '', 'started_at' => '' }, 'total' => 0 }
+      end
+
+      context 'with `access_token`' do
+        context 'when `access_token` is actual' do
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when `access_token` is outdated' do
+          let(:access_token) { outdated_access_token }
+
+          context 'with `refresh_token`' do
+            it { is_expected.to eq expected_result }
+          end
+
+          context 'without `refresh_token`' do
+            let(:refresh_token) { nil }
+
+            it { expect { subject }.to raise_error TwitchOAuth2::Error, 'missing refresh token' }
+          end
+        end
+      end
+
+      context 'without tokens' do
+        let(:access_token) { nil }
+        let(:refresh_token) { nil }
+
+        let(:redirect_params) do
+          URI.encode_www_form_component URI.encode_www_form(
+            client_id: client_id,
+            redirect_uri: redirect_uri,
+            response_type: :code,
+            scope: scopes.join(' ')
+          )
+        end
+
+        let(:expected_login_url) do
+          "https://www.twitch.tv/login?client_id=#{client_id}&redirect_params=#{redirect_params}"
+        end
+
+        it do
+          expect { subject }.to raise_error an_instance_of(TwitchOAuth2::Error)
+            .and having_attributes(
+              message: 'Use `error.metadata[:link]` for getting new tokens',
+              metadata: { link: expected_login_url }
+            )
+        end
+      end
+    end
+
+    context 'when `token_type` is `application`' do
+      let(:token_type) { :application }
+
+      context 'without tokens' do
+        let(:access_token) { nil }
+        let(:refresh_token) { nil }
+
+        it { expect { subject }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
+      end
+    end
   end
 
   describe '#get_clips' do
     it 'will return information about a clip' do
-      VCR.use_cassette('get_clips_OEHHL') do
-        broadcaster_id_greekgodx = 15_310_631
+      broadcaster_id_greekgodx = 15_310_631
 
-        res = @client.get_clips(id: 'ObliqueEncouragingHumanHumbleLife')
+      res = client.get_clips(id: 'ObliqueEncouragingHumanHumbleLife')
 
-        expect(res.data).to_not be_empty
-        expect(res.data.first.broadcaster_id)
-          .to eq(broadcaster_id_greekgodx.to_s)
-      end
+      expect(res.data).to_not be_empty
+      expect(res.data.first.broadcaster_id)
+        .to eq(broadcaster_id_greekgodx.to_s)
     end
   end
 
   describe '#get_streams' do
     it 'will return the 20 most concurrently watched streams by default' do
-      VCR.use_cassette('get_streams_default') do
-        res = @client.get_streams({})
+      res = client.get_streams({})
 
-        # Expecting the site to have regular use
-        expect(res.data.length).to eq(20)
-      end
+      # Expecting the site to have regular use
+      expect(res.data.length).to eq(20)
     end
+
     it 'can retrieve a single live stream by username' do
-      test_user_login = 'disguisedtoasths'
+      test_user_login = 'GemsFireplace'
 
-      VCR.use_cassette('get_streams_disguisedtoasths') do
-        res = @client.get_streams(user_login: test_user_login)
+      res = client.get_streams(user_login: test_user_login)
 
-        expect(res.data).to_not be_empty
-        expect(res.data[0].viewer_count).to be_an(Integer)
-      end
+      expect(res.data).to_not be_empty
+      expect(res.data[0].viewer_count).to be_an(Integer)
     end
   end
 
@@ -48,12 +128,10 @@ RSpec.describe Twitch::Client do
     it 'can retrieve a user by id' do
       test_user_id = 18_587_270
 
-      VCR.use_cassette('get_users_day9tv') do
-        res = @client.get_users(id: test_user_id)
+      res = client.get_users(id: test_user_id)
 
-        expect(res.data).to_not be_empty
-        expect(res.data[0].login).to eq('day9tv')
-      end
+      expect(res.data).to_not be_empty
+      expect(res.data[0].login).to eq('day9tv')
     end
 
     it 'should get the information of a user your are acting on behalf of'
@@ -61,24 +139,20 @@ RSpec.describe Twitch::Client do
 
   describe '#get_games' do
     it 'can retrieve multiple games by name' do
-      VCR.use_cassette('get_games_hots_smo') do
-        res = @client.get_games(
-          name: ['Heroes of the Storm', 'Super Mario Odyssey']
-        )
+      res = client.get_games(
+        name: ['Heroes of the Storm', 'Super Mario Odyssey']
+      )
 
-        expect(res.data.length).to eq(2)
-      end
+      expect(res.data.length).to eq(2)
     end
   end
 
   describe '#get_top_games' do
     it 'can return the top games by current viewership' do
-      VCR.use_cassette('get_top_games') do
-        res = @client.get_top_games(first: 5)
+      res = client.get_top_games(first: 5)
 
-        # Expecting the site to have regular use
-        expect(res.data.length).to eq(5)
-      end
+      # Expecting the site to have regular use
+      expect(res.data.length).to eq(5)
     end
   end
 
@@ -86,12 +160,10 @@ RSpec.describe Twitch::Client do
     it 'can retrieve videos for a user' do
       test_video_user_id = 9_846_758
 
-      VCR.use_cassette('get_videos_user_vgboootcamp') do
-        res = @client.get_videos(user_id: test_video_user_id)
+      res = client.get_videos(user_id: test_video_user_id)
 
-        expect(res.data).to_not be_empty
-        expect(res.pagination['cursor']).to_not be_nil
-      end
+      expect(res.data).to_not be_empty
+      expect(res.pagination['cursor']).to_not be_nil
     end
   end
 end

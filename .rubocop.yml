@@ -6,6 +6,8 @@ Layout/LineLength:
   Max: 100
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
 
 Naming/FileName:
   Exclude:
