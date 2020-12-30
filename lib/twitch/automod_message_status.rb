@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A determination if AutoMod would allow a message in a particular channel's chat.
   class AutomodMessageStatus

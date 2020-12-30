@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   class Client
     # API methods for stream moderation

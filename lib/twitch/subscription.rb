@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A user's voluntary contribution to a streamer
   class Subscription

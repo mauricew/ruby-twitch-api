@@ -40,9 +40,7 @@ module Twitch
       @http_response = http_response
       @raw = @http_response
 
-      if data_class
-        @data = body['data'].map { |data_element| data_class.new(data_element) }
-      end
+      @data = body['data'].map { |data_element| data_class.new(data_element) } if data_class
 
       parse_rate_limits
 

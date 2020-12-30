@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A tag can be used for searching and filtering streams.
   class StreamTag

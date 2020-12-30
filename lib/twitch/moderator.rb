@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A user who wields some form of power in a broadcaster's Twitch chat.
   # This is simply a user ID/name pair.

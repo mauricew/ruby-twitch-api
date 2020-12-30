@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # A feature used to augment dynamic information on a stream.
   class Extension
@@ -9,6 +11,7 @@ module Twitch
     attr_reader :name
     # Whether the extension is configured such that it can be activated.
     attr_reader :can_activate
+
     # An array containing the display format of the extension.
     # Valid values can include `component`, `mobile`, `panel`, and `overlay`.
 

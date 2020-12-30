@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   class Client
     # API methods for extensions
@@ -8,7 +10,7 @@ module Twitch
         end
       end
 
-      # TODO This is more of a freeform response, but @data should still be populated
+      # TODO: This is more of a freeform response, but @data should still be populated
       # This may just be a mapping directly to hash
       def get_user_active_extensions(options = {})
         require_access_token do
@@ -16,8 +18,8 @@ module Twitch
         end
       end
 
-      # TODO see above method's comment
-      def get_user_active_extensions(options = {})
+      # TODO: see above method's comment
+      def update_user_extensions(options = {})
         require_access_token do
           initialize_response nil, put('users/extensions', options)
         end

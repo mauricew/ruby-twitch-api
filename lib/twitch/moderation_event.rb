@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Twitch
   # Information about a moderation action.
   # The action is determined based on the `event_type` field.
@@ -17,7 +19,7 @@ module Twitch
     attr_reader :version
     # A hash containing information about the moderation action.
     attr_reader :event_data
-    
+
     def initialize(attributes = {})
       attributes.each do |key, value|
         if DATE_ATTRIBUTES.include?(key.to_sym)
