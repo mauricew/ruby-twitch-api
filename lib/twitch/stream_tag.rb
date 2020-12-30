@@ -9,5 +9,11 @@ module Twitch
     attr_reader :localization_names
     # Hash containing localized descriptions of the tag.
     attr_reader :localization_descriptions
+
+    def initialize(attributes = {})
+      attributes.each do |key, value|
+        instance_variable_set "@#{key}", value
+      end
+    end
   end
 end

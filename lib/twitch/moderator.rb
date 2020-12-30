@@ -6,5 +6,11 @@ module Twitch
     attr_reader :user_id
     # User name of the moderator.
     attr_reader :user_name
+
+    def initialize(attributes = {})
+      attributes.each do |key, value|
+        instance_variable_set "@#{key}", value
+      end
+    end
   end
 end

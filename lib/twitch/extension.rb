@@ -11,5 +11,11 @@ module Twitch
     attr_reader :can_activate
     # An array containing the display format of the extension.
     # Valid values can include `component`, `mobile`, `panel`, and `overlay`.
+
+    def initialize(attributes = {})
+      attributes.each do |key, value|
+        instance_variable_set "@#{key}", value
+      end
+    end
   end
 end
