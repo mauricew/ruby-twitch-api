@@ -31,14 +31,6 @@ module Twitch
       faraday.response :json
     end
 
-    TOKENS_CONFLICT_WARNING = <<~TEXT
-      WARNING:
-      It is recommended that only one identifier token is specified.
-      Unpredictable behavior may follow.
-    TEXT
-
-    private_constant :TOKENS_CONFLICT_WARNING
-
     attr_reader :tokens
 
     # Initializes a Twitch client.
