@@ -1,3 +1,7 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 2.5
   NewCops: enable
@@ -16,3 +20,8 @@ Naming/FileName:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false

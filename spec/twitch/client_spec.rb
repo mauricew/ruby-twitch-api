@@ -2,7 +2,7 @@
 
 RSpec.describe Twitch::Client, :vcr do
   subject(:client) do
-    Twitch::Client.new(
+    described_class.new(
       client_id: client_id,
       client_secret: client_secret,
       ## Optional parameters below
@@ -24,7 +24,7 @@ RSpec.describe Twitch::Client, :vcr do
   let(:redirect_uri) { 'http://localhost' }
 
   describe '#get_bits_leaderboard' do
-    subject { super().get_bits_leaderboard.body }
+    subject(:body) { client.get_bits_leaderboard.body }
 
     let(:scopes) { %w[bits:read] }
 
@@ -50,7 +50,7 @@ RSpec.describe Twitch::Client, :vcr do
           context 'without `refresh_token`' do
             let(:refresh_token) { nil }
 
-            it { expect { subject }.to raise_error TwitchOAuth2::Error, 'missing refresh token' }
+            it { expect { body }.to raise_error TwitchOAuth2::Error, 'missing refresh token' }
           end
         end
       end
@@ -73,7 +73,7 @@ RSpec.describe Twitch::Client, :vcr do
         end
 
         it do
-          expect { subject }.to raise_error an_instance_of(TwitchOAuth2::Error)
+          expect { body }.to raise_error an_instance_of(TwitchOAuth2::Error)
             .and having_attributes(
               message: 'Use `error.metadata[:link]` for getting new tokens',
               metadata: { link: expected_login_url }
@@ -89,81 +89,100 @@ RSpec.describe Twitch::Client, :vcr do
         let(:access_token) { nil }
         let(:refresh_token) { nil }
 
-        it { expect { subject }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
+        it { expect { body }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
       end
     end
   end
 
   describe '#get_clips' do
-    it 'will return information about a clip' do
-      broadcaster_id_greekgodx = 15_310_631
+    subject { client.get_clips(id: 'ObliqueEncouragingHumanHumbleLife').data }
 
-      res = client.get_clips(id: 'ObliqueEncouragingHumanHumbleLife')
+    let(:broadcaster_id_greekgodx) { 15_310_631 }
 
-      expect(res.data).to_not be_empty
-      expect(res.data.first.broadcaster_id)
-        .to eq(broadcaster_id_greekgodx.to_s)
+    it { is_expected.not_to be_empty }
+
+    describe '#broadcaster_id' do
+      subject { super().first.broadcaster_id }
+
+      it { is_expected.to eq broadcaster_id_greekgodx.to_s }
     end
   end
 
   describe '#get_streams' do
-    it 'will return the 20 most concurrently watched streams by default' do
-      res = client.get_streams({})
+    subject { client.get_streams(**kwargs).data }
 
-      # Expecting the site to have regular use
-      expect(res.data.length).to eq(20)
+    context 'with empty kwargs' do
+      let(:kwargs) { {} }
+
+      describe 'data length' do
+        subject { super().length }
+
+        it { is_expected.to eq(20) }
+      end
     end
 
-    it 'can retrieve a single live stream by username' do
-      test_user_login = 'GemsFireplace'
+    context 'with username' do
+      let(:kwargs) { { user_login: 'SunsetClub' } }
 
-      res = client.get_streams(user_login: test_user_login)
+      it { is_expected.not_to be_empty }
 
-      expect(res.data).to_not be_empty
-      expect(res.data[0].viewer_count).to be_an(Integer)
+      describe 'viewer_count' do
+        subject { super().first.viewer_count }
+
+        it { is_expected.to be_an(Integer) }
+      end
     end
   end
 
   describe '#get_users' do
-    it 'can retrieve a user by id' do
-      test_user_id = 18_587_270
+    subject { client.get_users(id: 18_587_270).data }
 
-      res = client.get_users(id: test_user_id)
+    it { is_expected.not_to be_empty }
 
-      expect(res.data).to_not be_empty
-      expect(res.data[0].login).to eq('day9tv')
+    describe 'login' do
+      subject { super().first.login }
+
+      it { is_expected.to eq 'day9tv' }
     end
-
-    it 'should get the information of a user your are acting on behalf of'
   end
 
   describe '#get_games' do
-    it 'can retrieve multiple games by name' do
-      res = client.get_games(
-        name: ['Heroes of the Storm', 'Super Mario Odyssey']
-      )
+    subject { client.get_games(name: games_names) }
 
-      expect(res.data.length).to eq(2)
+    let(:games_names) { ['Heroes of the Storm', 'Super Mario Odyssey'] }
+
+    describe 'data length' do
+      subject { super().data.length }
+
+      it { is_expected.to eq games_names.size }
     end
   end
 
   describe '#get_top_games' do
-    it 'can return the top games by current viewership' do
-      res = client.get_top_games(first: 5)
+    subject { client.get_top_games(first: limit) }
 
-      # Expecting the site to have regular use
-      expect(res.data.length).to eq(5)
+    let(:limit) { 5 }
+
+    describe 'data length' do
+      subject { super().data.length }
+
+      it { is_expected.to eq limit }
     end
   end
 
   describe '#get_videos' do
-    it 'can retrieve videos for a user' do
-      test_video_user_id = 9_846_758
+    subject { client.get_videos(user_id: 9_846_758) }
 
-      res = client.get_videos(user_id: test_video_user_id)
+    describe 'data' do
+      subject { super().data }
 
-      expect(res.data).to_not be_empty
-      expect(res.pagination['cursor']).to_not be_nil
+      it { is_expected.not_to be_empty }
+    end
+
+    describe 'pagination cursor' do
+      subject { super().pagination['cursor'] }
+
+      it { is_expected.not_to be_nil }
     end
   end
 end

@@ -8,56 +8,20 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.1.0
+      - Faraday v1.3.0
       Authorization:
       - "<AUTHORIZATION_HEADER>"
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      date:
-      - Fri, 13 Nov 2020 16:03:16 GMT
-      content-type:
-      - application/json
-      content-length:
-      - '48'
-      connection:
-      - keep-alive
-      server:
-      - nginx/1.14.1
-      access-control-allow-origin:
-      - "*"
-      x-ctxlog-logid:
-      - 1-5faeae44-44647e17170029c91f1b013c
-    body:
-      encoding: UTF-8
-      string: '{"status":401,"message":"invalid access token"}
-
-        '
-  recorded_at: Fri, 13 Nov 2020 16:03:16 GMT
-- request:
-    method: post
-    uri: https://id.twitch.tv/oauth2/token
-    body:
-      encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
-    headers:
-      User-Agent:
-      - Faraday v1.1.0
-      Content-Type:
-      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 13 Nov 2020 16:03:17 GMT
+      - Thu, 04 Feb 2021 04:08:18 GMT
       content-type:
       - application/json
       content-length:
-      - '93'
+      - '215'
       connection:
       - keep-alive
       server:
@@ -65,13 +29,13 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5faeae45-23c7dd4f67a8997223444f54
+      - 1-601b7332-617873bb5cbeded504fcd2b7
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":4679636,"token_type":"bearer"}
+      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["channel:moderate","channel_editor","channel_read","chat:edit","chat:read","user_read"],"user_id":"277558749","expires_in":15429}
 
         '
-  recorded_at: Fri, 13 Nov 2020 16:03:17 GMT
+  recorded_at: Thu, 04 Feb 2021 04:08:18 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/games?name%5B%5D=Heroes+of+the+Storm&name%5B%5D=Super+Mario+Odyssey
@@ -109,23 +73,23 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1605283398'
+      - '1612411699'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - e455cc31172e25593d9c240f5211f7dc
+      - 37a6e7bb1ff63b4b4b4054b30517e581
       x-ctxlog-logid:
-      - 1-5faeae45-79bd9383329294ab23d02bc8
+      - 1-601b7332-0552c64372d3524726b92cda
       date:
-      - Fri, 13 Nov 2020 16:03:18 GMT
+      - Thu, 04 Feb 2021 04:08:18 GMT
       x-served-by:
-      - cache-sea4438-SEA, cache-bma1647-BMA
+      - cache-sea4425-SEA, cache-bma1620-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1605283398.860510,VS0,VS0,VE205
+      - S1612411698.416649,VS0,VS0,VE181
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -134,5 +98,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"data":[{"id":"32959","name":"Heroes of the Storm","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Heroes%20of%20the%20Storm-{width}x{height}.jpg"},{"id":"493997","name":"Super
         Mario Odyssey","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Super%20Mario%20Odyssey-{width}x{height}.jpg"}]}'
-  recorded_at: Fri, 13 Nov 2020 16:03:18 GMT
+  recorded_at: Thu, 04 Feb 2021 04:08:18 GMT
 recorded_with: VCR 6.0.0

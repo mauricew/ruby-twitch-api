@@ -1,0 +1,103 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 04 Feb 2021 04:08:19 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '215'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-601b7333-291fd65a15df2ade798b55a8
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["channel:moderate","channel_editor","channel_read","chat:edit","chat:read","user_read"],"user_id":"277558749","expires_in":15428}
+
+        '
+  recorded_at: Thu, 04 Feb 2021 04:08:19 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/games/top?first=5
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '732'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1612411700'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - b3eadf74ed615d6c902464631f1f56fd
+      x-ctxlog-logid:
+      - 1-601b7333-541f3f4b16f1d63e0a69ca6b
+      date:
+      - Thu, 04 Feb 2021 04:08:19 GMT
+      x-served-by:
+      - cache-sea4446-SEA, cache-bma1621-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1612411700.529810,VS0,VS0,VE178
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"509658","name":"Just Chatting","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-{width}x{height}.jpg"},{"id":"27471","name":"Minecraft","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Minecraft-{width}x{height}.jpg"},{"id":"516575","name":"VALORANT","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/VALORANT-{width}x{height}.jpg"},{"id":"32982","name":"Grand
+        Theft Auto V","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Grand%20Theft%20Auto%20V-{width}x{height}.jpg"},{"id":"21779","name":"League
+        of Legends","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-{width}x{height}.jpg"}],"pagination":{"cursor":"eyJzIjo1LCJkIjpmYWxzZSwidCI6dHJ1ZX0="}}'
+  recorded_at: Thu, 04 Feb 2021 04:08:19 GMT
+recorded_with: VCR 6.0.0
