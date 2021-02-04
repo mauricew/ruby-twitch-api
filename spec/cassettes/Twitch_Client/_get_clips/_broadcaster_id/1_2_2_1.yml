@@ -8,56 +8,20 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.1.0
+      - Faraday v1.3.0
       Authorization:
       - "<AUTHORIZATION_HEADER>"
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      date:
-      - Fri, 13 Nov 2020 16:03:05 GMT
-      content-type:
-      - application/json
-      content-length:
-      - '48'
-      connection:
-      - keep-alive
-      server:
-      - nginx/1.14.1
-      access-control-allow-origin:
-      - "*"
-      x-ctxlog-logid:
-      - 1-5faeae39-73c7092505ed0e5974359436
-    body:
-      encoding: UTF-8
-      string: '{"status":401,"message":"invalid access token"}
-
-        '
-  recorded_at: Fri, 13 Nov 2020 16:03:06 GMT
-- request:
-    method: post
-    uri: https://id.twitch.tv/oauth2/token
-    body:
-      encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
-    headers:
-      User-Agent:
-      - Faraday v1.1.0
-      Content-Type:
-      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 13 Nov 2020 16:03:06 GMT
+      - Thu, 04 Feb 2021 04:08:11 GMT
       content-type:
       - application/json
       content-length:
-      - '93'
+      - '215'
       connection:
       - keep-alive
       server:
@@ -65,13 +29,13 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5faeae3a-11ab478705fb42d001d0f241
+      - 1-601b732b-13d5a97a5dc3aa6d3ca48406
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":5141303,"token_type":"bearer"}
+      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["channel:moderate","channel_editor","channel_read","chat:edit","chat:read","user_read"],"user_id":"277558749","expires_in":15436}
 
         '
-  recorded_at: Fri, 13 Nov 2020 16:03:07 GMT
+  recorded_at: Thu, 04 Feb 2021 04:08:11 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/clips?id=ObliqueEncouragingHumanHumbleLife
@@ -109,23 +73,23 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1605283388'
+      - '1612411692'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - 2f50ffaaae80ee88ca6439952ab0618d
+      - 37b97b0b2021f8457cf733da925b473c
       x-ctxlog-logid:
-      - 1-5faeae3b-59cdce6e7eed233f6d177027
+      - 1-601b732b-562b8ba25c5187806e140121
       date:
-      - Fri, 13 Nov 2020 16:03:07 GMT
+      - Thu, 04 Feb 2021 04:08:11 GMT
       x-served-by:
-      - cache-sea4433-SEA, cache-bma1649-BMA
+      - cache-sea4474-SEA, cache-bma1632-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1605283387.211309,VS0,VS0,VE263
+      - S1612411691.465144,VS0,VS0,VE193
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -133,6 +97,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"data":[{"id":"ObliqueEncouragingHumanHumbleLife","url":"https://clips.twitch.tv/ObliqueEncouragingHumanHumbleLife","embed_url":"https://clips.twitch.tv/embed?clip=ObliqueEncouragingHumanHumbleLife","broadcaster_id":"15310631","broadcaster_name":"Greekgodx","creator_id":"39950897","creator_name":"KillaTwitch","video_id":"","game_id":"","language":"en-gb","title":"wrong
-        place wrong time","view_count":178546,"created_at":"2017-12-28T21:37:52Z","thumbnail_url":"https://clips-media-assets2.twitch.tv/168564772-preview-480x272.jpg"}],"pagination":{}}'
-  recorded_at: Fri, 13 Nov 2020 16:03:07 GMT
+        place wrong time","view_count":179002,"created_at":"2017-12-28T21:37:52Z","thumbnail_url":"https://clips-media-assets2.twitch.tv/168564772-preview-480x272.jpg"}],"pagination":{}}'
+  recorded_at: Thu, 04 Feb 2021 04:08:11 GMT
 recorded_with: VCR 6.0.0

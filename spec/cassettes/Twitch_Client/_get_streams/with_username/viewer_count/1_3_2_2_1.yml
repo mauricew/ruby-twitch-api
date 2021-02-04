@@ -1,0 +1,103 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 04 Feb 2021 04:08:14 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '215'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-601b732e-7be1d597002515c5057efea8
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["channel:moderate","channel_editor","channel_read","chat:edit","chat:read","user_read"],"user_id":"277558749","expires_in":15433}
+
+        '
+  recorded_at: Thu, 04 Feb 2021 04:08:14 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams?user_login=SunsetClub
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '514'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1612411696'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - 8c39e448ced61b6d4a0c84e85cc661db
+      x-ctxlog-logid:
+      - 1-601b732f-1fc63bd163ff88d466f816b7
+      date:
+      - Thu, 04 Feb 2021 04:08:15 GMT
+      x-served-by:
+      - cache-sea4461-SEA, cache-bma1647-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1612411695.930424,VS0,VS0,VE182
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"40971485260","user_id":"508623691","user_login":"sunsetclub","user_name":"SunsetClub","game_id":"499973","game_name":"Always
+        On","type":"live","title":"LIVE view of the World Trade Center, The Hudson
+        River, Downtown NYC, and the Verrazzano- Narrows Bridge ","viewer_count":2,"started_at":"2021-02-03T03:45:19Z","language":"en","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_sunsetclub-{width}x{height}.jpg","tag_ids":["6ea6bca4-4712-4ab9-a906-e3336a9d8039"]}],"pagination":{}}'
+  recorded_at: Thu, 04 Feb 2021 04:08:15 GMT
+recorded_with: VCR 6.0.0
