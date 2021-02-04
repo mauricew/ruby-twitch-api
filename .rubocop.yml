@@ -3,6 +3,11 @@ require:
   - rubocop-rake
   - rubocop-rspec
 
+inherit_mode:
+  merge:
+    - Include
+    - Exclude
+
 AllCops:
   TargetRubyVersion: 2.5
   NewCops: enable
