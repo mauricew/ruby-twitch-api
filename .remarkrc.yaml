@@ -2,3 +2,4 @@ plugins:
   - remark-preset-lint-recommended
   - - remark-lint-code-block-style
     - fenced
+  - remark-gfm
