@@ -51,6 +51,7 @@ module Twitch
     # Used for refreshing User Access Token.
     def initialize(options = {})
       client_id = options[:client_id]
+      client_secret = options[:client_secret]
 
       @oauth2_client = TwitchOAuth2::Client.new(
         client_id: client_id, **options.slice(:client_secret, :redirect_uri, :scopes)
