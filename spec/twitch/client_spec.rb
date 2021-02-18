@@ -185,4 +185,14 @@ RSpec.describe Twitch::Client, :vcr do
       it { is_expected.not_to be_nil }
     end
   end
+
+  describe '#get_stream_tags' do
+    it 'can retrieve the tags assigned to a stream' do
+      test_user_id = 94_753_024
+
+      res = client.get_stream_tags(broadcaster_id: test_user_id)
+
+      expect(res.data).not_to be_empty
+    end
+  end
 end

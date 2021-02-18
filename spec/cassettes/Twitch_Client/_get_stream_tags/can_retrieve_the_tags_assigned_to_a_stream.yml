@@ -1,0 +1,138 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 18 Feb 2021 02:30:59 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '116'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-602dd163-2f566cb24cf64b60202663c5
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"<TOKEN_USER_LOGIN>","scopes":[],"user_id":"<TOKEN_USER_ID>","expires_in":0}
+
+'
+  recorded_at: Thu, 18 Feb 2021 02:30:59 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 18 Feb 2021 02:31:00 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-602dd163-5e02648a181fed1a70bb10a0
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5578987,"token_type":"bearer"}
+
+'
+  recorded_at: Thu, 18 Feb 2021 02:31:00 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams/tags?broadcaster_id=94753024
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '1342'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1613615461'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - a5755cd74bc1495491f143001f1166c3
+      x-ctxlog-logid:
+      - 1-602dd164-37f1d20a60cfde4a5a14eb4d
+      date:
+      - Thu, 18 Feb 2021 02:31:00 GMT
+      x-served-by:
+      - cache-sea4421-SEA, cache-mia11370-MIA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1613615460.403514,VS0,VS0,VE102
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJkYXRhIjpbeyJ0YWdfaWQiOiI2ZWE2YmNhNC00NzEyLTRhYjktYTkwNi1lMzMzNmE5ZDgwMzkiLCJpc19hdXRvIjp0cnVlLCJsb2NhbGl6YXRpb25fbmFtZXMiOnsiYmctYmciOiLQsNC90LPQu9C40LnRgdC60LgiLCJjcy1jeiI6IkFuZ2xpxI10aW5hIiwiZGEtZGsiOiJFbmdlbHNrIiwiZGUtZGUiOiJFbmdsaXNjaCIsImVsLWdyIjoizpHOs86zzrvOuc66zqwiLCJlbi11cyI6IkVuZ2xpc2giLCJlcy1lcyI6IkluZ2zDqXMiLCJlcy1teCI6IkluZ2zDqXMiLCJmaS1maSI6ImVuZ2xhbnRpIiwiZnItZnIiOiJBbmdsYWlzIiwiaHUtaHUiOiJBbmdvbCIsIml0LWl0IjoiSW5nbGVzZSIsImphLWpwIjoi6Iux6KqeIiwia28ta3IiOiLsmIHslrQiLCJubC1ubCI6IkVuZ2VscyIsIm5vLW5vIjoiRW5nZWxzayIsInBsLXBsIjoiYW5naWVsc2tpIiwicHQtYnIiOiJJbmdsw6pzIiwicHQtcHQiOiJJbmdsw6pzIiwicm8tcm8iOiJFbmdsZXrEgyIsInJ1LXJ1Ijoi0JDQvdCz0LvQuNC50YHQutC40LkiLCJzay1zayI6IkFuZ2xpxI10aW5hIiwic3Ytc2UiOiJFbmdlbHNrYSIsInRoLXRoIjoi4Lit4Lix4LiH4LiB4Lik4LipIiwidHItdHIiOiLEsG5naWxpemNlIiwidmktdm4iOiJUaeG6v25nIEFuaCIsInpoLWNuIjoi6Iux5paHIiwiemgtdHciOiLoi7HmlocifSwibG9jYWxpemF0aW9uX2Rlc2NyaXB0aW9ucyI6eyJiZy1iZyI6ItCX0LAg0L/QvtGC0L7RhtC4INGBINC40LfQv9C+0LvQt9Cy0LDQvdC1INC90LAg0LDQvdCz0LvQuNC50YHQutC4IiwiY3MtY3oiOiJQcm8gdnlzw61sw6Fuw60gb2JzYWh1asOtY8OtIGFuZ2xpxI10aW51LiIsImRhLWRrIjoiVGlsIHN0cmVhbXMsIGh2b3JpIGRlciBpbmRnw6VyIGVuZ2Vsc2siLCJkZS1kZSI6IkbDvHIgU3RyZWFtcyBhdWYgRW5nbGlzY2guIiwiZWwtZ3IiOiLOk865zrEgzrzOtc+EzrHOtM+Mz4POtc65z4Igz4DOv8+FIM+AzrXPgc65zrvOsc68zrLOrM69zr/Phc69IM+Ezrcgz4fPgc6uz4POtyDOkc6zzrPOu865zrrPjs69IiwiZW4tdXMiOiJGb3Igc3RyZWFtcyBmZWF0dXJpbmcgdGhlIHVzZSBvZiBFbmdsaXNoIiwiZXMtZXMiOiJQYXJhIHRyYW5zbWlzaW9uZXMgZW4gaW5nbMOpcy4iLCJlcy1teCI6IlBhcmEgc3RyZWFtcyBxdWUgaW5jbHV5ZW4gZWwgdXNvIGRlbCBpbmdsw6lzLiIsImZpLWZpIjoiTMOkaGV0eWtzaWxsZSwgam9pc3NhIHB1aHV0YWFuIGVuZ2xhbnRpYS4iLCJmci1mciI6IlBvdXIgbGVzIHN0cmVhbXMgZG9udCB0b3V0IG91IHVuZSBwYXJ0aWUgZXN0IGVuIGFuZ2xhaXMiLCJodS1odSI6IkFuZ29sIG55ZWx2xbEga8O2enZldMOtdMOpc2VrIiwiaXQtaXQiOiJQZXIgZ2xpIHN0cmVhbWluZyBpbiBsaW5ndWEgaW5nbGVzZSIsImphLWpwIjoi6Iux6Kqe44KS5L2/55So44GZ44KL6YWN5L+h44Gr5L2/44KP44KM44G+44GZIiwia28ta3IiOiLsmIHslrTrpbwg7IKs7Jqp7ZWY64qUIOuwqeyGoSIsIm5sLW5sIjoiVm9vciBzdHJlYW1zIHdhYXJpbiBFbmdlbHMgd29yZHQgZ2VzcHJva2VuIiwibm8tbm8iOiJGb3Iga3JpbmdrYXN0aW5nZXIgc29tIGVyIHDDpSBlbmdlbHNrIiwicGwtcGwiOiJEbGEgc3RyZWFtw7N3LCBwb2RjemFzIGt0w7NyeWNoIHXFvHl3YW55IGplc3QgasSZenlrIGFuZ2llbHNraSIsInB0LWJyIjoiUGFyYSB0cmFuc21pc3PDtWVzIHF1ZSB1dGlsaXphbSBvIGlkaW9tYSBpbmdsw6pzLiIsInB0LXB0IjoiUGFyYSB0cmFuc21pc3PDtWVzIGVtIGluZ2zDqnMuIiwicm8tcm8iOiJQZW50cnUgcmVkxINyaSDDrm4gZmx1eCBjYXJlIHByZXN1cHVuIGZvbG9zaXJlYSBsaW1iaWkgZW5nbGV6ZSIsInJ1LXJ1Ijoi0KLRgNCw0L3RgdC70Y/RhtC40Lgg0L3QsCDQsNC90LPQu9C40LnRgdC60L7QvCDRj9C30YvQutC1Iiwic2stc2siOiJQcmUgc3RyZWFteSwga3RvcsOpIG9ic2FodWrDuiBhbmdsacSNdGludSIsInN2LXNlIjoiRsO2ciBzdHJlYW1hciBzb20gaW5uZWjDpWxsZXIgYW52w6RuZG5pbmcgYXYgZW5nZWxza2EiLCJ0aC10aCI6IuC4quC4s+C4q+C4o+C4seC4muC4quC4leC4o+C4teC4oeC4l+C4teC5iOC4oeC4teC4geC4suC4o+C5g+C4iuC5ieC4oOC4suC4qeC4suC4reC4seC4h+C4geC4pOC4qSIsInRyLXRyIjoixLBuZ2lsaXpjZSBrb251xZ91bGFuIHlhecSxbmxhciBpw6dpbiIsInZpLXZuIjoiRMOgbmggY2hvIGNoxrDGoW5nIHRyw6xuaCB0cnV54buBbiB0cuG7sWMgdGnhur9wIGPDsyBu4buZaSBkdW5nIHPhu60gZOG7pW5nIHRp4bq/bmcgQW5oIiwiemgtY24iOiLnm7Tmkq3lhoXlrrnkvb/nlKjoi7HmlociLCJ6aC10dyI6IuS9v+eUqOiLseaWh+eahOWvpuazgSJ9fV19
+  recorded_at: Thu, 18 Feb 2021 02:31:00 GMT
+recorded_with: VCR 6.0.0
