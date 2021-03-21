@@ -55,14 +55,26 @@ $ gem install twitch-api
 
 [Twitch documentation](https://dev.twitch.tv/docs/authentication).
 
+This gem uses [`twitch_oauth2` gem](https://github.com/AlexWayfer/twitch_oauth2)
+for authorization and authentication, you can read more detailed documentation there
+(but it's pretty simple).
+
+The goal is in an object with credentials and re-using it between different gems,
+for example for API and for chat, or for the old API and the new one.
+Also a logic for tokens validation and refreshing is encapsulated in it.
+
+One of references is [this JavaScript set of libraries](https://github.com/d-fischer/twitch).
+
 #### Client (application) flow
 
-This is default flow (`:token_type`).
+This is easier flow with limited (non-personal) access.
 
 ```ruby
-twitch_client = Twitch::Client.new(
-  client_id: client_id,
-  client_secret: client_secret,
+tokens = TwitchOAuth2::Tokens.new(
+  client: {
+    client_id: client_id,
+    client_secret: client_secret
+  },
 
   ## this is default
   # token_type: :application,
@@ -70,34 +82,39 @@ twitch_client = Twitch::Client.new(
   ## this can be required by some Twitch end-points
   # scopes: scopes,
 
-  ## if you already have one
+  ## if you already have ones
   # access_token: access_token
 )
+
+twitch_client = Twitch::Client.new(tokens: tokens)
 ```
 
 #### Authorization (user) flow
 
 This is flow required for user-specific actions.
 
-If there are no `access_token` and `refresh_token`, `TwitchOAuth2::Error` will be raised
-with `#metadata[:link]`.
+If there are no `access_token` and `refresh_token` in `:tokens`,
+`TwitchOAuth2::Error` will be raised with `#metadata[:link]`.
 
 If you have a web-application with N users, you can redirect them to this link
 and use `redirect_uri` to your application for callbacks.
 
 Otherwise, if you have something like CLI tool, you can print instructions with a link for user.
 
-Then you can use `#token(token_type: :user, code: 'a code from params in redirect uri')`
-and get your `:access_token` and `:refresh_token`.
+Then you can use `tokens.code = 'a code from params in redirect uri'`
+and it'll store new `:access_token` and `:refresh_token`.
 
 ```ruby
-twitch_client = Twitch::Client.new(
-  client_id: client_id,
-  client_secret: client_secret,
-  token_type: :user,
+tokens = TwitchOAuth2::Tokens.new(
+  client: {
+    client_id: client_id,
+    client_secret: client_secret,
 
-  ## `localhost` by default, can be your application end-point
-  # redirect_uri: redirect_uri,
+    ## `localhost` by default, can be your application end-point
+    # redirect_uri: redirect_uri
+  },
+
+  token_type: :user,
 
   ## this can be required by some Twitch end-points
   # scopes: scopes,
@@ -106,23 +123,21 @@ twitch_client = Twitch::Client.new(
   # access_token: access_token,
   # refresh_token: refresh_token
 )
+
+twitch_client = Twitch::Client.new(tokens: tokens)
 ```
 
 #### After initialization
 
-```ruby
-twitch_client.check_tokens! # old tokens, if they're actual, or new tokens
-```
+If you've passed `refresh_token` to initialization and your `access_token` is invalid,
+requests that require `access_token` will automatically refresh it.
 
-If you've passed `refresh_token` to initialization and your `access_token`
-is invalid, requests that require `access_token` will automatically refresh it.
-
-Later you can access tokens:
+You can access tokens:
 
 ```ruby
-twitch_client.tokens # => { access_token: 'abcdef', refresh_token: 'ghijkl' }
-twitch_client.access_token # => 'abcdef'
-twitch_client.refresh_token # => 'ghijkl'
+twitch_client.tokens # => `TwitchOAuth2::Tokens` instance
+twitch_client.tokens.access_token # => 'abcdef'
+twitch_client.tokens.refresh_token # => 'ghijkl'
 ```
 
 ### Calls

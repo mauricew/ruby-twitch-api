@@ -3,14 +3,17 @@
 RSpec.describe Twitch::Client, :vcr do
   subject(:client) do
     described_class.new(
-      client_id: client_id,
-      client_secret: client_secret,
-      ## Optional parameters below
-      access_token: access_token,
-      refresh_token: refresh_token,
-      token_type: token_type,
-      scopes: scopes,
-      redirect_uri: redirect_uri
+      tokens: TwitchOAuth2::Tokens.new(
+        client: {
+          client_id: client_id,
+          client_secret: client_secret,
+          redirect_uri: redirect_uri
+        },
+        access_token: access_token,
+        refresh_token: refresh_token,
+        token_type: token_type,
+        scopes: scopes
+      )
     )
   end
 
@@ -73,10 +76,10 @@ RSpec.describe Twitch::Client, :vcr do
         end
 
         it do
-          expect { body }.to raise_error an_instance_of(TwitchOAuth2::Error)
+          expect { body }.to raise_error an_instance_of(TwitchOAuth2::AuthorizeError)
             .and having_attributes(
-              message: 'Use `error.metadata[:link]` for getting new tokens',
-              metadata: { link: expected_login_url }
+              message: 'Direct user to `error.link` and assign `code`',
+              link: expected_login_url
             )
         end
       end
