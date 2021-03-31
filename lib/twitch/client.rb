@@ -42,7 +42,7 @@ module Twitch
 
       CONNECTION.headers['Client-ID'] = self.tokens.client.client_id
 
-      renew_authorization_header if self.tokens.token_type == :user
+      renew_authorization_header
     end
 
     def create_clip(options = {})
@@ -82,11 +82,7 @@ module Twitch
 
     %w[get post put].each do |http_method|
       define_method http_method do |resource, params|
-        http_response = CONNECTION.public_send http_method, resource, params
-
-        raise APIError.new(http_response.status, http_response.body) unless http_response.success?
-
-        http_response
+        request http_method, resource, params
       end
     end
 
@@ -94,10 +90,18 @@ module Twitch
       CONNECTION.headers['Authorization'] = "Bearer #{tokens.access_token}"
     end
 
-    def request(http_method, *args)
-      Retriable.with_context(:twitch) do
-        CONNECTION.public_send http_method, *args
+    def request(http_method, resource, params)
+      http_response = CONNECTION.public_send http_method, resource, params
+
+      if http_response.status == 401
+        renew_authorization_header
+
+        http_response = CONNECTION.public_send http_method, resource, params
       end
+
+      return http_response if http_response.success?
+
+      raise APIError.new(http_response.status, http_response.body)
     end
   end
 end

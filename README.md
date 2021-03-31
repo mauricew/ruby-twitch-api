@@ -94,7 +94,7 @@ twitch_client = Twitch::Client.new(tokens: tokens)
 This is flow required for user-specific actions.
 
 If there are no `access_token` and `refresh_token` in `:tokens`,
-`TwitchOAuth2::Error` will be raised with `#metadata[:link]`.
+`TwitchOAuth2::AuthorizeError` will be raised with `#link`.
 
 If you have a web-application with N users, you can redirect them to this link
 and use `redirect_uri` to your application for callbacks.

@@ -13,29 +13,65 @@ http_interactions:
       - "<AUTHORIZATION_HEADER>"
   response:
     status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Wed, 31 Mar 2021 19:45:15 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.18.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6064d14b-634546a3752c099c4d65427d
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Wed, 31 Mar 2021 19:45:15 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Content-Type:
+      - application/json
+  response:
+    status:
       code: 200
       message: OK
     headers:
       date:
-      - Thu, 04 Feb 2021 04:08:17 GMT
+      - Wed, 31 Mar 2021 19:45:16 GMT
       content-type:
       - application/json
       content-length:
-      - '215'
+      - '93'
       connection:
       - keep-alive
       server:
-      - nginx/1.14.1
+      - nginx/1.18.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-601b7331-42efc6367115516f3fa8fc21
+      - 1-6064d14b-777deecf1b596f52143a9535
     body:
       encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["channel:moderate","channel_editor","channel_read","chat:edit","chat:read","user_read"],"user_id":"277558749","expires_in":15430}
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":4806187,"token_type":"bearer"}
 
         '
-  recorded_at: Thu, 04 Feb 2021 04:08:17 GMT
+  recorded_at: Wed, 31 Mar 2021 19:45:16 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/users?id=18587270
@@ -73,23 +109,23 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1612411698'
+      - '1617219917'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - 67f4de80aaf0d12052339e860dedb124
+      - fc854cdf51e34fd7ce501e354569ab9c
       x-ctxlog-logid:
-      - 1-601b7331-6032b0ef5126ef7750a32ced
+      - 1-6064d14c-3ddf80190c87faab0cee23a6
       date:
-      - Thu, 04 Feb 2021 04:08:17 GMT
+      - Wed, 31 Mar 2021 19:45:16 GMT
       x-served-by:
-      - cache-sea4428-SEA, cache-bma1635-BMA
+      - cache-sea4453-SEA, cache-bma1648-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1612411697.266141,VS0,VS0,VE183
+      - S1617219916.350805,VS0,VS0,VE184
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -98,6 +134,6 @@ http_interactions:
       encoding: UTF-8
       string: '{"data":[{"id":"18587270","login":"day9tv","display_name":"Day9tv","type":"","broadcaster_type":"partner","description":"A
         mixture of thoughtful gaming strategy, comedy, and silly fun. Featuring MTGA,
-        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":87448761,"created_at":"2010-12-09T05:50:55.91122Z"}]}'
-  recorded_at: Thu, 04 Feb 2021 04:08:17 GMT
+        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":87906798,"created_at":"2010-12-09T05:50:55.91122Z"}]}'
+  recorded_at: Wed, 31 Mar 2021 19:45:16 GMT
 recorded_with: VCR 6.0.0

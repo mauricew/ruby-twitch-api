@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.1.0
+      - Faraday v1.3.0
       Authorization:
       - "<AUTHORIZATION_HEADER>"
   response:
@@ -17,7 +17,7 @@ http_interactions:
       message: Unauthorized
     headers:
       date:
-      - Fri, 13 Nov 2020 16:03:14 GMT
+      - Wed, 31 Mar 2021 19:45:17 GMT
       content-type:
       - application/json
       content-length:
@@ -25,17 +25,17 @@ http_interactions:
       connection:
       - keep-alive
       server:
-      - nginx/1.14.1
+      - nginx/1.18.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5faeae42-03de6aba01e3effa3500b30d
+      - 1-6064d14d-56c510f92752b0ce575a590a
     body:
       encoding: UTF-8
       string: '{"status":401,"message":"invalid access token"}
 
         '
-  recorded_at: Fri, 13 Nov 2020 16:03:14 GMT
+  recorded_at: Wed, 31 Mar 2021 19:45:17 GMT
 - request:
     method: post
     uri: https://id.twitch.tv/oauth2/token
@@ -44,7 +44,7 @@ http_interactions:
       string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
     headers:
       User-Agent:
-      - Faraday v1.1.0
+      - Faraday v1.3.0
       Content-Type:
       - application/json
   response:
@@ -53,7 +53,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 13 Nov 2020 16:03:15 GMT
+      - Wed, 31 Mar 2021 19:45:18 GMT
       content-type:
       - application/json
       content-length:
@@ -61,17 +61,17 @@ http_interactions:
       connection:
       - keep-alive
       server:
-      - nginx/1.14.1
+      - nginx/1.18.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5faeae43-4cfa5af05e26adb273cdf8de
+      - 1-6064d14e-07fc8baf665ba05f0d8e3bcb
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_APPLICATION_ACCESS_TOKEN>","expires_in":5656061,"token_type":"bearer"}
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5510555,"token_type":"bearer"}
 
         '
-  recorded_at: Fri, 13 Nov 2020 16:03:15 GMT
+  recorded_at: Wed, 31 Mar 2021 19:45:18 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/users?id=18587270
@@ -109,23 +109,23 @@ http_interactions:
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1605283396'
+      - '1617219919'
       timing-allow-origin:
       - https://www.twitch.tv
       twitch-trace-id:
-      - caf5e859ad9118651f3b3b98d5e68bb0
+      - b063d76d31547b669ae78232bfeaff2a
       x-ctxlog-logid:
-      - 1-5faeae43-54fa3a400d7c71d6306c7fef
+      - 1-6064d14e-28457c683a030fda770c34d4
       date:
-      - Fri, 13 Nov 2020 16:03:15 GMT
+      - Wed, 31 Mar 2021 19:45:18 GMT
       x-served-by:
-      - cache-sea4453-SEA, cache-bma1622-BMA
+      - cache-sea4479-SEA, cache-bma1631-BMA
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1605283396.584837,VS0,VS0,VE197
+      - S1617219918.403836,VS0,VS0,VE176
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -134,6 +134,6 @@ http_interactions:
       encoding: UTF-8
       string: '{"data":[{"id":"18587270","login":"day9tv","display_name":"Day9tv","type":"","broadcaster_type":"partner","description":"A
         mixture of thoughtful gaming strategy, comedy, and silly fun. Featuring MTGA,
-        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":87041001,"created_at":"2010-12-09T05:50:55.91122Z"}]}'
-  recorded_at: Fri, 13 Nov 2020 16:03:15 GMT
+        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":87906798,"created_at":"2010-12-09T05:50:55.91122Z"}]}'
+  recorded_at: Wed, 31 Mar 2021 19:45:18 GMT
 recorded_with: VCR 6.0.0
