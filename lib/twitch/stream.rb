@@ -16,6 +16,8 @@ module Twitch
     attr_reader :user_name
     # ID of the game being broadcast.
     attr_reader :game_id
+    # Name of the game being broadcast.
+    attr_reader :game_name
     # Associated community IDs for the broadcaster.
     attr_reader :community_ids
     # The type of broadcast
