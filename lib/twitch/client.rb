@@ -24,7 +24,7 @@ module Twitch
     # Base connection to Helix API.
     CONNECTION = Faraday.new(
       'https://api.twitch.tv/helix', {
-        headers: { "User-Agent": "twitch-api ruby client #{Twitch::VERSION}" }
+        headers: { 'User-Agent': "twitch-api ruby client #{Twitch::VERSION}" }
       }
     ) do |faraday|
       faraday.request :json
