@@ -5,15 +5,11 @@ module Twitch
     ## API method for streams
     module Streams
       def create_stream_marker(options = {})
-        require_access_token do
-          initialize_response StreamMarker, post('streams/markers', options)
-        end
+        initialize_response StreamMarker, post('streams/markers', options)
       end
 
       def get_stream_markers(options = {})
-        require_access_token do
-          initialize_response StreamMarkerResponse, get('streams/markers', options)
-        end
+        initialize_response StreamMarkerResponse, get('streams/markers', options)
       end
 
       def get_streams(options = {})

@@ -1,0 +1,219 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 31 Mar 2021 14:39:10 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '302'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.18.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6064898e-245151f97107d2245945b4a0
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["bits:read","channel:moderate","channel_commercial","channel_editor","channel_read","channel_stream","chat:edit","chat:read","user:read:email","user_blocks_edit","user_read"],"user_id":"277558749","expires_in":12351}
+
+        '
+  recorded_at: Wed, 31 Mar 2021 14:39:11 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/bits/leaderboard
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '66'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1617201552'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - d59eacb9102be79b725ea5ba7bf5d5e8
+      x-ctxlog-logid:
+      - 1-6064898f-4dab937f3a377bc830e5e88c
+      date:
+      - Wed, 31 Mar 2021 14:39:11 GMT
+      x-served-by:
+      - cache-sea4475-SEA, cache-bma1647-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1617201552.560147,VS0,VS0,VE201
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[],"date_range":{"started_at":"","ended_at":""},"total":0}'
+  recorded_at: Wed, 31 Mar 2021 14:39:11 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/bits/leaderboard
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '69'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - f6cc45a7e3965fe3885d0beb87e359b3
+      x-ctxlog-logid:
+      - 1-6064898f-72bc13691f4b875453f90dcb
+      date:
+      - Wed, 31 Mar 2021 14:39:12 GMT
+      x-served-by:
+      - cache-sea4458-SEA, cache-bma1647-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1617201552.874331,VS0,VS0,VE158
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Unauthorized","status":401,"message":"Invalid OAuth token"}'
+  recorded_at: Wed, 31 Mar 2021 14:39:12 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/bits/leaderboard
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '66'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1617201553'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - 4ff86a0034634b27bd37d1531cc393ba
+      x-ctxlog-logid:
+      - 1-60648990-1d92332d31cdb63048704df4
+      date:
+      - Wed, 31 Mar 2021 14:39:12 GMT
+      x-served-by:
+      - cache-sea4479-SEA, cache-bma1622-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1617201552.138622,VS0,VS0,VE186
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[],"date_range":{"started_at":"","ended_at":""},"total":0}'
+  recorded_at: Wed, 31 Mar 2021 14:39:12 GMT
+recorded_with: VCR 6.0.0

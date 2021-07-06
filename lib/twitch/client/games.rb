@@ -13,9 +13,7 @@ module Twitch
       end
 
       def get_game_analytics(options = {})
-        require_access_token do
-          initialize_response GameAnalytic, get('analytics/games', options)
-        end
+        initialize_response GameAnalytic, get('analytics/games', options)
       end
     end
   end

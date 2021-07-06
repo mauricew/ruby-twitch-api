@@ -9,15 +9,11 @@ module Twitch
       end
 
       def get_users(options = {})
-        require_access_token do
-          initialize_response User, get('users', options)
-        end
+        initialize_response User, get('users', options)
       end
 
       def update_user(options = {})
-        require_access_token do
-          initialize_response User, put('users', options)
-        end
+        initialize_response User, put('users', options)
       end
     end
   end
