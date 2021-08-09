@@ -17,6 +17,7 @@ require_relative 'stream_metadata'
 require_relative 'user'
 require_relative 'user_follow'
 require_relative 'video'
+require_relative 'event_sub'
 
 module Twitch
   # Core class for requests
@@ -105,6 +106,9 @@ module Twitch
 
     require_relative 'client/users'
     include Users
+
+    require_relative 'client/event_sub'
+    include EventSubs
 
     private
 
