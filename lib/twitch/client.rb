@@ -16,6 +16,8 @@ require_relative 'stream_marker'
 require_relative 'stream_metadata'
 require_relative 'user'
 require_relative 'user_follow'
+require_relative 'reward'
+require_relative 'redemption'
 require_relative 'video'
 
 module Twitch
@@ -105,6 +107,9 @@ module Twitch
 
     require_relative 'client/users'
     include Users
+
+    require_relative 'client/rewards'
+    include Rewards
 
     private
 
