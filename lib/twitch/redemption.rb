@@ -17,9 +17,14 @@ module Twitch
     attr_reader :user_login
     # Formatted username of the user.
     attr_reader :user_name
-
-    attr_reader :reward, :user_input, :status, :redeemed_at
-
+    # The associated reward being redeemed
+    attr_reader :reward
+    # The user input (e.g. text) if allowed by the reward
+    attr_reader  :user_input,
+    # The status of the redemption's fulfillment
+    attr_reader :status
+    # The timestamp of the redemption
+    attr_reader :redeemed_at
 
     def initialize(attributes = {})
       attributes.each do |key, value|
