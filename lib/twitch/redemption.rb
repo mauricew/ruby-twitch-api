@@ -20,7 +20,7 @@ module Twitch
     # The associated reward being redeemed
     attr_reader :reward
     # The user input (e.g. text) if allowed by the reward
-    attr_reader  :user_input,
+    attr_reader  :user_input
     # The status of the redemption's fulfillment
     attr_reader :status
     # The timestamp of the redemption
