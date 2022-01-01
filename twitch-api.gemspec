@@ -12,6 +12,16 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mauricew/ruby-twitch-api'
   spec.license       = 'MIT'
 
+  github_uri = 'https://github.com/mauricew/ruby-twitch-api'
+
+  spec.metadata = {
+    'bug_tracker_uri' => "#{github_uri}/issues",
+    'documentation_uri' => "http://www.rubydoc.info/gems/#{spec.name}/#{spec.version}",
+    'homepage_uri' => spec.homepage,
+    'rubygems_mfa_required' => 'true',
+    'source_code_uri' => github_uri
+  }
+
   spec.required_ruby_version = '>= 2.5', '< 4'
 
   spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt']
