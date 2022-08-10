@@ -33,23 +33,23 @@ VCR.configure do |vcr_config|
   vcr_config.hook_into :faraday
 
   vcr_config.filter_sensitive_data('<CLIENT_ID>') do
-    ENV['TWITCH_CLIENT_ID']
+    ENV.fetch('TWITCH_CLIENT_ID')
   end
 
   vcr_config.filter_sensitive_data('<CLIENT_SECRET>') do
-    ENV['TWITCH_CLIENT_SECRET']
+    ENV.fetch('TWITCH_CLIENT_SECRET')
   end
 
   vcr_config.filter_sensitive_data('<ACTUAL_ACCESS_TOKEN>') do
-    ENV['TWITCH_ACCESS_TOKEN']
+    ENV.fetch('TWITCH_ACCESS_TOKEN')
   end
 
   vcr_config.filter_sensitive_data('<ACTUAL_REFRESH_TOKEN>') do
-    ENV['TWITCH_REFRESH_TOKEN']
+    ENV.fetch('TWITCH_REFRESH_TOKEN')
   end
 
   vcr_config.filter_sensitive_data('<ACTUAL_APPLICATION_ACCESS_TOKEN>') do
-    ENV['TWITCH_APPLICATION_ACCESS_TOKEN']
+    ENV.fetch('TWITCH_APPLICATION_ACCESS_TOKEN')
   end
 
   vcr_config.filter_sensitive_data('<NEW_ACCESS_TOKEN>') do |interaction|

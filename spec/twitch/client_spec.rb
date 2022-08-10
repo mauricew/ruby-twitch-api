@@ -17,11 +17,11 @@ RSpec.describe Twitch::Client, :vcr do
     )
   end
 
-  let(:client_id) { ENV['TWITCH_CLIENT_ID'] }
-  let(:client_secret) { ENV['TWITCH_CLIENT_SECRET'] }
-  let(:access_token) { ENV['TWITCH_ACCESS_TOKEN'] }
+  let(:client_id) { ENV.fetch('TWITCH_CLIENT_ID') }
+  let(:client_secret) { ENV.fetch('TWITCH_CLIENT_SECRET') }
+  let(:access_token) { ENV.fetch('TWITCH_ACCESS_TOKEN') }
   let(:outdated_access_token) { '9y7bf00r4fof71czggal1e2wlo50q3' }
-  let(:refresh_token) { ENV['TWITCH_REFRESH_TOKEN'] }
+  let(:refresh_token) { ENV.fetch('TWITCH_REFRESH_TOKEN') }
   let(:token_type) { :application }
   let(:scopes) { [] }
   let(:redirect_uri) { 'http://localhost' }

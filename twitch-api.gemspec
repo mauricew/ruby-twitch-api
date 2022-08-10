@@ -12,20 +12,29 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mauricew/ruby-twitch-api'
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = '>= 2.5', '< 4'
+  github_uri = 'https://github.com/mauricew/ruby-twitch-api'
+
+  spec.metadata = {
+    'bug_tracker_uri' => "#{github_uri}/issues",
+    'documentation_uri' => "http://www.rubydoc.info/gems/#{spec.name}/#{spec.version}",
+    'homepage_uri' => spec.homepage,
+    'rubygems_mfa_required' => 'true',
+    'source_code_uri' => github_uri
+  }
+
+  spec.required_ruby_version = '>= 2.6', '< 4'
 
   spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt']
 
-  spec.add_dependency 'faraday', '~> 1.0'
-  spec.add_dependency 'faraday_middleware', '~> 1.0'
+  spec.add_dependency 'faraday', '~> 2.3'
   spec.add_dependency 'twitch_oauth2', '~> 0.4.0'
 
   spec.add_development_dependency 'bundler', '~> 2.1'
-  spec.add_development_dependency 'codecov', '~> 0.5.0'
+  spec.add_development_dependency 'codecov', '~> 0.6.0'
   spec.add_development_dependency 'pry-byebug', '~> 3.9'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.18.1'
+  spec.add_development_dependency 'rubocop', '~> 1.32.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.8'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.0'
