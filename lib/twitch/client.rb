@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'faraday'
+require 'faraday/retry'
 require 'twitch_oauth2'
 
 require_relative 'response'
@@ -26,6 +27,9 @@ module Twitch
         headers: { 'User-Agent': "twitch-api ruby client #{Twitch::VERSION}" }
       }
     ) do |faraday|
+      faraday.request :retry,
+        exceptions: [*Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS, Faraday::ConnectionFailed]
+
       faraday.request :json
       faraday.response :json
     end

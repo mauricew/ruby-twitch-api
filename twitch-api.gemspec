@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt']
 
   spec.add_dependency 'faraday', '~> 2.3'
+  spec.add_dependency 'faraday-retry', '~> 2.0'
   spec.add_dependency 'twitch_oauth2', '~> 0.4.0'
 
   spec.add_development_dependency 'bundler', '~> 2.1'
