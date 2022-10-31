@@ -185,4 +185,32 @@ RSpec.describe Twitch::Client, :vcr do
       it { is_expected.not_to be_nil }
     end
   end
+
+  describe '#modify_channel' do
+    subject(:request) do
+      client.modify_channel(
+        ## `StreamAssistantBot`
+        broadcaster_id: '277558749',
+        game_id: new_game_id,
+        title: 'Test'
+      )
+    end
+
+    let(:token_type) { :user }
+
+    context 'when everything is OK' do
+      ## `Science & Technology`
+      let(:new_game_id) { '509670' }
+
+      it { is_expected.to be true }
+    end
+
+    context 'when game ID is incorrect' do
+      let(:new_game_id) { 'abc' }
+
+      specify do
+        expect { request }.to raise_error(Twitch::APIError, 'The ID in game_id is not valid.')
+      end
+    end
+  end
 end

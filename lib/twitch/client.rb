@@ -109,13 +109,22 @@ module Twitch
     require_relative 'client/users'
     include Users
 
+    ## https://dev.twitch.tv/docs/api/reference#modify-channel-information
+    def modify_channel(options = {})
+      response = patch('channels', options)
+
+      return true if response.body.empty?
+
+      response.body
+    end
+
     private
 
     def initialize_response(data_class, http_response)
       Response.new(data_class, http_response: http_response)
     end
 
-    %w[get post put].each do |http_method|
+    %w[get post put patch].each do |http_method|
       define_method http_method do |resource, params|
         http_response = CONNECTION.public_send http_method, resource, params
 
