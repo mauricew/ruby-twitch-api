@@ -186,6 +186,88 @@ RSpec.describe Twitch::Client, :vcr do
     end
   end
 
+  describe '#get_channels' do
+    subject(:request) { client.get_channels(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      context 'when broadcaster ID is single value' do
+        ## `StreamAssistantBot`
+        let(:broadcaster_id) { '277558749' }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_attributes) do
+            {
+              broadcaster_id: broadcaster_id,
+              broadcaster_login: 'streamassistantbot',
+              broadcaster_name: 'StreamAssistantBot',
+              broadcaster_language: a_string_matching(/^([a-z]{2}|other)$/),
+              game_id: a_string_matching(/^\d+$/),
+              game_name: a_kind_of(String),
+              title: a_kind_of(String),
+              delay: 0
+            }
+          end
+
+          it { is_expected.to contain_exactly(have_attributes(expected_attributes)) }
+        end
+      end
+
+      context 'when broadcaster ID is an Array of values' do
+        ## `StreamAssistantBot`, `AlexWayfer`
+        let(:broadcaster_id) { %w[277558749 117474239] }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_elements) do
+            [
+              have_attributes(
+                broadcaster_id: broadcaster_id[0],
+                broadcaster_login: 'streamassistantbot',
+                broadcaster_name: 'StreamAssistantBot'
+              ),
+              have_attributes(
+                broadcaster_id: broadcaster_id[1],
+                broadcaster_login: 'alexwayfer',
+                broadcaster_name: 'AlexWayfer'
+              )
+            ]
+          end
+
+          it { is_expected.to contain_exactly(*expected_elements) }
+        end
+      end
+    end
+  end
+
   describe '#modify_channel' do
     subject(:request) do
       client.modify_channel(

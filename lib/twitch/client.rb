@@ -5,8 +5,10 @@ require 'faraday/retry'
 require 'twitch_oauth2'
 
 require_relative 'response'
+
 require_relative 'api_error'
 require_relative 'bits_leader'
+require_relative 'channel'
 require_relative 'clip'
 require_relative 'entitlement_grant_url'
 require_relative 'game'
@@ -108,6 +110,11 @@ module Twitch
 
     require_relative 'client/users'
     include Users
+
+    ## https://dev.twitch.tv/docs/api/reference#get-channel-information
+    def get_channels(options = {})
+      initialize_response Channel, get('channels', options)
+    end
 
     ## https://dev.twitch.tv/docs/api/reference#modify-channel-information
     def modify_channel(options = {})

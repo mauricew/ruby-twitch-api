@@ -1,0 +1,92 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 31 Oct 2022 17:27:47 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '302'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.20.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-63600593-75d723dd20164e0f15038c8a
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["bits:read","channel:moderate","channel_commercial","channel_editor","channel_read","channel_stream","chat:edit","chat:read","user:read:email","user_blocks_edit","user_read"],"user_id":"277558749","expires_in":12070}
+
+        '
+  recorded_at: Mon, 31 Oct 2022 17:27:47 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/channels?broadcaster_id=277558749
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '234'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1667237268'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Mon, 31 Oct 2022 17:27:48 GMT
+      x-served-by:
+      - cache-bfi-kbfi7400094-BFI, cache-ams12777-AMS
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1667237268.905264,VS0,VS0,VE191
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"broadcaster_id":"277558749","broadcaster_login":"streamassistantbot","broadcaster_name":"StreamAssistantBot","broadcaster_language":"en","game_id":"509670","game_name":"Science
+        \u0026 Technology","title":"Test","delay":0}]}'
+  recorded_at: Mon, 31 Oct 2022 17:27:48 GMT
+recorded_with: VCR 6.1.0
