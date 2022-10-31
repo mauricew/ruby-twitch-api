@@ -53,13 +53,13 @@ VCR.configure do |vcr_config|
   end
 
   vcr_config.filter_sensitive_data('<NEW_ACCESS_TOKEN>') do |interaction|
-    if interaction.response.headers['content-type'].include? 'application/json'
+    if interaction.response.headers['content-type']&.include? 'application/json'
       JSON.parse(interaction.response.body)['access_token']
     end
   end
 
   vcr_config.filter_sensitive_data('<NEW_REFRESH_TOKEN>') do |interaction|
-    if interaction.response.headers['content-type'].include? 'application/json'
+    if interaction.response.headers['content-type']&.include? 'application/json'
       JSON.parse(interaction.response.body)['refresh_token']
     end
   end
