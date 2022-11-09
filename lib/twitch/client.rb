@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 require 'faraday'
+require 'faraday/retry'
 require 'twitch_oauth2'
 
 require_relative 'response'
+
 require_relative 'api_error'
 require_relative 'bits_leader'
+require_relative 'channel'
 require_relative 'clip'
 require_relative 'entitlement_grant_url'
 require_relative 'game'
@@ -26,6 +29,9 @@ module Twitch
         headers: { 'User-Agent': "twitch-api ruby client #{Twitch::VERSION}" }
       }
     ) do |faraday|
+      faraday.request :retry,
+        exceptions: [*Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS, Faraday::ConnectionFailed]
+
       faraday.request :json
       faraday.response :json
     end
@@ -73,13 +79,27 @@ module Twitch
     require_relative 'client/users'
     include Users
 
+    ## https://dev.twitch.tv/docs/api/reference#get-channel-information
+    def get_channels(options = {})
+      initialize_response Channel, get('channels', options)
+    end
+
+    ## https://dev.twitch.tv/docs/api/reference#modify-channel-information
+    def modify_channel(options = {})
+      response = patch('channels', options)
+
+      return true if response.body.empty?
+
+      response.body
+    end
+
     private
 
     def initialize_response(data_class, http_response)
       Response.new(data_class, http_response: http_response)
     end
 
-    %w[get post put].each do |http_method|
+    %w[get post put patch].each do |http_method|
       define_method http_method do |resource, params|
         request http_method, resource, params
       end

@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 31 Oct 2022 18:17:53 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '301'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.20.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-63601150-210d3041218eebfa6adf4ef9
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["bits:read","channel:moderate","channel_commercial","channel_editor","channel_read","channel_stream","chat:edit","chat:read","user:read:email","user_blocks_edit","user_read"],"user_id":"277558749","expires_in":9065}
+
+        '
+  recorded_at: Mon, 31 Oct 2022 18:17:53 GMT
+- request:
+    method: patch
+    uri: https://api.twitch.tv/helix/channels
+    body:
+      encoding: UTF-8
+      string: '{"broadcaster_id":"277558749","game_id":"509670","title":"Test"}'
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      connection:
+      - keep-alive
+      access-control-allow-origin:
+      - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1667240274'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Mon, 31 Oct 2022 18:17:53 GMT
+      x-served-by:
+      - cache-bfi-krnt7300109-BFI, cache-ams12735-AMS
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1667240273.413977,VS0,VS0,VE186
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Mon, 31 Oct 2022 18:17:53 GMT
+recorded_with: VCR 6.1.0
