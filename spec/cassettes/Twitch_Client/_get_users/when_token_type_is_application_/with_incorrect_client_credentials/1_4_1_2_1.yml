@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.3.0
+      - Faraday v2.6.0
       Authorization:
       - "<AUTHORIZATION_HEADER>"
   response:
@@ -17,7 +17,7 @@ http_interactions:
       message: Unauthorized
     headers:
       date:
-      - Wed, 31 Mar 2021 19:44:39 GMT
+      - Thu, 10 Nov 2022 00:37:54 GMT
       content-type:
       - application/json
       content-length:
@@ -25,17 +25,17 @@ http_interactions:
       connection:
       - keep-alive
       server:
-      - nginx/1.18.0
+      - nginx/1.22.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-6064d127-7215676f2bea5ec33f8f6c57
+      - 1-636c47e2-7114dbc348364d6e13791d3c
     body:
       encoding: UTF-8
       string: '{"status":401,"message":"invalid access token"}
 
         '
-  recorded_at: Wed, 31 Mar 2021 19:44:40 GMT
+  recorded_at: Thu, 10 Nov 2022 00:37:54 GMT
 - request:
     method: post
     uri: https://id.twitch.tv/oauth2/token
@@ -44,7 +44,7 @@ http_interactions:
       string: '{"client_id":null,"client_secret":null,"code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
     headers:
       User-Agent:
-      - Faraday v1.3.0
+      - Faraday v2.6.0
       Content-Type:
       - application/json
   response:
@@ -53,7 +53,7 @@ http_interactions:
       message: Bad Request
     headers:
       date:
-      - Wed, 31 Mar 2021 19:44:40 GMT
+      - Thu, 10 Nov 2022 00:37:54 GMT
       content-type:
       - application/json
       content-length:
@@ -61,15 +61,15 @@ http_interactions:
       connection:
       - keep-alive
       server:
-      - nginx/1.18.0
+      - nginx/1.22.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-6064d128-1bbb8076665628d543d53eca
+      - 1-636c47e2-3172ef015c9dd38b7ebc6d4d
     body:
       encoding: UTF-8
       string: '{"status":400,"message":"missing client id"}
 
         '
-  recorded_at: Wed, 31 Mar 2021 19:44:40 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Thu, 10 Nov 2022 00:37:54 GMT
+recorded_with: VCR 6.1.0

@@ -156,16 +156,14 @@ RSpec.describe Twitch::Client, :vcr do
     subject(:data) { client.get_users(id: user_id).data }
 
     let(:user_id) { 18_587_270 }
-    let(:user_login) { 'day9tv' }
 
-    let(:expected_result) { have_attributes(id: user_id.to_s, login: user_login) }
-
-    it { is_expected.to contain_exactly expected_result }
-
-    describe 'login' do
-      subject { super().first.login }
-
-      it { is_expected.to eq user_login }
+    let(:expected_result) do
+      have_attributes(
+        id: user_id.to_s,
+        login: 'day9tv',
+        display_name: 'Day9tv',
+        created_at: Time.new(2010, 12, 9, 5, 50, 55, '+00:00')
+      )
     end
 
     context 'when `token_type` is `application`' do

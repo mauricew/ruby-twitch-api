@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'faraday'
+require 'faraday/parse_dates'
 require 'faraday/retry'
 require 'twitch_oauth2'
 
@@ -31,6 +32,8 @@ module Twitch
     ) do |faraday|
       faraday.request :retry,
         exceptions: [*Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS, Faraday::ConnectionFailed]
+
+      faraday.response :parse_dates
 
       faraday.request :json
       faraday.response :json

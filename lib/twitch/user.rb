@@ -24,6 +24,8 @@ module Twitch
     attr_reader :offline_image_url
     # Total number of visits to the user's stream page.
     attr_reader :view_count
+    # The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.
+    attr_reader :created_at
 
     def initialize(attributes = {})
       attributes.each do |key, value|

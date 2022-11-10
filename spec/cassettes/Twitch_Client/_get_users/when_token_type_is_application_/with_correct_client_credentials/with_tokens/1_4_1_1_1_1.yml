@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.3.0
+      - Faraday v2.6.0
       Authorization:
       - "<AUTHORIZATION_HEADER>"
   response:
@@ -17,7 +17,7 @@ http_interactions:
       message: Unauthorized
     headers:
       date:
-      - Wed, 31 Mar 2021 19:45:13 GMT
+      - Thu, 10 Nov 2022 00:37:50 GMT
       content-type:
       - application/json
       content-length:
@@ -25,17 +25,17 @@ http_interactions:
       connection:
       - keep-alive
       server:
-      - nginx/1.18.0
+      - nginx/1.22.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-6064d149-789672fb6bc836573dc23e7d
+      - 1-636c47de-1d77180e04b935845d15e982
     body:
       encoding: UTF-8
       string: '{"status":401,"message":"invalid access token"}
 
         '
-  recorded_at: Wed, 31 Mar 2021 19:45:13 GMT
+  recorded_at: Thu, 10 Nov 2022 00:37:50 GMT
 - request:
     method: post
     uri: https://id.twitch.tv/oauth2/token
@@ -44,7 +44,7 @@ http_interactions:
       string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
     headers:
       User-Agent:
-      - Faraday v1.3.0
+      - Faraday v2.6.0
       Content-Type:
       - application/json
   response:
@@ -53,7 +53,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Wed, 31 Mar 2021 19:45:14 GMT
+      - Thu, 10 Nov 2022 00:37:51 GMT
       content-type:
       - application/json
       content-length:
@@ -61,17 +61,17 @@ http_interactions:
       connection:
       - keep-alive
       server:
-      - nginx/1.18.0
+      - nginx/1.22.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-6064d149-6f3a5f0f5a6ae38315024beb
+      - 1-636c47df-0542efe72cd3af5c5c01511f
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5550200,"token_type":"bearer"}
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":4842195,"token_type":"bearer"}
 
         '
-  recorded_at: Wed, 31 Mar 2021 19:45:14 GMT
+  recorded_at: Thu, 10 Nov 2022 00:37:51 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/users?id=18587270
@@ -93,39 +93,29 @@ http_interactions:
       connection:
       - keep-alive
       content-length:
-      - '586'
+      - '580'
       content-type:
       - application/json; charset=utf-8
       access-control-allow-origin:
       - "*"
-      cache-control:
-      - no-cache, no-store, must-revalidate, private
-      expires:
-      - '0'
-      pragma:
-      - no-cache
       ratelimit-limit:
       - '800'
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1617219915'
+      - '1668040672'
       timing-allow-origin:
       - https://www.twitch.tv
-      twitch-trace-id:
-      - 48d46e1c23db2cfe5fb17602757efbfc
-      x-ctxlog-logid:
-      - 1-6064d14a-4cbfb3206fab2869358079a4
       date:
-      - Wed, 31 Mar 2021 19:45:14 GMT
+      - Thu, 10 Nov 2022 00:37:51 GMT
       x-served-by:
-      - cache-sea4428-SEA, cache-bma1648-BMA
+      - cache-bfi-kbfi7400066-BFI, cache-ams12753-AMS
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1617219914.237843,VS0,VS0,VE184
+      - S1668040672.708771,VS0,VS0,VE184
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -134,6 +124,6 @@ http_interactions:
       encoding: UTF-8
       string: '{"data":[{"id":"18587270","login":"day9tv","display_name":"Day9tv","type":"","broadcaster_type":"partner","description":"A
         mixture of thoughtful gaming strategy, comedy, and silly fun. Featuring MTGA,
-        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":87906798,"created_at":"2010-12-09T05:50:55.91122Z"}]}'
-  recorded_at: Wed, 31 Mar 2021 19:45:14 GMT
-recorded_with: VCR 6.0.0
+        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":90257984,"created_at":"2010-12-09T05:50:55Z"}]}'
+  recorded_at: Thu, 10 Nov 2022 00:37:51 GMT
+recorded_with: VCR 6.1.0
