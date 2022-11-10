@@ -141,7 +141,7 @@ RSpec.describe Twitch::Client, :vcr do
       have_attributes(
         login: 'day9tv',
         display_name: 'Day9tv',
-        created_at: Time.new(2010, 12, 9, 5, 50, 55, 'UTC')
+        created_at: Time.new(2010, 12, 9, 5, 50, 55, '+00:00')
       )
     end
 
