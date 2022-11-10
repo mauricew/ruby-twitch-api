@@ -17,7 +17,7 @@ module Twitch
 
     def initialize(attributes = {})
       @id = attributes['id']
-      @created_at = Time.parse(attributes['created_at'])
+      @created_at = attributes['created_at']
       @description = attributes['description']
       @position_seconds = attributes['position_seconds']
       @url = attributes['URL']
