@@ -137,13 +137,15 @@ RSpec.describe Twitch::Client, :vcr do
   describe '#get_users' do
     subject { client.get_users(id: 18_587_270).data }
 
-    it { is_expected.not_to be_empty }
-
-    describe 'login' do
-      subject { super().first.login }
-
-      it { is_expected.to eq 'day9tv' }
+    let(:expected_attributes) do
+      have_attributes(
+        login: 'day9tv',
+        display_name: 'Day9tv',
+        created_at: Time.new(2010, 12, 9, 5, 50, 55, 'UTC')
+      )
     end
+
+    it { is_expected.to contain_exactly(expected_attributes) }
   end
 
   describe '#get_games' do
