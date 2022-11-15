@@ -8,34 +8,70 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.6.0
+      - Faraday v2.7.0
       Authorization:
       - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:30:29 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373ccb5-44f00ab97547bb54621071ce
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:30:29 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Mon, 31 Oct 2022 17:27:46 GMT
+      - Tue, 15 Nov 2022 17:30:30 GMT
       content-type:
       - application/json
       content-length:
-      - '302'
+      - '93'
       connection:
       - keep-alive
       server:
-      - nginx/1.20.0
+      - nginx/1.22.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-63600592-195a3c9e232e7fb164ec86c1
+      - 1-6373ccb6-44dc8fe74732e42b0d678be3
     body:
       encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["bits:read","channel:moderate","channel_commercial","channel_editor","channel_read","channel_stream","chat:edit","chat:read","user:read:email","user_blocks_edit","user_read"],"user_id":"277558749","expires_in":12071}
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5648718,"token_type":"bearer"}
 
         '
-  recorded_at: Mon, 31 Oct 2022 17:27:46 GMT
+  recorded_at: Tue, 15 Nov 2022 17:30:30 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/channels
@@ -65,15 +101,15 @@ http_interactions:
       timing-allow-origin:
       - https://www.twitch.tv
       date:
-      - Mon, 31 Oct 2022 17:27:46 GMT
+      - Tue, 15 Nov 2022 17:30:31 GMT
       x-served-by:
-      - cache-bfi-krnt7300027-BFI, cache-ams12780-AMS
+      - cache-bfi-krnt7300027-BFI, cache-hhn11561-HHN
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1667237267.541730,VS0,VS0,VE158
+      - S1668533431.189162,VS0,VS0,VE171
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -82,5 +118,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":"Bad Request","status":400,"message":"Missing required parameter
         \"broadcaster_id\""}'
-  recorded_at: Mon, 31 Oct 2022 17:27:46 GMT
+  recorded_at: Tue, 15 Nov 2022 17:30:31 GMT
 recorded_with: VCR 6.1.0
