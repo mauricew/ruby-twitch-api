@@ -148,6 +148,34 @@ RSpec.describe Twitch::Client, :vcr do
     it { is_expected.to contain_exactly(expected_attributes) }
   end
 
+  describe '#get_users_follows' do
+    subject { client.get_users_follows(from_id: from_id, first: 100).data }
+
+    let(:from_id) { '117474239' }
+    let(:from_name) { 'AlexWayfer' }
+
+    let(:expected_elements) do
+      [
+        have_attributes(
+          from_id: from_id,
+          from_name: from_name,
+          to_id: '519237924',
+          to_name: 'azhomnir',
+          followed_at: Time.new(2020, 4, 23, 19, 18, 25, '+00:00')
+        ),
+        have_attributes(
+          from_id: from_id,
+          from_name: from_name,
+          to_id: '238339665',
+          to_name: 'pierr0t777',
+          followed_at: Time.new(2021, 8, 5, 19, 16, 39, '+00:00')
+        )
+      ]
+    end
+
+    it { is_expected.to include(*expected_elements) }
+  end
+
   describe '#get_games' do
     subject { client.get_games(name: games_names) }
 
