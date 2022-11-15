@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:26:25 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cbc1-7d37b7174f18f46a382b8725
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:26:25 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:26:26 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cbc2-0f74138447ac0080054cd4ab
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":4949796,"token_type":"bearer"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:26:26 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/users/follows?first=100&from_id=117474239
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '1846'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      content-encoding:
+      - gzip
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1668533188'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Tue, 15 Nov 2022 17:26:27 GMT
+      x-served-by:
+      - cache-bfi-krnt7300027-BFI, cache-hhn11577-HHN
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1668533187.977099,VS0,VS0,VE189
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"total":57,"data":[{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"112353016","to_login":"delta_fix","to_name":"DELTA_FiX","followed_at":"2022-11-07T17:22:26Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"94424053","to_login":"refferency","to_name":"Refferency","followed_at":"2022-10-27T13:10:02Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"43578182","to_login":"f1ashko","to_name":"F1ashko","followed_at":"2022-10-18T11:47:25Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"505424814","to_login":"heyitsipo","to_name":"heyitsIPO","followed_at":"2022-09-28T19:47:58Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"30600749","to_login":"jimmy_webs","to_name":"jimmy_webs","followed_at":"2022-09-23T22:57:47Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"63828424","to_login":"aimlul","to_name":"AIMLUL","followed_at":"2022-09-17T12:29:29Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"666629487","to_login":"char_dj","to_name":"char_dj","followed_at":"2022-08-30T06:25:51Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"38629049","to_login":"wrugb","to_name":"Wrugb","followed_at":"2022-08-17T12:23:09Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"68069769","to_login":"disimon","to_name":"DiSimon","followed_at":"2022-07-23T15:14:10Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"444784392","to_login":"alexsmolyar","to_name":"alexsmolyar","followed_at":"2022-06-27T08:21:40Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"37501903","to_login":"krndl_","to_name":"krndl_","followed_at":"2022-06-17T12:07:39Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"22877031","to_login":"uselessmouth","to_name":"UselessMouth","followed_at":"2022-06-07T20:00:26Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"503585324","to_login":"metrikmusic","to_name":"metrikmusic","followed_at":"2022-05-16T11:35:54Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"280494727","to_login":"grafixmusicuk","to_name":"grafixmusicuk","followed_at":"2022-05-16T11:35:47Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"23161357","to_login":"lirik","to_name":"LIRIK","followed_at":"2022-05-11T22:46:22Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"72717097","to_login":"alena4p","to_name":"Alena4p","followed_at":"2022-05-11T15:00:02Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"152003382","to_login":"slava_110","to_name":"slava_110","followed_at":"2022-03-03T21:12:51Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"206792432","to_login":"ericallenlive","to_name":"ericallenlive","followed_at":"2021-12-29T05:28:02Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"600513126","to_login":"tabula_russia","to_name":"tabula_russia","followed_at":"2021-11-15T19:58:44Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"414153932","to_login":"ygvar","to_name":"YGVAR","followed_at":"2021-11-12T23:05:37Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"404919507","to_login":"persikoviylesss","to_name":"persikoviylesss","followed_at":"2021-11-01T18:23:53Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"96410707","to_login":"fongott","to_name":"Fongott","followed_at":"2021-08-05T20:10:31Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"238339665","to_login":"pierr0t777","to_name":"pierr0t777","followed_at":"2021-08-05T19:16:39Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"511367280","to_login":"katrenk","to_name":"katrenK","followed_at":"2021-07-23T15:59:09Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"26819117","to_login":"melharucos","to_name":"melharucos","followed_at":"2021-07-14T09:20:03Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"176793962","to_login":"wild_nut","to_name":"Wild_Nut","followed_at":"2021-07-09T08:33:51Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"87791915","to_login":"ilame","to_name":"iLame","followed_at":"2021-06-13T20:35:27Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"135519336","to_login":"stanyyy","to_name":"stanyyy","followed_at":"2021-06-10T12:40:58Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"673580874","to_login":"satontdev","to_name":"satontdev","followed_at":"2021-04-09T21:55:53Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"665562197","to_login":"lwgerry","to_name":"LWGerry","followed_at":"2021-03-23T21:05:35Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"436417492","to_login":"pyka","to_name":"PYKA","followed_at":"2021-03-03T03:03:12Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"408679510","to_login":"jessu","to_name":"Jessu","followed_at":"2021-02-20T03:11:55Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"139709045","to_login":"letsgameitout","to_name":"LetsGameItOut","followed_at":"2021-02-14T00:34:05Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"31630119","to_login":"muyskerm","to_name":"muyskerm","followed_at":"2021-02-12T11:44:32Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"171821579","to_login":"thefyzu","to_name":"TheFyzu","followed_at":"2020-12-27T21:11:20Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"81937039","to_login":"seendorei","to_name":"seendorei","followed_at":"2020-12-14T14:30:55Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"614425362","to_login":"heytellmesomething","to_name":"heytellmesomething","followed_at":"2020-11-29T10:02:41Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"593449437","to_login":"asterdesign","to_name":"asterdesign","followed_at":"2020-10-08T22:00:06Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"436848986","to_login":"yolomodetv","to_name":"yolomodetv","followed_at":"2020-10-05T11:01:51Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"77438592","to_login":"xxvostx","to_name":"xxvostx","followed_at":"2020-10-04T21:01:48Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"400371863","to_login":"ringofelysium_aurora","to_name":"RingofElysium_Aurora","followed_at":"2020-09-12T14:35:20Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"519237924","to_login":"azhomnir","to_name":"azhomnir","followed_at":"2020-04-23T19:18:25Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"35031843","to_login":"tatam","to_name":"TaTaM","followed_at":"2020-04-04T16:55:52Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"277121996","to_login":"davydovanton","to_name":"davydovanton","followed_at":"2020-02-25T15:06:34Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"135007558","to_login":"4game_ru","to_name":"4game_ru","followed_at":"2019-10-14T14:34:42Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"128644134","to_login":"s4tont","to_name":"S4tont","followed_at":"2019-09-07T14:16:55Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"45135549","to_login":"bigyarus","to_name":"BIGYARUS","followed_at":"2019-08-30T11:05:49Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"110195080","to_login":"piter_penn","to_name":"piter_PENN","followed_at":"2019-08-08T09:50:25Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"96016144","to_login":"sierra_tv","to_name":"Sierra_TV","followed_at":"2019-05-27T12:08:07Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"147232209","to_login":"alkachann","to_name":"AlkaChann","followed_at":"2019-04-26T15:33:35Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"254234138","to_login":"aibt","to_name":"Aibt","followed_at":"2019-03-24T19:55:12Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"160130544","to_login":"qqqqqqqppppppp","to_name":"qqqqqqqppppppp","followed_at":"2019-03-24T19:54:55Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"64151175","to_login":"sovuschka","to_name":"SovuschkA","followed_at":"2019-03-23T15:31:35Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"222905698","to_login":"generationzerogame","to_name":"GenerationZeroGame","followed_at":"2019-02-20T22:19:51Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"68889103","to_login":"smo1der","to_name":"Smo1der","followed_at":"2019-01-23T01:51:54Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"107035660","to_login":"stas_satori","to_name":"stas_satori","followed_at":"2018-12-20T22:52:03Z"},{"from_id":"117474239","from_login":"alexwayfer","from_name":"AlexWayfer","to_id":"95582903","to_login":"dzennzenn","to_name":"DZennZenn","followed_at":"2018-12-20T16:13:54Z"}],"pagination":{}}'
+  recorded_at: Tue, 15 Nov 2022 17:26:27 GMT
+recorded_with: VCR 6.1.0
