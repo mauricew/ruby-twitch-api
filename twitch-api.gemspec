@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     'source_code_uri' => github_uri
   }
 
-  spec.required_ruby_version = '>= 2.6', '< 4'
+  spec.required_ruby_version = '>= 2.7', '< 4'
 
   spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt']
 
