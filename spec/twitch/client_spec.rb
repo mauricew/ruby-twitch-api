@@ -3,14 +3,17 @@
 RSpec.describe Twitch::Client, :vcr do
   subject(:client) do
     described_class.new(
-      client_id: client_id,
-      client_secret: client_secret,
-      ## Optional parameters below
-      access_token: access_token,
-      refresh_token: refresh_token,
-      token_type: token_type,
-      scopes: scopes,
-      redirect_uri: redirect_uri
+      tokens: TwitchOAuth2::Tokens.new(
+        client: {
+          client_id: client_id,
+          client_secret: client_secret,
+          redirect_uri: redirect_uri
+        },
+        access_token: access_token,
+        refresh_token: refresh_token,
+        token_type: token_type,
+        scopes: scopes
+      )
     )
   end
 
@@ -24,16 +27,20 @@ RSpec.describe Twitch::Client, :vcr do
   let(:redirect_uri) { 'http://localhost' }
 
   describe '#get_bits_leaderboard' do
-    subject(:body) { client.get_bits_leaderboard.body }
+    def make_request
+      client.get_bits_leaderboard.body
+    end
+
+    subject(:body) { make_request }
 
     let(:scopes) { %w[bits:read] }
 
+    let(:expected_result) do
+      { 'data' => [], 'date_range' => { 'ended_at' => '', 'started_at' => '' }, 'total' => 0 }
+    end
+
     context 'when `token_type` is `user`' do
       let(:token_type) { :user }
-
-      let(:expected_result) do
-        { 'data' => [], 'date_range' => { 'ended_at' => '', 'started_at' => '' }, 'total' => 0 }
-      end
 
       context 'with `access_token`' do
         context 'when `access_token` is actual' do
@@ -51,6 +58,17 @@ RSpec.describe Twitch::Client, :vcr do
             let(:refresh_token) { nil }
 
             it { expect { body }.to raise_error TwitchOAuth2::Error, 'missing refresh token' }
+          end
+        end
+
+        context 'when `access_token` was actual, but became outdated' do
+          before do
+            make_request
+            client.class::CONNECTION.headers['Authorization'] = "Bearer #{outdated_access_token}"
+          end
+
+          context 'with `refresh_token`' do
+            it { is_expected.to eq expected_result }
           end
         end
       end
@@ -73,23 +91,23 @@ RSpec.describe Twitch::Client, :vcr do
         end
 
         it do
-          expect { body }.to raise_error an_instance_of(TwitchOAuth2::Error)
+          expect { body }.to raise_error an_instance_of(TwitchOAuth2::AuthorizeError)
             .and having_attributes(
-              message: 'Use `error.metadata[:link]` for getting new tokens',
-              metadata: { link: expected_login_url }
+              message: 'Direct user to `error.link` and assign `code`',
+              link: expected_login_url
             )
         end
       end
     end
 
+    ## This API method requires User Access Token
     context 'when `token_type` is `application`' do
       let(:token_type) { :application }
 
-      context 'without tokens' do
-        let(:access_token) { nil }
-        let(:refresh_token) { nil }
-
-        it { expect { body }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
+      context 'with correct client credentials' do
+        context 'with tokens' do
+          it { expect { body }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
+        end
       end
     end
   end
@@ -135,17 +153,42 @@ RSpec.describe Twitch::Client, :vcr do
   end
 
   describe '#get_users' do
-    subject { client.get_users(id: 18_587_270).data }
+    subject(:data) { client.get_users(id: user_id).data }
 
-    let(:expected_attributes) do
+    let(:user_id) { 18_587_270 }
+
+    let(:expected_result) do
       have_attributes(
+        id: user_id.to_s,
         login: 'day9tv',
         display_name: 'Day9tv',
         created_at: Time.new(2010, 12, 9, 5, 50, 55, '+00:00')
       )
     end
 
-    it { is_expected.to contain_exactly(expected_attributes) }
+    context 'when `token_type` is `application`' do
+      let(:token_type) { :application }
+
+      context 'with correct client credentials' do
+        context 'with tokens' do
+          it { is_expected.to contain_exactly expected_result }
+        end
+
+        context 'without tokens' do
+          let(:access_token) { nil }
+          let(:refresh_token) { nil }
+
+          it { is_expected.to contain_exactly expected_result }
+        end
+      end
+
+      context 'with incorrect client credentials' do
+        let(:client_id) { nil }
+        let(:client_secret) { nil }
+
+        it { expect { data }.to raise_error TwitchOAuth2::Error, 'missing client id' }
+      end
+    end
   end
 
   describe '#get_users_follows' do

@@ -8,7 +8,7 @@ http_interactions:
       string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
     headers:
       User-Agent:
-      - Faraday v1.1.0
+      - Faraday v2.6.0
       Content-Type:
       - application/json
   response:
@@ -17,7 +17,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Mon, 16 Nov 2020 23:57:00 GMT
+      - Thu, 10 Nov 2022 00:37:52 GMT
       content-type:
       - application/json
       content-length:
@@ -25,20 +25,20 @@ http_interactions:
       connection:
       - keep-alive
       server:
-      - nginx/1.14.1
+      - nginx/1.22.0
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-5fb311cc-2eed30ed111c09c0368d60d0
+      - 1-636c47e0-6fd8cc4978ab29ac39f393bf
     body:
       encoding: UTF-8
-      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5360138,"token_type":"bearer"}
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5008463,"token_type":"bearer"}
 
         '
-  recorded_at: Mon, 16 Nov 2020 23:57:00 GMT
+  recorded_at: Thu, 10 Nov 2022 00:37:52 GMT
 - request:
     method: get
-    uri: https://api.twitch.tv/helix/bits/leaderboard
+    uri: https://api.twitch.tv/helix/users?id=18587270
     body:
       encoding: US-ASCII
       string: ''
@@ -51,46 +51,43 @@ http_interactions:
       - "<AUTHORIZATION_HEADER>"
   response:
     status:
-      code: 401
-      message: Unauthorized
+      code: 200
+      message: OK
     headers:
       connection:
       - keep-alive
       content-length:
-      - '74'
+      - '580'
       content-type:
       - application/json; charset=utf-8
       access-control-allow-origin:
       - "*"
-      cache-control:
-      - no-cache, no-store, must-revalidate, private
-      expires:
-      - '0'
-      pragma:
-      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1668040674'
       timing-allow-origin:
       - https://www.twitch.tv
-      twitch-trace-id:
-      - fc923a4163b57e9225dc7e412e5db5db
-      x-ctxlog-logid:
-      - 1-5fb311cc-519d09cb7a6d172a6f2e2283
       date:
-      - Mon, 16 Nov 2020 23:57:01 GMT
+      - Thu, 10 Nov 2022 00:37:53 GMT
       x-served-by:
-      - cache-sea4434-SEA, cache-bma1635-BMA
+      - cache-bfi-kbfi7400027-BFI, cache-hhn11564-HHN
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1605571021.835763,VS0,VS0,VE187
+      - S1668040673.154951,VS0,VS0,VE177
       vary:
       - Accept-Encoding
       strict-transport-security:
       - max-age=300
     body:
       encoding: UTF-8
-      string: '{"error":"Unauthorized","status":401,"message":"Missing User OAUTH
-        Token"}'
-  recorded_at: Mon, 16 Nov 2020 23:57:01 GMT
-recorded_with: VCR 6.0.0
+      string: '{"data":[{"id":"18587270","login":"day9tv","display_name":"Day9tv","type":"","broadcaster_type":"partner","description":"A
+        mixture of thoughtful gaming strategy, comedy, and silly fun. Featuring MTGA,
+        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":90257984,"created_at":"2010-12-09T05:50:55Z"}]}'
+  recorded_at: Thu, 10 Nov 2022 00:37:53 GMT
+recorded_with: VCR 6.1.0

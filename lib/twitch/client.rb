@@ -43,52 +43,22 @@ module Twitch
 
     # Initializes a Twitch client.
     #
-    # - client_id [String] The client ID.
-    # Used as the Client-ID header in a request.
-    # - client_secret [String] The client secret.
-    # Used for generation access tokens.
-    # - redirect_uri [String] A redirect URI.
-    # Used for redirection after successful authentication.
-    # - scopes [Array<String>] Required scopes.
-    # Used to specify permissions for the token.
-    # - token_type [Symbol] Access Token type.
-    # Used for behavior with given tokens and on requests.
-    # - access_token [String] An access token.
-    # Used as the Authorization header in a request.
-    # - refresh_token [String] A refresh token.
-    # Used for refreshing User Access Token.
-    def initialize(options = {})
-      client_id = options[:client_id]
+    # - tokens [TwitchOAuth2::Tokens] Tokens object with their refreshing logic inside.
+    # All client and authentication information (`client_id`, `:scopes`, etc.) stores there.
+    def initialize(tokens:)
+      @tokens = tokens
 
-      @oauth2_client = TwitchOAuth2::Client.new(
-        client_id: client_id, **options.slice(:client_secret, :redirect_uri, :scopes)
-      )
+      CONNECTION.headers['Client-ID'] = self.tokens.client.client_id
 
-      @token_type = options.fetch(:token_type, :application)
-
-      @tokens = @oauth2_client.check_tokens(
-        **options.slice(:access_token, :refresh_token), token_type: @token_type
-      )
-
-      CONNECTION.headers['Client-ID'] = client_id
-
-      renew_authorization_header if access_token
-    end
-
-    %i[access_token refresh_token].each do |key|
-      define_method(key) { tokens[key] }
+      renew_authorization_header
     end
 
     def create_clip(options = {})
-      require_access_token do
-        initialize_response Clip, post('clips', options)
-      end
+      initialize_response Clip, post('clips', options)
     end
 
     def create_entitlement_grant_url(options = {})
-      require_access_token do
-        initialize_response EntitlementGrantUrl, post('entitlements/upload', options)
-      end
+      initialize_response EntitlementGrantUrl, post('entitlements/upload', options)
     end
 
     def get_clips(options = {})
@@ -96,9 +66,7 @@ module Twitch
     end
 
     def get_bits_leaderboard(options = {})
-      require_access_token do
-        initialize_response BitsLeader, get('bits/leaderboard', options)
-      end
+      initialize_response BitsLeader, get('bits/leaderboard', options)
     end
 
     require_relative 'client/games'
@@ -136,37 +104,26 @@ module Twitch
 
     %w[get post put patch].each do |http_method|
       define_method http_method do |resource, params|
-        http_response = CONNECTION.public_send http_method, resource, params
-
-        raise APIError.new(http_response.status, http_response.body) unless http_response.success?
-
-        http_response
+        request http_method, resource, params
       end
     end
 
     def renew_authorization_header
-      CONNECTION.headers['Authorization'] = "Bearer #{access_token}"
+      CONNECTION.headers['Authorization'] = "Bearer #{tokens.access_token}"
     end
 
-    def request(http_method, *args)
-      Retriable.with_context(:twitch) do
-        CONNECTION.public_send http_method, *args
-      end
-    end
+    def request(http_method, resource, params)
+      http_response = CONNECTION.public_send http_method, resource, params
 
-    def require_access_token
-      response = yield
-      if response.success? ||
-          @token_type != :user ||
-          response.status != 401 ||
-          ## Here can be another error, like "missing required oauth scope"
-          response.body[:message] != 'invalid oauth token'
-        return response
+      if http_response.status == 401
+        renew_authorization_header
+
+        http_response = CONNECTION.public_send http_method, resource, params
       end
 
-      @tokens = @oauth2_client.refreshed_tokens(refresh_token: refresh_token)
-      renew_authorization_header
-      yield
+      return http_response if http_response.success?
+
+      raise APIError.new(http_response.status, http_response.body)
     end
   end
 end
