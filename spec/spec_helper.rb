@@ -3,12 +3,13 @@
 require 'pry-byebug'
 
 require 'simplecov'
-SimpleCov.start
 
-if ENV['CODECOV_TOKEN']
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+if ENV['CI']
+  require 'simplecov-cobertura'
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 end
+
+SimpleCov.start
 
 ENV['TWITCH_CLIENT_ID'] ||= 'test_client_id'
 ENV['TWITCH_CLIENT_SECRET'] ||= 'test_client_secret'

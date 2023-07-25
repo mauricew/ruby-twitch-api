@@ -335,7 +335,7 @@ RSpec.describe Twitch::Client, :vcr do
             ]
           end
 
-          it { is_expected.to contain_exactly(*expected_elements) }
+          it { is_expected.to match_array(expected_elements) }
         end
       end
     end
