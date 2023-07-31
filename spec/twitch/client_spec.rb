@@ -19,7 +19,18 @@ RSpec.describe Twitch::Client, :vcr do
 
   let(:client_id) { ENV.fetch('TWITCH_CLIENT_ID') }
   let(:client_secret) { ENV.fetch('TWITCH_CLIENT_SECRET') }
-  let(:access_token) { ENV.fetch('TWITCH_ACCESS_TOKEN') }
+
+  let(:access_token) do
+    case token_type
+    when :user
+      ENV.fetch('TWITCH_ACCESS_TOKEN')
+    when :application
+      ENV.fetch('TWITCH_APPLICATION_ACCESS_TOKEN')
+    else
+      raise "Unknown token type: #{token_type.inspect}"
+    end
+  end
+
   let(:outdated_access_token) { '9y7bf00r4fof71czggal1e2wlo50q3' }
   let(:refresh_token) { ENV.fetch('TWITCH_REFRESH_TOKEN') }
   let(:token_type) { :application }
@@ -186,7 +197,16 @@ RSpec.describe Twitch::Client, :vcr do
         let(:client_id) { nil }
         let(:client_secret) { nil }
 
-        it { expect { data }.to raise_error TwitchOAuth2::Error, 'missing client id' }
+        context 'with tokens' do
+          it { expect { data }.to raise_error Twitch::APIError, 'Client ID is missing' }
+        end
+
+        context 'without tokens' do
+          let(:access_token) { nil }
+          let(:refresh_token) { nil }
+
+          it { expect { data }.to raise_error TwitchOAuth2::Error, 'missing client id' }
+        end
       end
     end
   end

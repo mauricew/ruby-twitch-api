@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":null,"client_secret":null,"code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      date:
+      - Mon, 31 Jul 2023 16:19:53 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '45'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7df29-551d591e1880555f2e280a78
+    body:
+      encoding: UTF-8
+      string: '{"status":400,"message":"missing client id"}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 16:19:53 GMT
+recorded_with: VCR 6.2.0
