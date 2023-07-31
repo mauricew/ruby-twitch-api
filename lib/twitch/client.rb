@@ -84,9 +84,6 @@ module Twitch
     require_relative 'client/moderation'
     include Moderation
 
-    require_relative 'client/stream_tags'
-    include StreamTags
-
     require_relative 'client/streams'
     include Streams
 
