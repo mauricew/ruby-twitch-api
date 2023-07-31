@@ -504,4 +504,74 @@ RSpec.describe Twitch::Client, :vcr do
       end
     end
   end
+
+  describe '#get_user_active_extensions' do
+    subject(:request) { client.get_user_active_extensions(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { p request }.to raise_error(
+            Twitch::APIError,
+            'The user_id query parameter is required if you specify an app access token.'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        it 'returns extensions for the authentificated user' do
+          expect { request }.not_to raise_error
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { user_id: user_id } }
+
+      ## `StreamAssistantBot`
+      let(:user_id) { '277558749' }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_extension_attributes) do
+            {
+              id: a_string_matching(/^\w+$/),
+              active: true,
+              version: a_string_matching(/^\d+(\.\d+)*$/),
+              name: an_instance_of(String)
+            }
+          end
+
+          let(:expected_attributes) do
+            {
+              panel: matching(
+                '1' => an_object_having_attributes(expected_extension_attributes),
+                '2' => an_object_having_attributes(active: false),
+                '3' => an_object_having_attributes(active: false)
+              ),
+              overlay: matching(
+                '1' => an_object_having_attributes(expected_extension_attributes)
+              ),
+              component: matching(
+                '1' => an_object_having_attributes(active: false),
+                '2' => an_object_having_attributes(active: false)
+              )
+            }
+          end
+
+          it { is_expected.to have_attributes(expected_attributes) }
+        end
+      end
+    end
+  end
 end
