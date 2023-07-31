@@ -89,7 +89,7 @@ module Twitch
 
     ## https://dev.twitch.tv/docs/api/reference/#search-channels
     def search_channels(options = {})
-      initialize_response User, get('search/channels', options)
+      initialize_response Channel, get('search/channels', options)
     end
 
     ## https://dev.twitch.tv/docs/api/reference#modify-channel-information
