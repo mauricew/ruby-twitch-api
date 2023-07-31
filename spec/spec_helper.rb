@@ -74,6 +74,18 @@ VCR.configure do |vcr_config|
   vcr_config.filter_sensitive_data('<AUTHORIZATION_HEADER>') do |interaction|
     interaction.request.headers['Authorization']&.first
   end
+
+  vcr_config.filter_sensitive_data('<TOKEN_USER_LOGIN>') do |interaction|
+    if interaction.request.uri == 'https://id.twitch.tv/oauth2/validate'
+      JSON.parse(interaction.response.body)['login']
+    end
+  end
+
+  vcr_config.filter_sensitive_data('<TOKEN_USER_ID>') do |interaction|
+    if interaction.request.uri == 'https://id.twitch.tv/oauth2/validate'
+      JSON.parse(interaction.response.body)['user_id']
+    end
+  end
 end
 
 require_relative '../lib/twitch-api'

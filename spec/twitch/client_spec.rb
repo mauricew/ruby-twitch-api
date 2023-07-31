@@ -19,7 +19,18 @@ RSpec.describe Twitch::Client, :vcr do
 
   let(:client_id) { ENV.fetch('TWITCH_CLIENT_ID') }
   let(:client_secret) { ENV.fetch('TWITCH_CLIENT_SECRET') }
-  let(:access_token) { ENV.fetch('TWITCH_ACCESS_TOKEN') }
+
+  let(:access_token) do
+    case token_type
+    when :user
+      ENV.fetch('TWITCH_ACCESS_TOKEN')
+    when :application
+      ENV.fetch('TWITCH_APPLICATION_ACCESS_TOKEN')
+    else
+      raise "Unknown token type: #{token_type.inspect}"
+    end
+  end
+
   let(:outdated_access_token) { '9y7bf00r4fof71czggal1e2wlo50q3' }
   let(:refresh_token) { ENV.fetch('TWITCH_REFRESH_TOKEN') }
   let(:token_type) { :application }
@@ -186,7 +197,16 @@ RSpec.describe Twitch::Client, :vcr do
         let(:client_id) { nil }
         let(:client_secret) { nil }
 
-        it { expect { data }.to raise_error TwitchOAuth2::Error, 'missing client id' }
+        context 'with tokens' do
+          it { expect { data }.to raise_error Twitch::APIError, 'Client ID is missing' }
+        end
+
+        context 'without tokens' do
+          let(:access_token) { nil }
+          let(:refresh_token) { nil }
+
+          it { expect { data }.to raise_error TwitchOAuth2::Error, 'missing client id' }
+        end
       end
     end
   end
@@ -415,6 +435,142 @@ RSpec.describe Twitch::Client, :vcr do
 
       specify do
         expect { request }.to raise_error(Twitch::APIError, 'The ID in game_id is not valid.')
+      end
+    end
+  end
+
+  describe '#get_moderators' do
+    subject(:request) { client.get_moderators(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'The broadcaster_id query parameter is required.'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'The broadcaster_id query parameter is required.'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      context 'when broadcaster ID is foreign channel' do
+        ## LIRIK
+        let(:broadcaster_id) { '23161357' }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, <<~MESSAGE.chomp
+              The ID in broadcaster_id must match the user ID found in the request's OAuth token.
+            MESSAGE
+          )
+        end
+      end
+
+      context 'when broadcaster ID is your own' do
+        ## `StreamAssistantBot`
+        let(:broadcaster_id) { '277558749' }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_elements) do
+            [
+              have_attributes(
+                user_id: '117474239',
+                user_login: 'alexwayfer',
+                user_name: 'AlexWayfer'
+              )
+            ]
+          end
+
+          it { is_expected.to match_array(expected_elements) }
+        end
+      end
+    end
+  end
+
+  describe '#get_user_active_extensions' do
+    subject(:request) { client.get_user_active_extensions(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { p request }.to raise_error(
+            Twitch::APIError,
+            'The user_id query parameter is required if you specify an app access token.'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        it 'returns extensions for the authentificated user' do
+          expect { request }.not_to raise_error
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { user_id: user_id } }
+
+      ## `StreamAssistantBot`
+      let(:user_id) { '277558749' }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_extension_attributes) do
+            {
+              id: a_string_matching(/^\w+$/),
+              active: true,
+              version: a_string_matching(/^\d+(\.\d+)*$/),
+              name: an_instance_of(String)
+            }
+          end
+
+          let(:expected_attributes) do
+            {
+              panel: matching(
+                '1' => an_object_having_attributes(expected_extension_attributes),
+                '2' => an_object_having_attributes(active: false),
+                '3' => an_object_having_attributes(active: false)
+              ),
+              overlay: matching(
+                '1' => an_object_having_attributes(expected_extension_attributes)
+              ),
+              component: matching(
+                '1' => an_object_having_attributes(active: false),
+                '2' => an_object_having_attributes(active: false)
+              )
+            }
+          end
+
+          it { is_expected.to have_attributes(expected_attributes) }
+        end
       end
     end
   end

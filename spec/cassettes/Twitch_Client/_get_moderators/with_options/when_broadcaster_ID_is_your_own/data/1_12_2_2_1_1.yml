@@ -17,11 +17,11 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Mon, 31 Jul 2023 16:19:41 GMT
+      - Mon, 31 Jul 2023 15:00:45 GMT
       content-type:
       - application/json
       content-length:
-      - '82'
+      - '635'
       connection:
       - keep-alive
       server:
@@ -29,16 +29,16 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-64c7df1d-2f74f9f647f05efa36359451
+      - 1-64c7cc9d-7b47ebd8068ffb3b670ee3f7
     body:
       encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","scopes":null,"expires_in":5356623}
+      string: '{"client_id":"<CLIENT_ID>","login":"<TOKEN_USER_LOGIN>","scopes":["bits:read","channel:edit:commercial","channel:manage:broadcast","channel:manage:polls","channel:manage:predictions","channel:moderate","channel:read:polls","channel:read:predictions","chat:edit","chat:read","clips:edit","moderation:read","moderator:manage:announcements","moderator:manage:banned_users","moderator:manage:chat_messages","moderator:manage:chat_settings","moderator:read:chat_settings","moderator:read:chatters","user:edit","user:manage:blocked_users","user:read:broadcast","user:read:email"],"user_id":"<TOKEN_USER_ID>","expires_in":13874}
 
         '
-  recorded_at: Mon, 31 Jul 2023 16:19:41 GMT
+  recorded_at: Mon, 31 Jul 2023 15:00:46 GMT
 - request:
     method: get
-    uri: https://api.twitch.tv/helix/channels
+    uri: https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=277558749
     body:
       encoding: US-ASCII
       string: ''
@@ -51,36 +51,41 @@ http_interactions:
       - "<AUTHORIZATION_HEADER>"
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers:
       connection:
       - keep-alive
       content-length:
-      - '94'
+      - '101'
       content-type:
       - application/json; charset=utf-8
       access-control-allow-origin:
       - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1690815647'
       timing-allow-origin:
       - https://www.twitch.tv
       date:
-      - Mon, 31 Jul 2023 16:19:41 GMT
+      - Mon, 31 Jul 2023 15:00:46 GMT
       x-served-by:
-      - cache-bfi-krnt7300027-BFI, cache-lhr7365-LHR
+      - cache-bfi-kbfi7400026-BFI, cache-lhr7365-LHR
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1690820381.402827,VS0,VS0,VE149
+      - S1690815646.341761,VS0,VS0,VE169
       vary:
       - Accept-Encoding
       strict-transport-security:
       - max-age=300
     body:
       encoding: UTF-8
-      string: '{"error":"Bad Request","status":400,"message":"Missing required parameter
-        \"broadcaster_id\""}'
-  recorded_at: Mon, 31 Jul 2023 16:19:41 GMT
+      string: '{"data":[{"user_id":"117474239","user_login":"alexwayfer","user_name":"AlexWayfer"}],"pagination":{}}'
+  recorded_at: Mon, 31 Jul 2023 15:00:46 GMT
 recorded_with: VCR 6.2.0

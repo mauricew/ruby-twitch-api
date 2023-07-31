@@ -40,7 +40,7 @@ module Twitch
       @http_response = http_response
       @raw = @http_response
 
-      @data = body['data'].map { |data_element| data_class.new(data_element) }
+      @data = parse_data data_class
 
       parse_rate_limits
 
@@ -50,6 +50,17 @@ module Twitch
     end
 
     private
+
+    def parse_data(data_class)
+      raw_data = body['data']
+      return raw_data unless data_class
+
+      if raw_data.is_a?(Array)
+        raw_data.map { |data_element| data_class.new(data_element) }
+      else
+        data_class.new(raw_data)
+      end
+    end
 
     def parse_rate_limits
       @rate_limit = rate_limit_headers[:limit].to_i

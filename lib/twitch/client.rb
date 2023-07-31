@@ -12,12 +12,18 @@ require_relative 'bits_leader'
 require_relative 'channel'
 require_relative 'clip'
 require_relative 'entitlement_grant_url'
+require_relative 'extension'
+require_relative 'extensions_by_types'
 require_relative 'game'
 require_relative 'game_analytic'
+require_relative 'moderation_event'
+require_relative 'moderator'
 require_relative 'stream'
 require_relative 'stream_marker'
 require_relative 'stream_metadata'
+require_relative 'subscription'
 require_relative 'user'
+require_relative 'user_ban'
 require_relative 'user_follow'
 require_relative 'video'
 
@@ -69,11 +75,20 @@ module Twitch
       initialize_response BitsLeader, get('bits/leaderboard', options)
     end
 
+    require_relative 'client/extensions'
+    include Extensions
+
     require_relative 'client/games'
     include Games
 
+    require_relative 'client/moderation'
+    include Moderation
+
     require_relative 'client/streams'
     include Streams
+
+    require_relative 'client/subscriptions'
+    include Subscriptions
 
     def get_videos(options = {})
       initialize_response Video, get('videos', options)
