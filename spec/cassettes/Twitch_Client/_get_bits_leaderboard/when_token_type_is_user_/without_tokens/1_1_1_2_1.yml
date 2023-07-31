@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/authorize?client_id=<CLIENT_ID>&redirect_uri=http%3A%2F%2Flocalhost&response_type=code&scope=bits%3Aread
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      date:
+      - Mon, 16 Nov 2020 23:56:14 GMT
+      content-type:
+      - text/html; charset=utf-8
+      content-length:
+      - '247'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      location:
+      - https://www.twitch.tv/login?client_id=<CLIENT_ID>&redirect_params=client_id%3D<CLIENT_ID>%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%26response_type%3Dcode%26scope%3Dbits%253Aread
+      set-cookie:
+      - twilight-auth=; Path=/; Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00
+        GMT; Max-Age=0; Secure, twilight-user=; Path=/; Domain=twitch.tv; Expires=Thu,
+        01 Jan 1970 00:00:00 GMT; Max-Age=0; Secure, twilight-user.dev=; Path=/; Domain=twitch.tv;
+        Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; Secure, twilight-user.spotlight=;
+        Path=/; Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0;
+        Secure, twilight-user.desklight=; Path=/; Domain=twitch.tv; Expires=Thu, 01
+        Jan 1970 00:00:00 GMT; Max-Age=0; Secure, auth-token=; Path=/; Domain=twitch.tv;
+        Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; Secure, persistent=; Path=/;
+        Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; Secure,
+        login=; Path=/; Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0;
+        Secure, name=; Path=/; Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00
+        GMT; Max-Age=0; Secure, sudo=; Path=/; Domain=twitch.tv; Expires=Thu, 01 Jan
+        1970 00:00:00 GMT; Max-Age=0; Secure, bits_sudo=; Path=/; Domain=twitch.tv;
+        Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; Secure, api_token=; Path=/;
+        Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; Secure,
+        _twitch_session_id=; Path=/; Domain=twitch.tv; Expires=Thu, 01 Jan 1970 00:00:00
+        GMT; Max-Age=0; Secure
+      x-ctxlog-logid:
+      - 1-5fb3119e-7a53e5ba0ac8e93e1feaad29
+      x-frame-options:
+      - DENY
+    body:
+      encoding: UTF-8
+      string: "<a href=\"https://www.twitch.tv/login?client_id=<CLIENT_ID>&amp;redirect_params=client_id%3D<CLIENT_ID>%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%26response_type%3Dcode%26scope%3Dbits%253Aread\">Found</a>.\n\n"
+  recorded_at: Mon, 16 Nov 2020 23:56:14 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":"<CODE>","grant_type":"authorization_code","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 16 Nov 2020 23:56:59 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '182'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.14.1
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-5fb311cb-269d6d1b399e1e7c202bd4ee
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":14517,"refresh_token":"<NEW_REFRESH_TOKEN>","scope":["bits:read"],"token_type":"bearer"}
+
+        '
+  recorded_at: Mon, 16 Nov 2020 23:56:59 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/bits/leaderboard
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '66'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - no-cache, no-store, must-revalidate, private
+      expires:
+      - '0'
+      pragma:
+      - no-cache
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1605571020'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      twitch-trace-id:
+      - 10022a560b378fa8941cb11c404bdc8e
+      x-ctxlog-logid:
+      - 1-5fb311cb-3c4ea36f2f072c8c413bb9ac
+      date:
+      - Mon, 16 Nov 2020 23:56:59 GMT
+      x-served-by:
+      - cache-sea4448-SEA, cache-bma1632-BMA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1605571019.446457,VS0,VS0,VE198
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[],"date_range":{"started_at":"","ended_at":""},"total":0}'
+  recorded_at: Mon, 16 Nov 2020 23:56:59 GMT
+recorded_with: VCR 6.0.0

@@ -1,0 +1,130 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:29:17 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cc6d-1087eac41b22b6ef36bb54cf
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:29:17 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:29:19 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cc6e-41ba5a03431f77f948dcdc95
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":4849280,"token_type":"bearer"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:29:19 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/games/top?first=5
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '711'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1668533360'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Tue, 15 Nov 2022 17:29:19 GMT
+      x-served-by:
+      - cache-bfi-krnt7300037-BFI, cache-hhn11558-HHN
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1668533360.650438,VS0,VS0,VE181
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"509658","name":"Just Chatting","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/509658-{width}x{height}.jpg"},{"id":"516575","name":"VALORANT","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/516575-{width}x{height}.jpg"},{"id":"32982","name":"Grand
+        Theft Auto V","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-{width}x{height}.jpg"},{"id":"21779","name":"League
+        of Legends","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/21779-{width}x{height}.jpg"},{"id":"102007682","name":"God
+        of War Ragnarök","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/102007682_IGDB-{width}x{height}.jpg"}],"pagination":{"cursor":"eyJzIjo1LCJkIjpmYWxzZSwidCI6dHJ1ZX0="}}'
+  recorded_at: Tue, 15 Nov 2022 17:29:19 GMT
+recorded_with: VCR 6.1.0

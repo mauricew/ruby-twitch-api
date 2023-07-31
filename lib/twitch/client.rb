@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/parse_dates'
+require 'faraday/retry'
+require 'twitch_oauth2'
 
 require_relative 'response'
+
 require_relative 'api_error'
 require_relative 'bits_leader'
+require_relative 'channel'
 require_relative 'clip'
 require_relative 'entitlement_grant_url'
 require_relative 'game'
@@ -23,45 +27,30 @@ module Twitch
     # Base connection to Helix API.
     CONNECTION = Faraday.new(
       'https://api.twitch.tv/helix', {
-        headers: { "User-Agent": "twitch-api ruby client #{Twitch::VERSION}" }
+        headers: { 'User-Agent': "twitch-api ruby client #{Twitch::VERSION}" }
       }
     ) do |faraday|
+      faraday.request :retry,
+        exceptions: [*Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS, Faraday::ConnectionFailed]
+
+      faraday.response :parse_dates
+
       faraday.request :json
       faraday.response :json
     end
 
-    TOKENS_CONFLICT_WARNING = <<~TEXT
-      WARNING:
-      It is recommended that only one identifier token is specified.
-      Unpredictable behavior may follow.
-    TEXT
-
-    private_constant :TOKENS_CONFLICT_WARNING
+    attr_reader :tokens
 
     # Initializes a Twitch client.
     #
-    # - client_id [String] The client ID.
-    # Used as the Client-ID header in a request.
-    # - access_token [String] An access token.
-    # Used as the Authorization header in a request.
-    # Any "Bearer " prefix will be stripped.
-    # - with_raw [Boolean] Whether to include raw HTTP response
-    # Intended for testing/checking API results
-    def initialize(client_id: nil, access_token: nil, with_raw: false)
-      unless client_id || access_token
-        raise 'An identifier token (client ID or bearer token) is required'
-      end
+    # - tokens [TwitchOAuth2::Tokens] Tokens object with their refreshing logic inside.
+    # All client and authentication information (`client_id`, `:scopes`, etc.) stores there.
+    def initialize(tokens:)
+      @tokens = tokens
 
-      warn TOKENS_CONFLICT_WARNING if client_id && access_token
+      CONNECTION.headers['Client-ID'] = self.tokens.client.client_id
 
-      CONNECTION.headers['Client-ID'] = client_id if client_id
-
-      if access_token
-        access_token = access_token.gsub(/^Bearer /, '')
-        CONNECTION.headers['Authorization'] = "Bearer #{access_token}"
-      end
-
-      @with_raw = with_raw
+      renew_authorization_header
     end
 
     def create_clip(options = {})
@@ -72,10 +61,6 @@ module Twitch
       initialize_response EntitlementGrantUrl, post('entitlements/upload', options)
     end
 
-    def create_stream_marker(options = {})
-      initialize_response StreamMarker, post('streams/markers', options)
-    end
-
     def get_clips(options = {})
       initialize_response Clip, get('clips', options)
     end
@@ -84,64 +69,65 @@ module Twitch
       initialize_response BitsLeader, get('bits/leaderboard', options)
     end
 
-    def get_games(options = {})
-      initialize_response Game, get('games', options)
-    end
+    require_relative 'client/games'
+    include Games
 
-    def get_top_games(options = {})
-      initialize_response Game, get('games/top', options)
-    end
-
-    def get_game_analytics(options = {})
-      initialize_response GameAnalytic, get('analytics/games', options)
-    end
-
-    def get_stream_markers(options = {})
-      initialize_response StreamMarkerResponse, get('streams/markers', options)
-    end
-
-    def get_streams(options = {})
-      initialize_response Stream, get('streams', options)
-    end
-
-    def get_streams_metadata(options = {})
-      initialize_response StreamMetadata, get('streams/metadata', options)
-    end
-
-    def get_users_follows(options = {})
-      initialize_response UserFollow, get('users/follows', options)
-    end
-
-    def get_users(options = {})
-      initialize_response User, get('users', options)
-    end
-
-    def update_user(options = {})
-      initialize_response User, put('users', options)
-    end
+    require_relative 'client/streams'
+    include Streams
 
     def get_videos(options = {})
       initialize_response Video, get('videos', options)
+    end
+
+    require_relative 'client/users'
+    include Users
+
+    ## https://dev.twitch.tv/docs/api/reference#get-channel-information
+    def get_channels(options = {})
+      initialize_response Channel, get('channels', options)
     end
 
     def search(options = {})
       initialize_response User, get('search/channels', options)
     end
 
+    ## https://dev.twitch.tv/docs/api/reference#modify-channel-information
+    def modify_channel(options = {})
+      response = patch('channels', options)
+
+      return true if response.body.empty?
+
+      response.body
+    end
+
     private
 
     def initialize_response(data_class, http_response)
-      Response.new(data_class, http_response: http_response, with_raw: @with_raw)
+      Response.new(data_class, http_response: http_response)
     end
 
-    %w[get post put].each do |http_method|
+    %w[get post put patch].each do |http_method|
       define_method http_method do |resource, params|
-        http_response = CONNECTION.public_send http_method, resource, params
-
-        raise APIError.new(http_response.status, http_response.body) unless http_response.success?
-
-        http_response
+        request http_method, resource, params
       end
+    end
+
+    def renew_authorization_header
+      CONNECTION.headers['Authorization'] = "Bearer #{tokens.access_token}"
+    end
+
+    def request(http_method, resource, params)
+      http_response = CONNECTION.public_send http_method, resource, params
+
+      if http_response.status == 401
+        renew_authorization_header
+
+        http_response = CONNECTION.public_send http_method, resource, params
+      end
+
+      return http_response if http_response.success?
+
+      raise APIError.new(http_response.status, http_response.body)
     end
   end
 end

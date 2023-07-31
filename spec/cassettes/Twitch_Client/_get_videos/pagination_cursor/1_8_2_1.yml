@@ -1,0 +1,158 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:29:25 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cc75-67bcdc9946b4e9cf789612b2
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:29:25 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:29:26 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cc76-11fdf34d3bbe9e2622178b19
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":4832318,"token_type":"bearer"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:29:26 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/videos?user_id=9846758
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      content-encoding:
+      - gzip
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1668533428'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Tue, 15 Nov 2022 17:30:28 GMT
+      x-served-by:
+      - cache-bfi-krnt7300067-BFI, cache-hhn11558-HHN
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1668533427.049498,VS0,VS0,VE1008
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+      transfer-encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"1652727194","stream_id":"46300851900","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 | Day 3 - Top 8 Singles | Feat: Tea, Bloom4Eva, Glutonny, Sisqui, Hikaru,
+        Jake, Space and Raflow! | !bracket !enter","description":"","created_at":"2022-11-14T19:17:15Z","published_at":"2022-11-14T19:17:15Z","url":"https://www.twitch.tv/videos/1652727194","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/b0f34bdb8933702ba02b_vgbootcamp_46300851900_1668453426//thumb/thumb0-%{width}x%{height}.jpg","viewable":"public","view_count":5234,"language":"en","type":"archive","duration":"3h45m54s","muted_segments":null},{"id":"1652174613","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 GRAND FINALS - Leon \u0026 Oryon Vs. Chag \u0026 Jake - SSBU Ultimate
+        Tournament","description":"","created_at":"2022-11-14T01:16:04Z","published_at":"2022-11-14T01:16:04Z","url":"https://www.twitch.tv/videos/1652174613","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/ad7f8324034705758be8_vgbootcamp_92596132467_2783236098//thumb/thumb1652174613-%{width}x%{height}.jpg","viewable":"public","view_count":97,"language":"en","type":"highlight","duration":"41m50s","muted_segments":null},{"id":"1652173828","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 Losers Finals - Chag \u0026 Jake Vs. Mr.R \u0026 Sisqui - SSBU Ultimate
+        Tournament","description":"","created_at":"2022-11-14T01:15:06Z","published_at":"2022-11-14T01:15:06Z","url":"https://www.twitch.tv/videos/1652173828","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/e2770c9f50ceaba615da_vgbootcamp_11188451967_2686241393//thumb/thumb1652173828-%{width}x%{height}.jpg","viewable":"public","view_count":7,"language":"en","type":"highlight","duration":"20m43s","muted_segments":null},{"id":"1652173276","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 Winners Finals - Chag \u0026 Jake Vs. Leon \u0026 Oryon - SSBU Ultimate
+        Tournament","description":"","created_at":"2022-11-14T01:14:23Z","published_at":"2022-11-14T01:14:23Z","url":"https://www.twitch.tv/videos/1652173276","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/6a1c109981bb9096eb51_vgbootcamp_23872689180_1431126444//thumb/thumb1652173276-%{width}x%{height}.jpg","viewable":"public","view_count":8,"language":"en","type":"highlight","duration":"16m6s","muted_segments":null},{"id":"1652172879","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 Losers Semis - Mr.R \u0026 Sisqui Vs. Ludo \u0026 Homika - SSBU Ultimate
+        Tournament","description":"","created_at":"2022-11-14T01:13:53Z","published_at":"2022-11-14T01:13:53Z","url":"https://www.twitch.tv/videos/1652172879","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/34a70516bd23ea38b97a_vgbootcamp_54753358719_6420179944//thumb/thumb1652172879-%{width}x%{height}.jpg","viewable":"public","view_count":4,"language":"en","type":"highlight","duration":"16m15s","muted_segments":null},{"id":"1652170053","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Nokcha \u0026 Phoenix Vs. Ludo \u0026 Homika - SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T01:10:21Z","published_at":"2022-11-14T01:10:21Z","url":"https://www.twitch.tv/videos/1652170053","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/08514f7270c034304695_vgbootcamp_48605174414_4740452791//thumb/thumb1652170053-%{width}x%{height}.jpg","viewable":"public","view_count":1,"language":"en","type":"highlight","duration":"14m6s","muted_segments":null},{"id":"1652169373","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Mr.R \u0026 Sisqui Vs. Glutonny \u0026 Mika - SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T01:09:32Z","published_at":"2022-11-14T01:09:32Z","url":"https://www.twitch.tv/videos/1652169373","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/d74ecadac8c6e050b943_vgbootcamp_41287859922_8367855773//thumb/thumb1652169373-%{width}x%{height}.jpg","viewable":"public","view_count":5,"language":"en","type":"highlight","duration":"28m33s","muted_segments":null},{"id":"1652168575","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Nokcha \u0026 Phoenix Vs. Chag \u0026 Jake - SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T01:08:33Z","published_at":"2022-11-14T01:08:33Z","url":"https://www.twitch.tv/videos/1652168575","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/8bd628b13849d5fd5d70_vgbootcamp_77587606179_2601147160//thumb/thumb1652168575-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"11m41s","muted_segments":null},{"id":"1652167498","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Mr.R \u0026 Sisqui Vs. Leon \u0026 Oryon - SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T01:07:12Z","published_at":"2022-11-14T01:07:12Z","url":"https://www.twitch.tv/videos/1652167498","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/d2546c23147c59d668a1_vgbootcamp_37690709667_6248757463//thumb/thumb1652167498-%{width}x%{height}.jpg","viewable":"public","view_count":3,"language":"en","type":"highlight","duration":"21m33s","muted_segments":null},{"id":"1652166914","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Ludo \u0026 Homika Vs. Winder \u0026 Kingël - SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T01:06:29Z","published_at":"2022-11-14T01:06:29Z","url":"https://www.twitch.tv/videos/1652166914","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/318b1fb5e919eb18567d_vgbootcamp_40764319180_9478864795//thumb/thumb1652166914-%{width}x%{height}.jpg","viewable":"public","view_count":1,"language":"en","type":"highlight","duration":"14m57s","muted_segments":null},{"id":"1652166177","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Glutonny \u0026 Mika Vs. M.Pop0 \u0026 moufi - SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T01:05:36Z","published_at":"2022-11-14T01:05:36Z","url":"https://www.twitch.tv/videos/1652166177","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/7cb34238fd12a8e85fd1_vgbootcamp_60152693179_8717515049//thumb/thumb1652166177-%{width}x%{height}.jpg","viewable":"public","view_count":0,"language":"en","type":"highlight","duration":"20m29s","muted_segments":null},{"id":"1652141044","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 GRAND FINALS - Tea (Pac-Man, Kazuya) Vs. Glutonny (Wario) SSBU Ultimate
+        Tournament","description":"","created_at":"2022-11-14T00:33:49Z","published_at":"2022-11-14T00:33:49Z","url":"https://www.twitch.tv/videos/1652141044","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/fc25f2234e6610a6516c_vgbootcamp_42072080536_5814425391//thumb/thumb1652141044-%{width}x%{height}.jpg","viewable":"public","view_count":32,"language":"en","type":"highlight","duration":"28m51s","muted_segments":null},{"id":"1652140196","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 Losers Finals - HIKARU (Donkey Kong, Mii Brawler) Vs. Glutonny (Wario)
+        SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T00:32:39Z","published_at":"2022-11-14T00:32:39Z","url":"https://www.twitch.tv/videos/1652140196","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/202dd985aa9518774920_vgbootcamp_30149799601_7062069460//thumb/thumb1652140196-%{width}x%{height}.jpg","viewable":"public","view_count":11,"language":"en","type":"highlight","duration":"22m49s","muted_segments":null},{"id":"1652139308","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 Losers Semis - Bloom4Eva (Bayonetta, Joker) Vs. Glutonny (Wario) SSBU
+        Ultimate Tournament","description":"","created_at":"2022-11-14T00:31:30Z","published_at":"2022-11-14T00:31:30Z","url":"https://www.twitch.tv/videos/1652139308","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/5e1283b7fd3705484533_vgbootcamp_85506191098_9876468065//thumb/thumb1652139308-%{width}x%{height}.jpg","viewable":"public","view_count":5,"language":"en","type":"highlight","duration":"24m11s","muted_segments":null},{"id":"1652138072","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 Winners Finals - Tea (Pac-Man, Kazuya) Vs. HIKARU (Donkey Kong) SSBU
+        Ultimate Tournament","description":"","created_at":"2022-11-14T00:30:01Z","published_at":"2022-11-14T00:30:01Z","url":"https://www.twitch.tv/videos/1652138072","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/ead52cb993a279e28931_vgbootcamp_68655247113_5454486817//thumb/thumb1652138072-%{width}x%{height}.jpg","viewable":"public","view_count":8,"language":"en","type":"highlight","duration":"20m28s","muted_segments":null},{"id":"1652135041","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Sisqui (Samus, Dark Samus) Vs. Glutonny (Wario) SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T00:26:01Z","published_at":"2022-11-14T00:26:01Z","url":"https://www.twitch.tv/videos/1652135041","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/b41c06df06e8a7e4c9a5_vgbootcamp_46072260765_2499581630//thumb/thumb1652135041-%{width}x%{height}.jpg","viewable":"public","view_count":4,"language":"en","type":"highlight","duration":"18m37s","muted_segments":null},{"id":"1652128926","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Bloom4Eva (Bayonetta) Vs. Jake (Steve) SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T00:17:38Z","published_at":"2022-11-14T00:17:38Z","url":"https://www.twitch.tv/videos/1652128926","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/e9e249997fc135805aca_vgbootcamp_56829415148_6610841949//thumb/thumb1652128926-%{width}x%{height}.jpg","viewable":"public","view_count":4,"language":"en","type":"highlight","duration":"14m19s","muted_segments":null},{"id":"1652128404","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Tea (Kazuya) Vs. Sisqui (Samus, Snake) SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T00:16:50Z","published_at":"2022-11-14T00:16:50Z","url":"https://www.twitch.tv/videos/1652128404","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/da455286588205c8900f_vgbootcamp_28058019470_9893695910//thumb/thumb1652128404-%{width}x%{height}.jpg","viewable":"public","view_count":6,"language":"en","type":"highlight","duration":"12m30s","muted_segments":null},{"id":"1652125043","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Bloom4Eva (Bayonetta) Vs. HIKARU (Donkey Kong) SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T00:12:25Z","published_at":"2022-11-14T00:12:25Z","url":"https://www.twitch.tv/videos/1652125043","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/957cb577f3be9739f645_vgbootcamp_58872009973_3383284834//thumb/thumb1652125043-%{width}x%{height}.jpg","viewable":"public","view_count":10,"language":"en","type":"highlight","duration":"21m19s","muted_segments":null},{"id":"1652124051","stream_id":"1","user_id":"9846758","user_login":"vgbootcamp","user_name":"VGBootCamp","title":"UFA
+        2022 - Space (Pyra Mythra) Vs. Glutonny (Wario) SSBU Ultimate Tournament","description":"","created_at":"2022-11-14T00:11:04Z","published_at":"2022-11-14T00:11:04Z","url":"https://www.twitch.tv/videos/1652124051","thumbnail_url":"https://static-cdn.jtvnw.net/cf_vods/dgeft87wbj63p/9ef9bcd4105962740c2c_vgbootcamp_58610884526_4145420157//thumb/thumb1652124051-%{width}x%{height}.jpg","viewable":"public","view_count":3,"language":"en","type":"highlight","duration":"14m16s","muted_segments":null}],"pagination":{"cursor":"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MjB9fQ"}}'
+  recorded_at: Tue, 15 Nov 2022 17:30:28 GMT
+recorded_with: VCR 6.1.0

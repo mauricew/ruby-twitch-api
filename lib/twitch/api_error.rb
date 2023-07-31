@@ -12,7 +12,7 @@ module Twitch
       @status_code = status_code
       @body = body
 
-      super "The server returned error #{status_code}"
+      super self.body['message']
     end
   end
 end
