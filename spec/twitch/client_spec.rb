@@ -341,6 +341,56 @@ RSpec.describe Twitch::Client, :vcr do
     end
   end
 
+  describe '#search_channels' do
+    subject(:request) { client.search_channels(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "query"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "query"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { query: 'angel of death' } }
+
+      describe 'data' do
+        subject { super().data }
+
+        let(:expected_attributes) do
+          {
+            id: a_string_matching(/^\d+$/),
+            broadcaster_login: a_string_matching(/^\w{3,}$/),
+            display_name: an_instance_of(String),
+            broadcaster_language: a_string_matching(/^([a-z]{2}|other)$/),
+            game_id: a_string_matching(/^\d+$/),
+            game_name: an_instance_of(String),
+            title: an_instance_of(String)
+          }
+        end
+
+        it { is_expected.to include(an_object_having_attributes(expected_attributes)) }
+      end
+    end
+  end
+
   describe '#modify_channel' do
     subject(:request) do
       client.modify_channel(

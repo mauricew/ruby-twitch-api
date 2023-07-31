@@ -87,6 +87,11 @@ module Twitch
       initialize_response Channel, get('channels', options)
     end
 
+    ## https://dev.twitch.tv/docs/api/reference/#search-channels
+    def search_channels(options = {})
+      initialize_response Channel, get('search/channels', options)
+    end
+
     ## https://dev.twitch.tv/docs/api/reference#modify-channel-information
     def modify_channel(options = {})
       response = patch('channels', options)
