@@ -418,4 +418,70 @@ RSpec.describe Twitch::Client, :vcr do
       end
     end
   end
+
+  describe '#get_moderators' do
+    subject(:request) { client.get_moderators(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'The broadcaster_id query parameter is required.'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'The broadcaster_id query parameter is required.'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      context 'when broadcaster ID is foreign channel' do
+        ## LIRIK
+        let(:broadcaster_id) { '23161357' }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, <<~MESSAGE.chomp
+              The ID in broadcaster_id must match the user ID found in the request's OAuth token.
+            MESSAGE
+          )
+        end
+      end
+
+      context 'when broadcaster ID is your own' do
+        ## `StreamAssistantBot`
+        let(:broadcaster_id) { '277558749' }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_elements) do
+            [
+              have_attributes(
+                user_id: '117474239',
+                user_login: 'alexwayfer',
+                user_name: 'AlexWayfer'
+              )
+            ]
+          end
+
+          it { is_expected.to match_array(expected_elements) }
+        end
+      end
+    end
+  end
 end
