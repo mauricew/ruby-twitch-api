@@ -6,7 +6,9 @@ module Twitch
   class Moderator
     # User ID of the moderator.
     attr_reader :user_id
-    # User name of the moderator.
+    # The user’s login name.
+    attr_reader :user_login
+    # The user’s display name.
     attr_reader :user_name
 
     def initialize(attributes = {})
