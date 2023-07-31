@@ -87,7 +87,7 @@ module Twitch
       initialize_response Channel, get('channels', options)
     end
 
-    def search(options = {})
+    def search_channels(options = {})
       initialize_response User, get('search/channels', options)
     end
 
