@@ -1,0 +1,122 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Mon, 31 Jul 2023 13:33:56 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7b844-043230b026ffa84e1775530f
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 13:33:56 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 31 Jul 2023 13:33:57 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7b845-7e4576416917955562c1f8ae
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5126808,"token_type":"bearer"}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 13:33:57 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/search/channels
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '85'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Mon, 31 Jul 2023 13:33:57 GMT
+      x-served-by:
+      - cache-bfi-krnt7300039-BFI, cache-lcy-eglc8600052-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1690810438.590641,VS0,VS0,VE145
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Bad Request","status":400,"message":"Missing required parameter
+        \"query\""}'
+  recorded_at: Mon, 31 Jul 2023 13:33:57 GMT
+recorded_with: VCR 6.2.0

@@ -1,0 +1,168 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Mon, 31 Jul 2023 13:34:01 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7b849-4331334c4f2388530c456538
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 13:34:01 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 31 Jul 2023 13:34:02 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7b84a-146706577ca144171d24e1ad
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":4945083,"token_type":"bearer"}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 13:34:02 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/search/channels?query=angel+of+death
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      content-encoding:
+      - gzip
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1690810443'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Mon, 31 Jul 2023 13:34:02 GMT
+      x-served-by:
+      - cache-bfi-krnt7300081-BFI, cache-lcy-eglc8600065-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1690810443.647118,VS0,VS0,VE283
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+      transfer-encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "{\"data\":[{\"broadcaster_language\":\"ru\",\"broadcaster_login\":\"angelofdeath666x\",\"display_name\":\"angelofdeath666x\",\"game_id\":\"32399\",\"game_name\":\"Counter-Strike:
+        Global Offensive\",\"id\":\"44443153\",\"is_live\":false,\"tag_ids\":[],\"tags\":[],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/15972b36-ade1-46e7-a414-abf4716c7960-profile_image-300x300.png\",\"title\":\"Возвращаю
+        Честь и открываю кейсы. Пора подниматься со дна. 10 сек задержка\",\"started_at\":\"\"},{\"broadcaster_language\":\"de\",\"broadcaster_login\":\"angelofdeathwhv\",\"display_name\":\"angelofdeathWHV\",\"game_id\":\"515024\",\"game_name\":\"Diablo
+        IV\",\"id\":\"63639499\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"Deutsch\",\"Nospoiler\",\"NoBackseating\",\"einfachwir\",\"Xbox\",\"XboxSeriesX\",\"AchievementHunting\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/ad7c7c08-794e-4f08-a206-b754b8def386-profile_image-300x300.png\",\"title\":\"[DE]
+        Diablo IV / Way to Level 100 / Wer mag, darf sich uns gerne anschließen !battletag
+        \ +Diablo Kanalpunkte Aktion\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath032\",\"display_name\":\"angelofdeath032\",\"game_id\":\"14333696\",\"game_name\":\"Goose
+        Goose Duck\",\"id\":\"87603003\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"English\",\"minecraft\",\"CommunityGames\",\"valorant\",\"fps\",\"Action\",\"Adventure\",\"Fortnite\",\"18PlusONLY\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/905f32f7-d564-44a1-b18e-71c2c34aa9c0-profile_image-300x300.png\",\"title\":\"the
+        unluckiest goose out here(18+)\U0001F977//deep talks\U0001F5E3️??JOIN UP\U0001FAF5//new
+        scary game at FOLLOW GOAL-\\u003e335\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath10x\",\"display_name\":\"AngelOfDeath10x\",\"game_id\":\"489635\",\"game_name\":\"ARK:
+        Survival Evolved\",\"id\":\"173276461\",\"is_live\":false,\"tag_ids\":[],\"tags\":[],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/a8511cb5-95d0-4d5c-bf16-c6a7dd61dc52-profile_image-300x300.png\",\"title\":\"Collecting
+        allll the eggs\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath0225\",\"display_name\":\"angelofdeath0225\",\"game_id\":\"263490\",\"game_name\":\"Rust\",\"id\":\"180137111\",\"is_live\":false,\"tag_ids\":[],\"tags\":[],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/ee3c8351-6a24-48e3-b71c-53d6d9f99af6-profile_image-300x300.png\",\"title\":\"Admin
+        Watching a War on Dark Tide Faction Wars! \\nMB94 Wants to fight the Heli!
+        he has agreed to despawn the loot! \",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeathe\",\"display_name\":\"AngelofDeathe\",\"game_id\":\"460696\",\"game_name\":\"Anthem\",\"id\":\"180791250\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/c54e9080-840f-4091-8167-9fba8972eeb6-profile_image-300x300.png\",\"title\":\"And
+        here we go again, once more into the breach my friends ANTHEM HERE WE GO!\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath290\",\"display_name\":\"AngelofDeath290\",\"game_id\":\"460508\",\"game_name\":\"Killing
+        Floor 2\",\"id\":\"230134617\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"Fun\",\"with\",\"my\",\"friends\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/aee57f4f-caf5-405e-af79-c1684a6e5375-profile_image-300x300.png\",\"title\":\"Scary
+        nights!\",\"started_at\":\"\"},{\"broadcaster_language\":\"es\",\"broadcaster_login\":\"angel_of_death_oficial\",\"display_name\":\"angel_of_death_oficial\",\"game_id\":\"24193\",\"game_name\":\"Left
+        4 Dead 2\",\"id\":\"412785087\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"Español\",\"Pendejoxd\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/8c83ce60-9125-4da2-93a9-441baebd7ca8-profile_image-300x300.png\",\"title\":\"me
+        desperte tarde   ( si quieren sacar un clip !clip)\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath_xo\",\"display_name\":\"AngelofDeath_xo\",\"game_id\":\"1678052513\",\"game_name\":\"Call
+        of Duty: Modern Warfare II\",\"id\":\"428736096\",\"is_live\":false,\"tag_ids\":[],\"tags\":[],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/926de473-74d7-4bbe-bae3-2f315a871d0b-profile_image-300x300.png\",\"title\":\"Test
+        stream.\",\"started_at\":\"\"},{\"broadcaster_language\":\"ja\",\"broadcaster_login\":\"angelofdeathplaysgb\",\"display_name\":\"angelofdeathplaysgb\",\"game_id\":\"29595\",\"game_name\":\"Dota
+        2\",\"id\":\"481036011\",\"is_live\":false,\"tag_ids\":[],\"tags\":[],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/user-default-pictures-uv/215b7342-def9-11e9-9a66-784f43822e80-profile_image-300x300.png\",\"title\":\"1500-6500
+        boost ark warden\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angel_ofdeath_az\",\"display_name\":\"angel_ofdeath_az\",\"game_id\":\"369380\",\"game_name\":\"Dying
+        Light\",\"id\":\"486812981\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/5a44e9a5-69ae-4ceb-aeae-4eafbcbe50fc-profile_image-300x300.png\",\"title\":\"hey
+        hey, come join us and chill!\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeathmds\",\"display_name\":\"angelofdeathmds\",\"game_id\":\"1995842324\",\"game_name\":\"Remnant
+        II\",\"id\":\"555349847\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/3231190d-1b7a-4895-b3fb-57c8efc900a7-profile_image-300x300.png\",\"title\":\"Fort
+        with the boisss\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath400\",\"display_name\":\"AngelofDeath400\",\"game_id\":\"1678052513\",\"game_name\":\"Call
+        of Duty: Modern Warfare II\",\"id\":\"563443647\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"Cali\",\"NativeAmerican\",\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/b1782cc9-1fa6-4023-bb86-1017d5b721a7-profile_image-300x300.png\",\"title\":\"come
+        say hey and love yall \U0001F618\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath111\",\"display_name\":\"angelofdeath111\",\"game_id\":\"1678052513\",\"game_name\":\"Call
+        of Duty: Modern Warfare II\",\"id\":\"566771013\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/50d43800-977c-40f1-a191-1391bf7eaf20-profile_image-300x300.png\",\"title\":\"MODERN
+        WARFARE 2\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelof_death17\",\"display_name\":\"angelof_death17\",\"game_id\":\"518222\",\"game_name\":\"Crash
+        Bandicoot 4: It's About Time\",\"id\":\"567859554\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"Anime\",\"Filipino\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/cfb7d61b-5c78-4797-80f3-4749d1623e70-profile_image-300x300.png\",\"title\":\"Let's
+        grind!!!\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeatha777\",\"display_name\":\"AngelOfDeathA777\",\"game_id\":\"490377\",\"game_name\":\"Sea
+        of Thieves\",\"id\":\"605339808\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"ADHD\",\"Chil\",\"Chatting\",\"chillinwithfriends\",\"pvp\",\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/85da2305-697e-42f0-8ae1-c5e84212f6db-profile_image-300x300.png\",\"title\":\"Come
+        chill with me!\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angel_of_death82\",\"display_name\":\"angel_of_death82\",\"game_id\":\"1614555304\",\"game_name\":\"Call
+        Of Duty: Modern Warfare\",\"id\":\"638111103\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"Multiplayer\",\"Squads\",\"SurvivalMode\",\"British\",\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/c7bc6d94-5578-479f-b491-74ba59db79bc-profile_image-300x300.png\",\"title\":\"CHASING
+        DA DUBS\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angelofdeath5224\",\"display_name\":\"Angelofdeath5224\",\"game_id\":\"491487\",\"game_name\":\"Dead
+        by Daylight\",\"id\":\"671104023\",\"is_live\":false,\"tag_ids\":[],\"tags\":[\"SportTalk\",\"FantasySports\",\"English\"],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/964393e3-1140-414c-be22-b5f30b5ba100-profile_image-300x300.png\",\"title\":\"grandpa
+        jj tell us a story!discord  #death brigade\",\"started_at\":\"\"},{\"broadcaster_language\":\"it\",\"broadcaster_login\":\"angelofdeath_v\",\"display_name\":\"AngelOfDeath_V\",\"game_id\":\"0\",\"game_name\":\"\",\"id\":\"686408426\",\"is_live\":false,\"tag_ids\":[],\"tags\":[],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/726cfab7-a6cd-47a3-b9e2-eba53d194ed0-profile_image-300x300.png\",\"title\":\"Server
+        Metin 2\",\"started_at\":\"\"},{\"broadcaster_language\":\"en\",\"broadcaster_login\":\"angel_of_death110690\",\"display_name\":\"angel_of_death110690\",\"game_id\":\"33214\",\"game_name\":\"Fortnite\",\"id\":\"730588969\",\"is_live\":false,\"tag_ids\":[],\"tags\":[],\"thumbnail_url\":\"https://static-cdn.jtvnw.net/jtv_user_pictures/38c41df7-68cf-43ad-bfe6-7d191d54b419-profile_image-300x300.jpeg\",\"title\":\"Im
+        back with some Fortnite\",\"started_at\":\"\"}],\"pagination\":{\"cursor\":\"MjA=\"}}"
+  recorded_at: Mon, 31 Jul 2023 13:34:02 GMT
+recorded_with: VCR 6.2.0
