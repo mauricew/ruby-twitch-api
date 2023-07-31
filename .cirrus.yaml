@@ -10,6 +10,15 @@ bundle_cache: &bundle_cache
     - gem install bundler
     - bundle update
 
+env:
+  ## To suppress flood of warnings:
+  ## https://github.com/cirruslabs/cirrus-ci-docs/issues/814
+  ## https://github.com/rubygems/rubygems/issues/4466#issuecomment-818688569
+  ## Global for:
+  ## 1. different tasks (rubocop, test, etc.);
+  ## 2. avoiding overriding `env` in specific cases like macOS.
+  TMPDIR: $CIRRUS_WORKING_DIR
+
 remark_task:
   container:
     image: node
@@ -48,22 +57,27 @@ rubocop_task:
     )
 
 rspec_task:
-  depends_on:
-    - remark
-    - rubocop
-
   container:
     matrix:
-      - image: ruby:2.5
-      - image: ruby:2.6
       - image: ruby:2.7
       - image: ruby:3.0
+      - image: ruby:3.1
+      - image: ruby:3.2
+
   <<: *bundle_cache
 
-  environment:
-    CODECOV_TOKEN: ENCRYPTED[041d9ca090dbea8e126b8e29c2823661f2e5c0a1f415f15619793c26c9c20c93b4a8e7df479697a7edef94ca5fa509f5]
-
   test_script: bundle exec rspec --format=json --out=rspec.json
+
+  codecov_uploader_cache:
+    folder: codecov
+    fingerprint_script:
+      - curl --no-progress-meter https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
+    populate_script:
+      - mkdir -p codecov
+      - curl https://uploader.codecov.io/latest/linux/codecov -o codecov/uploader
+      - chmod +x codecov/uploader
+
+  codecov_script: codecov/uploader
 
   always:
     rspec_artifacts:

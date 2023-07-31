@@ -1,0 +1,128 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:29:14 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cc6a-2dd89b0e0fcfc2bf02e5f77f
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:29:14 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Tue, 15 Nov 2022 17:29:15 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '93'
+      connection:
+      - keep-alive
+      server:
+      - nginx/1.22.0
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-6373cc6b-2a5053267b2042cb506cadff
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":5365399,"token_type":"bearer"}
+
+        '
+  recorded_at: Tue, 15 Nov 2022 17:29:15 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/games?name%5B%5D=Heroes+of+the+Storm&name%5B%5D=Super+Mario+Odyssey
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '276'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1668533357'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Tue, 15 Nov 2022 17:29:16 GMT
+      x-served-by:
+      - cache-bfi-krnt7300064-BFI, cache-hhn11561-HHN
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1668533356.475090,VS0,VS0,VE178
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"32959","name":"Heroes of the Storm","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/32959_IGDB-{width}x{height}.jpg"},{"id":"493997","name":"Super
+        Mario Odyssey","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/493997_IGDB-{width}x{height}.jpg"}]}'
+  recorded_at: Tue, 15 Nov 2022 17:29:16 GMT
+recorded_with: VCR 6.1.0

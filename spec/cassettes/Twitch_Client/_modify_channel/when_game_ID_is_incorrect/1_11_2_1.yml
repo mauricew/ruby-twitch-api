@@ -1,0 +1,130 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      date:
+      - Mon, 31 Jul 2023 13:42:39 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '48'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7ba4f-5a6700a670a3e7b57d600d32
+    body:
+      encoding: UTF-8
+      string: '{"status":401,"message":"invalid access token"}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 13:42:39 GMT
+- request:
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","grant_type":"refresh_token","refresh_token":"<NEW_REFRESH_TOKEN>"}'
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 31 Jul 2023 13:42:40 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '677'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7ba50-4c5059e56b873a275ee6602d
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":14958,"refresh_token":"<NEW_REFRESH_TOKEN>","scope":["bits:read","channel:edit:commercial","channel:manage:broadcast","channel:manage:polls","channel:manage:predictions","channel:moderate","channel:read:polls","channel:read:predictions","chat:edit","chat:read","clips:edit","moderation:read","moderator:manage:announcements","moderator:manage:banned_users","moderator:manage:chat_messages","moderator:manage:chat_settings","moderator:read:chat_settings","moderator:read:chatters","user:edit","user:manage:blocked_users","user:read:broadcast","user:read:email"],"token_type":"bearer"}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 13:42:40 GMT
+- request:
+    method: patch
+    uri: https://api.twitch.tv/helix/channels
+    body:
+      encoding: UTF-8
+      string: '{"broadcaster_id":"277558749","game_id":"abc","title":"Test"}'
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '80'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1690810962'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Mon, 31 Jul 2023 13:42:41 GMT
+      x-served-by:
+      - cache-bfi-krnt7300020-BFI, cache-lcy-eglc8600070-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1690810961.109400,VS0,VS0,VE156
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Bad Request","status":400,"message":"The ID in game_id is
+        not valid."}'
+  recorded_at: Mon, 31 Jul 2023 13:42:41 GMT
+recorded_with: VCR 6.2.0

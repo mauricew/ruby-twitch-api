@@ -5,8 +5,6 @@ require 'time'
 module Twitch
   # A captured broadcast or portion of a broadcast.
   class Video
-    DATE_ATTRIBUTES = %i[created_at published_at].freeze
-
     # ID of the video.
     attr_reader :id
     # Title of the video.
@@ -38,11 +36,7 @@ module Twitch
 
     def initialize(attributes = {})
       attributes.each do |key, value|
-        if DATE_ATTRIBUTES.include?(key.to_sym)
-          instance_variable_set("@#{key}", Time.parse(value))
-        else
-          instance_variable_set("@#{key}", value)
-        end
+        instance_variable_set("@#{key}", value)
       end
     end
   end
