@@ -11,6 +11,7 @@ require_relative 'api_error'
 require_relative 'bits_leader'
 require_relative 'channel'
 require_relative 'clip'
+require_relative 'custom_reward'
 require_relative 'entitlement_grant_url'
 require_relative 'extension'
 require_relative 'extensions_by_types'
@@ -25,6 +26,7 @@ require_relative 'subscription'
 require_relative 'user'
 require_relative 'user_ban'
 require_relative 'user_follow'
+require_relative 'redemption'
 require_relative 'video'
 
 module Twitch
@@ -96,6 +98,9 @@ module Twitch
 
     require_relative 'client/users'
     include Users
+
+    require_relative 'client/custom_rewards'
+    include CustomRewards
 
     ## https://dev.twitch.tv/docs/api/reference#get-channel-information
     def get_channels(options = {})
