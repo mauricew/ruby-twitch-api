@@ -77,11 +77,12 @@ module Twitch
     # See the `global_cooldown_setting` field.
     attr_reader :cooldown_expires_at
 
+    IMAGE_ATTRS = %w[image default_image].freeze
+    private_constant :IMAGE_ATTRS
+
     def initialize(attributes = {})
       attributes.each do |key, value|
-        if %w[image default_image].include?(key) && !value.nil?
-          value = CustomRewardImage.new(value)
-        end
+        value = CustomRewardImage.new(value) if IMAGE_ATTRS.include?(key) && !value.nil?
 
         instance_variable_set "@#{key}", value
       end
