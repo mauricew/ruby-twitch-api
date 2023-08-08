@@ -5,39 +5,27 @@ module Twitch
     ## API method for rewards
     module Rewards
       def create_custom_reward(options = {})
-        require_access_token do
-          initialize_response Reward, post('channel_points/custom_rewards', options)
-        end
+        initialize_response Reward, post('channel_points/custom_rewards', options)
       end
 
       def get_custom_reward(options = {})
-        require_access_token do
-          initialize_response Reward, get('channel_points/custom_rewards', options)
-        end
+        initialize_response Reward, get('channel_points/custom_rewards', options)
       end
 
       def delete_custom_reward(options = {})
-        require_access_token do
-          initialize_response Reward, delete('channel_points/custom_rewards', options)
-        end
+        initialize_response Reward, delete('channel_points/custom_rewards', options)
       end
 
       def get_custom_reward_redemption(options = {})
-        require_access_token do
-          initialize_response Reward, get('channel_points/custom_rewards/redemptions', options)
-        end
+        initialize_response Reward, get('channel_points/custom_rewards/redemptions', options)
       end
 
       def update_custom_reward(options = {})
-        require_access_token do
-          initialize_response Reward, patch('channel_points/custom_rewards', options)
-        end
+        initialize_response Reward, patch('channel_points/custom_rewards', options)
       end
 
       def update_redemption_status(options = {})
-        require_access_token do
-          initialize_response Reward, patch('channel_points/custom_rewards/redemptions', options)
-        end
+        initialize_response Reward, patch('channel_points/custom_rewards/redemptions', options)
       end
     end
   end
