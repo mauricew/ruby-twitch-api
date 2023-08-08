@@ -2,7 +2,7 @@
 
 module Twitch
   # Data object for Twitch users
-  class Reward
+  class CustomReward
     # ID of the broadcaster.
     attr_reader :broadcaster_id
     # Unformatted (lowercase) username of thebroadcaster.
@@ -13,7 +13,7 @@ module Twitch
     attr_reader :id
     # Title of the reward
     attr_reader :title
-    
+
     attr_reader :prompt, :cost, :image, :default_image, :is_enabled, :is_user_input_required,
     :max_per_stream_setting, :max_per_user_setting, :global_cooldown_setting, :is_paused,
     :is_in_stock, :should_redemptions_skip_request_queue, :redemptions_redeemed_current_stream,
