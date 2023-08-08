@@ -1,0 +1,133 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Tue, 08 Aug 2023 10:09:24 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '82'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64d21454-70bf2ae97699d5c91ef3c6de
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","scopes":null,"expires_in":4687640}
+
+        '
+  recorded_at: Tue, 08 Aug 2023 10:09:24 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/channel_points/custom_rewards?broadcaster_id=117474239
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '74'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Tue, 08 Aug 2023 10:09:25 GMT
+      x-served-by:
+      - cache-bfi-krnt7300086-BFI, cache-lcy-eglc8600039-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1691489365.990949,VS0,VS0,VE149
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Unauthorized","status":401,"message":"Missing User OAUTH
+        Token"}'
+  recorded_at: Tue, 08 Aug 2023 10:09:25 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/channel_points/custom_rewards?broadcaster_id=117474239
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '74'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Tue, 08 Aug 2023 10:09:25 GMT
+      x-served-by:
+      - cache-bfi-krnt7300086-BFI, cache-lcy-eglc8600026-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1691489365.412215,VS0,VS0,VE147
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Unauthorized","status":401,"message":"Missing User OAUTH
+        Token"}'
+  recorded_at: Tue, 08 Aug 2023 10:09:25 GMT
+recorded_with: VCR 6.2.0

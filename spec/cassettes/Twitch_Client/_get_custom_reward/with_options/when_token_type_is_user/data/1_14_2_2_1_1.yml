@@ -1,0 +1,104 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Tue, 08 Aug 2023 10:09:26 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '656'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64d21456-1b6da16d77a678631a5d6ac2
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"<TOKEN_USER_LOGIN>","scopes":["bits:read","channel:edit:commercial","channel:manage:broadcast","channel:manage:polls","channel:manage:predictions","channel:manage:redemptions","channel:moderate","channel:read:polls","channel:read:predictions","chat:edit","chat:read","clips:edit","moderation:read","moderator:manage:announcements","moderator:manage:banned_users","moderator:manage:chat_messages","moderator:manage:chat_settings","moderator:read:chat_settings","moderator:read:chatters","user:edit","user:manage:blocked_users","user:read:broadcast","user:read:email"],"user_id":"<TOKEN_USER_ID>","expires_in":12386}
+
+        '
+  recorded_at: Tue, 08 Aug 2023 10:09:26 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/channel_points/custom_rewards?broadcaster_id=117474239
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '1569'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      content-encoding:
+      - gzip
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1691489367'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Tue, 08 Aug 2023 10:09:26 GMT
+      x-served-by:
+      - cache-bfi-krnt7300086-BFI, cache-lcy-eglc8600041-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1691489367.790101,VS0,VS0,VE186
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"44a37744-66e0-4d0f-ab26-be53af19dc02","image":null,"background_color":"#FF38DB","is_enabled":false,"cost":1,"title":"test","prompt":"","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":false,"max_per_stream":0},"max_per_user_per_stream_setting":{"is_enabled":false,"max_per_user_per_stream":0},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":true,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/default-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/default-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/default-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"4a239c39-7b44-4835-85d8-b690e4f0b498","image":null,"background_color":"#1D227F","is_enabled":true,"cost":100000,"title":"Add
+        a Command","prompt":"Add a command of your choice","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":true,"max_per_stream":5},"max_per_user_per_stream_setting":{"is_enabled":true,"max_per_user_per_stream":1},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":false,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/gear-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/gear-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/gear-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"4eb8ee0f-2c05-4848-9ed4-d369b3ff5986","image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/4eb8ee0f-2c05-4848-9ed4-d369b3ff5986/b5a68f18-cd9f-462e-9f04-cce17de1ba8b/custom-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/4eb8ee0f-2c05-4848-9ed4-d369b3ff5986/b5a68f18-cd9f-462e-9f04-cce17de1ba8b/custom-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/4eb8ee0f-2c05-4848-9ed4-d369b3ff5986/b5a68f18-cd9f-462e-9f04-cce17de1ba8b/custom-4.png"},"background_color":"#019B00","is_enabled":true,"cost":100,"title":"Posture
+        Check!","prompt":"I straighten up - thanks!","is_user_input_required":false,"max_per_stream_setting":{"is_enabled":false,"max_per_stream":0},"max_per_user_per_stream_setting":{"is_enabled":false,"max_per_user_per_stream":0},"global_cooldown_setting":{"is_enabled":true,"global_cooldown_seconds":300},"is_paused":false,"is_in_stock":true,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/clock-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/clock-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/clock-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"55583ec5-2e94-45dc-b347-1bdaa775c886","image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/55583ec5-2e94-45dc-b347-1bdaa775c886/55777358-332d-47cf-8024-91be13e50ee4/custom-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/55583ec5-2e94-45dc-b347-1bdaa775c886/55777358-332d-47cf-8024-91be13e50ee4/custom-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/55583ec5-2e94-45dc-b347-1bdaa775c886/55777358-332d-47cf-8024-91be13e50ee4/custom-4.png"},"background_color":"#FFF500","is_enabled":true,"cost":3000,"title":"Review
+        something visually","prompt":"Review something (site, design, etc.) visually
+        no longer than 5 minutes.","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":true,"max_per_stream":3},"max_per_user_per_stream_setting":{"is_enabled":true,"max_per_user_per_stream":1},"global_cooldown_setting":{"is_enabled":true,"global_cooldown_seconds":1200},"is_paused":false,"is_in_stock":false,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/default-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/default-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/default-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"66394a94-85e5-4699-93d1-badd9e5c7590","image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/66394a94-85e5-4699-93d1-badd9e5c7590/c479e20c-1d3a-4a74-bccc-066b99c91a80/custom-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/66394a94-85e5-4699-93d1-badd9e5c7590/c479e20c-1d3a-4a74-bccc-066b99c91a80/custom-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/66394a94-85e5-4699-93d1-badd9e5c7590/c479e20c-1d3a-4a74-bccc-066b99c91a80/custom-4.png"},"background_color":"#8B59DC","is_enabled":true,"cost":50000,"title":"Request
+        a game","prompt":"Request a game what you want to see on stream","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":false,"max_per_stream":0},"max_per_user_per_stream_setting":{"is_enabled":false,"max_per_user_per_stream":0},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":true,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/default-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/default-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/default-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"6dd72cc7-fd27-4f8b-aa48-310b01412836","image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/6dd72cc7-fd27-4f8b-aa48-310b01412836/565c95fb-c5b8-477a-bbd5-dfd2b797ceba/custom-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/6dd72cc7-fd27-4f8b-aa48-310b01412836/565c95fb-c5b8-477a-bbd5-dfd2b797ceba/custom-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/6dd72cc7-fd27-4f8b-aa48-310b01412836/565c95fb-c5b8-477a-bbd5-dfd2b797ceba/custom-4.png"},"background_color":"#00A6FF","is_enabled":true,"cost":1000,"title":"Request
+        a song","prompt":"Request a song what you want to listen on stream","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":true,"max_per_stream":12},"max_per_user_per_stream_setting":{"is_enabled":true,"max_per_user_per_stream":10},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":false,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/default-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/default-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/default-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"79e331c5-7ee8-4d0a-ba02-2b86698674e7","image":null,"background_color":"#FF55A4","is_enabled":true,"cost":5000,"title":"Guide
+        the Raid","prompt":"Suggest who we raid at the end of the stream","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":true,"max_per_stream":6},"max_per_user_per_stream_setting":{"is_enabled":true,"max_per_user_per_stream":2},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":false,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/flag-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/flag-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/flag-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"bbe87a70-c02a-48a3-ba03-abcc047f2655","image":null,"background_color":"#3962BD","is_enabled":false,"cost":1500,"title":"Ad
+        Time","prompt":"I play an ad","is_user_input_required":false,"max_per_stream_setting":{"is_enabled":false,"max_per_stream":1},"max_per_user_per_stream_setting":{"is_enabled":false,"max_per_user_per_stream":0},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":true,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/money-bag-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/money-bag-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/money-bag-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"c3439bf8-5d58-40ba-9350-ede961e266e4","image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/c3439bf8-5d58-40ba-9350-ede961e266e4/7cb3abb1-bae7-4e21-9caa-aa0d21f2f1ed/custom-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/c3439bf8-5d58-40ba-9350-ede961e266e4/7cb3abb1-bae7-4e21-9caa-aa0d21f2f1ed/custom-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/c3439bf8-5d58-40ba-9350-ede961e266e4/7cb3abb1-bae7-4e21-9caa-aa0d21f2f1ed/custom-4.png"},"background_color":"#23B2A7","is_enabled":false,"cost":2000,"title":"Add
+        7TV emote","prompt":"Add an emote from https://7tv.app/","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":true,"max_per_stream":5},"max_per_user_per_stream_setting":{"is_enabled":true,"max_per_user_per_stream":5},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":false,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/default-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/default-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/default-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"dddf60b5-f84a-4405-98ff-5e5ced82a523","image":null,"background_color":"#000000","is_enabled":false,"cost":500,"title":"Timeout","prompt":"I
+        time you out","is_user_input_required":false,"max_per_stream_setting":{"is_enabled":false,"max_per_stream":1},"max_per_user_per_stream_setting":{"is_enabled":false,"max_per_user_per_stream":0},"global_cooldown_setting":{"is_enabled":false,"global_cooldown_seconds":0},"is_paused":false,"is_in_stock":true,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/clock-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/clock-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/clock-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null},{"broadcaster_name":"AlexWayfer","broadcaster_login":"alexwayfer","broadcaster_id":"117474239","id":"e47b95a8-6bd2-410b-9e8e-d33ff1c75358","image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/e47b95a8-6bd2-410b-9e8e-d33ff1c75358/6eab1108-e024-4820-94e0-4c751a35f7b3/custom-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/e47b95a8-6bd2-410b-9e8e-d33ff1c75358/6eab1108-e024-4820-94e0-4c751a35f7b3/custom-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/117474239/e47b95a8-6bd2-410b-9e8e-d33ff1c75358/6eab1108-e024-4820-94e0-4c751a35f7b3/custom-4.png"},"background_color":"#BE2525","is_enabled":true,"cost":10000,"title":"Code
+        review","prompt":"Review a code no longer than 15 minutes.","is_user_input_required":true,"max_per_stream_setting":{"is_enabled":true,"max_per_stream":6},"max_per_user_per_stream_setting":{"is_enabled":true,"max_per_user_per_stream":2},"global_cooldown_setting":{"is_enabled":true,"global_cooldown_seconds":1200},"is_paused":false,"is_in_stock":false,"default_image":{"url_1x":"https://static-cdn.jtvnw.net/custom-reward-images/default-1.png","url_2x":"https://static-cdn.jtvnw.net/custom-reward-images/default-2.png","url_4x":"https://static-cdn.jtvnw.net/custom-reward-images/default-4.png"},"should_redemptions_skip_request_queue":false,"redemptions_redeemed_current_stream":null,"cooldown_expires_at":null}]}'
+  recorded_at: Tue, 08 Aug 2023 10:09:27 GMT
+recorded_with: VCR 6.2.0

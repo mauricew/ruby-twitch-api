@@ -25,6 +25,12 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 end
 
+RSpec::Matchers.define :a_boolean do
+  match do |value|
+    [true, false].include? value
+  end
+end
+
 # require 'webmock/rspec'
 require 'vcr'
 

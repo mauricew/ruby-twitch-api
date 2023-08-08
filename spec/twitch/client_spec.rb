@@ -37,6 +37,16 @@ RSpec.describe Twitch::Client, :vcr do
   let(:scopes) { [] }
   let(:redirect_uri) { 'http://localhost' }
 
+  let(:uuid_string) do
+    a_string_matching(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)
+  end
+  let(:url_string) do
+    a_string_matching(%r{^https://[\w\-./]+$}i)
+  end
+  let(:hex_color_string) do
+    a_string_matching(/^#[0-9a-f]{6}$/i)
+  end
+
   describe '#get_bits_leaderboard' do
     def make_request
       client.get_bits_leaderboard.body
@@ -570,6 +580,104 @@ RSpec.describe Twitch::Client, :vcr do
           end
 
           it { is_expected.to have_attributes(expected_attributes) }
+        end
+      end
+    end
+  end
+
+  describe '#get_custom_reward' do
+    subject(:request) { client.get_custom_reward(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      ## `AlexWayfer`
+      ## It has to be partner or affiliate.
+      let(:broadcaster_id) { '117474239' }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing User OAUTH Token'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_reward_attributes) do
+            {
+              broadcaster_id: broadcaster_id,
+              broadcaster_login: a_string_matching(/^\w{3,}$/),
+              broadcaster_name: an_instance_of(String),
+              id: uuid_string,
+              title: an_instance_of(String),
+              prompt: an_instance_of(String),
+              cost: an_instance_of(Integer),
+              image: an_object_having_attributes(
+                url_1x: url_string,
+                url_2x: url_string,
+                url_4x: url_string
+              ),
+              default_image: an_object_having_attributes(
+                url_1x: url_string,
+                url_2x: url_string,
+                url_4x: url_string
+              ),
+              background_color: hex_color_string,
+              is_enabled: a_boolean,
+              is_user_input_required: a_boolean,
+              max_per_stream_setting: matching(
+                'is_enabled' => a_boolean,
+                'max_per_stream' => an_instance_of(Integer)
+              ),
+              max_per_user_per_stream_setting: matching(
+                'is_enabled' => a_boolean,
+                'max_per_user_per_stream' => an_instance_of(Integer)
+              ),
+              global_cooldown_setting: matching(
+                'is_enabled' => a_boolean,
+                'global_cooldown_seconds' => an_instance_of(Integer)
+              ),
+              is_paused: a_boolean,
+              is_in_stock: a_boolean,
+              should_redemptions_skip_request_queue: a_boolean,
+              redemptions_redeemed_current_stream: an_instance_of(Integer).or(be_nil),
+              cooldown_expires_at: nil
+            }
+          end
+
+          it { is_expected.to include an_object_having_attributes(expected_reward_attributes) }
         end
       end
     end
