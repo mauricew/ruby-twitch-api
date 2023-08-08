@@ -1,41 +1,41 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: https://id.twitch.tv/oauth2/validate
+    method: post
+    uri: https://id.twitch.tv/oauth2/token
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","client_secret":"<CLIENT_SECRET>","code":null,"grant_type":"client_credentials","redirect_uri":"http://localhost"}'
     headers:
       User-Agent:
-      - Faraday v1.3.0
-      Authorization:
-      - "<AUTHORIZATION_HEADER>"
+      - Faraday v2.7.10
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Thu, 04 Feb 2021 04:08:15 GMT
+      - Mon, 31 Jul 2023 16:19:50 GMT
       content-type:
       - application/json
       content-length:
-      - '215'
+      - '93'
       connection:
       - keep-alive
       server:
-      - nginx/1.14.1
+      - nginx
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-601b732f-25cbae3f7923d9c66f81694b
+      - 1-64c7df25-54b287fb0ff8f42f7a3d8f2f
     body:
       encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["channel:moderate","channel_editor","channel_read","chat:edit","chat:read","user_read"],"user_id":"277558749","expires_in":15432}
+      string: '{"access_token":"<NEW_ACCESS_TOKEN>","expires_in":4803057,"token_type":"bearer"}
 
         '
-  recorded_at: Thu, 04 Feb 2021 04:08:15 GMT
+  recorded_at: Mon, 31 Jul 2023 16:19:50 GMT
 - request:
     method: get
     uri: https://api.twitch.tv/helix/users?id=18587270
@@ -57,39 +57,29 @@ http_interactions:
       connection:
       - keep-alive
       content-length:
-      - '586'
+      - '573'
       content-type:
       - application/json; charset=utf-8
       access-control-allow-origin:
       - "*"
-      cache-control:
-      - no-cache, no-store, must-revalidate, private
-      expires:
-      - '0'
-      pragma:
-      - no-cache
       ratelimit-limit:
       - '800'
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1612411697'
+      - '1690820391'
       timing-allow-origin:
       - https://www.twitch.tv
-      twitch-trace-id:
-      - 3a97030813016d7d774bd1fa4895f6b8
-      x-ctxlog-logid:
-      - 1-601b7330-06965e2955c583c0261320a9
       date:
-      - Thu, 04 Feb 2021 04:08:16 GMT
+      - Mon, 31 Jul 2023 16:19:50 GMT
       x-served-by:
-      - cache-sea4435-SEA, cache-bma1632-BMA
+      - cache-bfi-kbfi7400096-BFI, cache-lcy-eglc8600074-LCY
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1612411696.129269,VS0,VS0,VE176
+      - S1690820391.527769,VS0,VS0,VE165
       vary:
       - Accept-Encoding
       strict-transport-security:
@@ -98,6 +88,6 @@ http_interactions:
       encoding: UTF-8
       string: '{"data":[{"id":"18587270","login":"day9tv","display_name":"Day9tv","type":"","broadcaster_type":"partner","description":"A
         mixture of thoughtful gaming strategy, comedy, and silly fun. Featuring MTGA,
-        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":87448761,"created_at":"2010-12-09T05:50:55.91122Z"}]}'
-  recorded_at: Thu, 04 Feb 2021 04:08:16 GMT
-recorded_with: VCR 6.0.0
+        Dota 2, adventure games, and other community favorites.","profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/day9tv-profile_image-2226c4b27aaf487a-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/b5b2dabd-d720-465b-bd0e-2e8aef3d9802-channel_offline_image-1920x1080.jpeg","view_count":0,"created_at":"2010-12-09T05:50:55Z"}]}'
+  recorded_at: Mon, 31 Jul 2023 16:19:50 GMT
+recorded_with: VCR 6.2.0

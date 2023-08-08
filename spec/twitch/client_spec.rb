@@ -3,37 +3,55 @@
 RSpec.describe Twitch::Client, :vcr do
   subject(:client) do
     described_class.new(
-      client_id: client_id,
-      client_secret: client_secret,
-      ## Optional parameters below
-      access_token: access_token,
-      refresh_token: refresh_token,
-      token_type: token_type,
-      scopes: scopes,
-      redirect_uri: redirect_uri
+      tokens: TwitchOAuth2::Tokens.new(
+        client: {
+          client_id: client_id,
+          client_secret: client_secret,
+          redirect_uri: redirect_uri
+        },
+        access_token: access_token,
+        refresh_token: refresh_token,
+        token_type: token_type,
+        scopes: scopes
+      )
     )
   end
 
-  let(:client_id) { ENV['TWITCH_CLIENT_ID'] }
-  let(:client_secret) { ENV['TWITCH_CLIENT_SECRET'] }
-  let(:access_token) { ENV['TWITCH_ACCESS_TOKEN'] }
+  let(:client_id) { ENV.fetch('TWITCH_CLIENT_ID') }
+  let(:client_secret) { ENV.fetch('TWITCH_CLIENT_SECRET') }
+
+  let(:access_token) do
+    case token_type
+    when :user
+      ENV.fetch('TWITCH_ACCESS_TOKEN')
+    when :application
+      ENV.fetch('TWITCH_APPLICATION_ACCESS_TOKEN')
+    else
+      raise "Unknown token type: #{token_type.inspect}"
+    end
+  end
+
   let(:outdated_access_token) { '9y7bf00r4fof71czggal1e2wlo50q3' }
-  let(:refresh_token) { ENV['TWITCH_REFRESH_TOKEN'] }
+  let(:refresh_token) { ENV.fetch('TWITCH_REFRESH_TOKEN') }
   let(:token_type) { :application }
   let(:scopes) { [] }
   let(:redirect_uri) { 'http://localhost' }
 
   describe '#get_bits_leaderboard' do
-    subject(:body) { client.get_bits_leaderboard.body }
+    def make_request
+      client.get_bits_leaderboard.body
+    end
+
+    subject(:body) { make_request }
 
     let(:scopes) { %w[bits:read] }
 
+    let(:expected_result) do
+      { 'data' => [], 'date_range' => { 'ended_at' => '', 'started_at' => '' }, 'total' => 0 }
+    end
+
     context 'when `token_type` is `user`' do
       let(:token_type) { :user }
-
-      let(:expected_result) do
-        { 'data' => [], 'date_range' => { 'ended_at' => '', 'started_at' => '' }, 'total' => 0 }
-      end
 
       context 'with `access_token`' do
         context 'when `access_token` is actual' do
@@ -51,6 +69,17 @@ RSpec.describe Twitch::Client, :vcr do
             let(:refresh_token) { nil }
 
             it { expect { body }.to raise_error TwitchOAuth2::Error, 'missing refresh token' }
+          end
+        end
+
+        context 'when `access_token` was actual, but became outdated' do
+          before do
+            make_request
+            client.class::CONNECTION.headers['Authorization'] = "Bearer #{outdated_access_token}"
+          end
+
+          context 'with `refresh_token`' do
+            it { is_expected.to eq expected_result }
           end
         end
       end
@@ -73,23 +102,23 @@ RSpec.describe Twitch::Client, :vcr do
         end
 
         it do
-          expect { body }.to raise_error an_instance_of(TwitchOAuth2::Error)
+          expect { body }.to raise_error an_instance_of(TwitchOAuth2::AuthorizeError)
             .and having_attributes(
-              message: 'Use `error.metadata[:link]` for getting new tokens',
-              metadata: { link: expected_login_url }
+              message: 'Direct user to `error.link` and assign `code`',
+              link: expected_login_url
             )
         end
       end
     end
 
+    ## This API method requires User Access Token
     context 'when `token_type` is `application`' do
       let(:token_type) { :application }
 
-      context 'without tokens' do
-        let(:access_token) { nil }
-        let(:refresh_token) { nil }
-
-        it { expect { body }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
+      context 'with correct client credentials' do
+        context 'with tokens' do
+          it { expect { body }.to raise_error Twitch::APIError, 'Missing User OAUTH Token' }
+        end
       end
     end
   end
@@ -135,15 +164,79 @@ RSpec.describe Twitch::Client, :vcr do
   end
 
   describe '#get_users' do
-    subject { client.get_users(id: 18_587_270).data }
+    subject(:data) { client.get_users(id: user_id).data }
 
-    it { is_expected.not_to be_empty }
+    let(:user_id) { 18_587_270 }
 
-    describe 'login' do
-      subject { super().first.login }
-
-      it { is_expected.to eq 'day9tv' }
+    let(:expected_result) do
+      have_attributes(
+        id: user_id.to_s,
+        login: 'day9tv',
+        display_name: 'Day9tv',
+        created_at: Time.new(2010, 12, 9, 5, 50, 55, '+00:00')
+      )
     end
+
+    context 'when `token_type` is `application`' do
+      let(:token_type) { :application }
+
+      context 'with correct client credentials' do
+        context 'with tokens' do
+          it { is_expected.to contain_exactly expected_result }
+        end
+
+        context 'without tokens' do
+          let(:access_token) { nil }
+          let(:refresh_token) { nil }
+
+          it { is_expected.to contain_exactly expected_result }
+        end
+      end
+
+      context 'with incorrect client credentials' do
+        let(:client_id) { nil }
+        let(:client_secret) { nil }
+
+        context 'with tokens' do
+          it { expect { data }.to raise_error Twitch::APIError, 'Client ID is missing' }
+        end
+
+        context 'without tokens' do
+          let(:access_token) { nil }
+          let(:refresh_token) { nil }
+
+          it { expect { data }.to raise_error TwitchOAuth2::Error, 'missing client id' }
+        end
+      end
+    end
+  end
+
+  describe '#get_users_follows' do
+    subject { client.get_users_follows(from_id: from_id, first: 100).data }
+
+    let(:from_id) { '117474239' }
+    let(:from_name) { 'AlexWayfer' }
+
+    let(:expected_elements) do
+      [
+        have_attributes(
+          from_id: from_id,
+          from_name: from_name,
+          to_id: '519237924',
+          to_name: 'azhomnir',
+          followed_at: Time.new(2020, 4, 23, 19, 18, 25, '+00:00')
+        ),
+        have_attributes(
+          from_id: from_id,
+          from_name: from_name,
+          to_id: '238339665',
+          to_name: 'pierr0t777',
+          followed_at: Time.new(2021, 8, 5, 19, 16, 39, '+00:00')
+        )
+      ]
+    end
+
+    it { is_expected.to include(*expected_elements) }
   end
 
   describe '#get_games' do
@@ -183,6 +276,302 @@ RSpec.describe Twitch::Client, :vcr do
       subject { super().pagination['cursor'] }
 
       it { is_expected.not_to be_nil }
+    end
+  end
+
+  describe '#get_channels' do
+    subject(:request) { client.get_channels(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      context 'when broadcaster ID is single value' do
+        ## `StreamAssistantBot`
+        let(:broadcaster_id) { '277558749' }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_attributes) do
+            {
+              broadcaster_id: broadcaster_id,
+              broadcaster_login: 'streamassistantbot',
+              broadcaster_name: 'StreamAssistantBot',
+              broadcaster_language: a_string_matching(/^([a-z]{2}|other)$/),
+              game_id: a_string_matching(/^\d+$/),
+              game_name: a_kind_of(String),
+              title: a_kind_of(String),
+              delay: 0
+            }
+          end
+
+          it { is_expected.to contain_exactly(have_attributes(expected_attributes)) }
+        end
+      end
+
+      context 'when broadcaster ID is an Array of values' do
+        ## `StreamAssistantBot`, `AlexWayfer`
+        let(:broadcaster_id) { %w[277558749 117474239] }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_elements) do
+            [
+              have_attributes(
+                broadcaster_id: broadcaster_id[0],
+                broadcaster_login: 'streamassistantbot',
+                broadcaster_name: 'StreamAssistantBot'
+              ),
+              have_attributes(
+                broadcaster_id: broadcaster_id[1],
+                broadcaster_login: 'alexwayfer',
+                broadcaster_name: 'AlexWayfer'
+              )
+            ]
+          end
+
+          it { is_expected.to match_array(expected_elements) }
+        end
+      end
+    end
+  end
+
+  describe '#search_channels' do
+    subject(:request) { client.search_channels(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "query"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "query"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { query: 'angel of death' } }
+
+      describe 'data' do
+        subject { super().data }
+
+        let(:expected_attributes) do
+          {
+            id: a_string_matching(/^\d+$/),
+            broadcaster_login: a_string_matching(/^\w{3,}$/),
+            display_name: an_instance_of(String),
+            broadcaster_language: a_string_matching(/^([a-z]{2}|other)$/),
+            game_id: a_string_matching(/^\d+$/),
+            game_name: an_instance_of(String),
+            title: an_instance_of(String)
+          }
+        end
+
+        it { is_expected.to include(an_object_having_attributes(expected_attributes)) }
+      end
+    end
+  end
+
+  describe '#modify_channel' do
+    subject(:request) do
+      client.modify_channel(
+        ## `StreamAssistantBot`
+        broadcaster_id: '277558749',
+        game_id: new_game_id,
+        title: 'Test'
+      )
+    end
+
+    let(:token_type) { :user }
+
+    context 'when everything is OK' do
+      ## `Science & Technology`
+      let(:new_game_id) { '509670' }
+
+      it { is_expected.to be true }
+    end
+
+    context 'when game ID is incorrect' do
+      let(:new_game_id) { 'abc' }
+
+      specify do
+        expect { request }.to raise_error(Twitch::APIError, 'The ID in game_id is not valid.')
+      end
+    end
+  end
+
+  describe '#get_moderators' do
+    subject(:request) { client.get_moderators(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'The broadcaster_id query parameter is required.'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'The broadcaster_id query parameter is required.'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      context 'when broadcaster ID is foreign channel' do
+        ## LIRIK
+        let(:broadcaster_id) { '23161357' }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, <<~MESSAGE.chomp
+              The ID in broadcaster_id must match the user ID found in the request's OAuth token.
+            MESSAGE
+          )
+        end
+      end
+
+      context 'when broadcaster ID is your own' do
+        ## `StreamAssistantBot`
+        let(:broadcaster_id) { '277558749' }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_elements) do
+            [
+              have_attributes(
+                user_id: '117474239',
+                user_login: 'alexwayfer',
+                user_name: 'AlexWayfer'
+              )
+            ]
+          end
+
+          it { is_expected.to match_array(expected_elements) }
+        end
+      end
+    end
+  end
+
+  describe '#get_user_active_extensions' do
+    subject(:request) { client.get_user_active_extensions(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { p request }.to raise_error(
+            Twitch::APIError,
+            'The user_id query parameter is required if you specify an app access token.'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        it 'returns extensions for the authentificated user' do
+          expect { request }.not_to raise_error
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { user_id: user_id } }
+
+      ## `StreamAssistantBot`
+      let(:user_id) { '277558749' }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_extension_attributes) do
+            {
+              id: a_string_matching(/^\w+$/),
+              active: true,
+              version: a_string_matching(/^\d+(\.\d+)*$/),
+              name: an_instance_of(String)
+            }
+          end
+
+          let(:expected_attributes) do
+            {
+              panel: matching(
+                '1' => an_object_having_attributes(expected_extension_attributes),
+                '2' => an_object_having_attributes(active: false),
+                '3' => an_object_having_attributes(active: false)
+              ),
+              overlay: matching(
+                '1' => an_object_having_attributes(expected_extension_attributes)
+              ),
+              component: matching(
+                '1' => an_object_having_attributes(active: false),
+                '2' => an_object_having_attributes(active: false)
+              )
+            }
+          end
+
+          it { is_expected.to have_attributes(expected_attributes) }
+        end
+      end
     end
   end
 end

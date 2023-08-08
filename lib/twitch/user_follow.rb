@@ -19,7 +19,7 @@ module Twitch
       @from_name = attributes['from_name']
       @to_id = attributes['to_id']
       @to_name = attributes['to_name']
-      @followed_at = Time.iso8601(attributes['followed_at'])
+      @followed_at = attributes['followed_at']
     end
   end
 end

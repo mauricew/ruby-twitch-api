@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 31 Jul 2023 16:19:51 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '82'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64c7df27-4346fb360d2e498b6c170330
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","scopes":null,"expires_in":5356613}
+
+        '
+  recorded_at: Mon, 31 Jul 2023 16:19:51 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/users?id=18587270
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID: []
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '70'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Mon, 31 Jul 2023 16:19:52 GMT
+      x-served-by:
+      - cache-bfi-krnt7300069-BFI, cache-lcy-eglc8600061-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1690820392.925200,VS0,VS0,VE153
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Unauthorized","status":401,"message":"Client ID is missing"}'
+  recorded_at: Mon, 31 Jul 2023 16:19:52 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/users?id=18587270
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID: []
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '70'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Mon, 31 Jul 2023 16:19:52 GMT
+      x-served-by:
+      - cache-bfi-krnt7300069-BFI, cache-lcy-eglc8600079-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1690820392.352191,VS0,VS0,VE155
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Unauthorized","status":401,"message":"Client ID is missing"}'
+  recorded_at: Mon, 31 Jul 2023 16:19:52 GMT
+recorded_with: VCR 6.2.0

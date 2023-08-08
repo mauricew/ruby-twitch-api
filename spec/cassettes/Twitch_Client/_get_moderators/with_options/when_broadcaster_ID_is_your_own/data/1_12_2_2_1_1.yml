@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.3.0
+      - Faraday v2.7.10
       Authorization:
       - "<AUTHORIZATION_HEADER>"
   response:
@@ -17,28 +17,28 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Thu, 04 Feb 2021 04:08:18 GMT
+      - Mon, 31 Jul 2023 15:00:45 GMT
       content-type:
       - application/json
       content-length:
-      - '215'
+      - '635'
       connection:
       - keep-alive
       server:
-      - nginx/1.14.1
+      - nginx
       access-control-allow-origin:
       - "*"
       x-ctxlog-logid:
-      - 1-601b7332-617873bb5cbeded504fcd2b7
+      - 1-64c7cc9d-7b47ebd8068ffb3b670ee3f7
     body:
       encoding: UTF-8
-      string: '{"client_id":"<CLIENT_ID>","login":"streamassistantbot","scopes":["channel:moderate","channel_editor","channel_read","chat:edit","chat:read","user_read"],"user_id":"277558749","expires_in":15429}
+      string: '{"client_id":"<CLIENT_ID>","login":"<TOKEN_USER_LOGIN>","scopes":["bits:read","channel:edit:commercial","channel:manage:broadcast","channel:manage:polls","channel:manage:predictions","channel:moderate","channel:read:polls","channel:read:predictions","chat:edit","chat:read","clips:edit","moderation:read","moderator:manage:announcements","moderator:manage:banned_users","moderator:manage:chat_messages","moderator:manage:chat_settings","moderator:read:chat_settings","moderator:read:chatters","user:edit","user:manage:blocked_users","user:read:broadcast","user:read:email"],"user_id":"<TOKEN_USER_ID>","expires_in":13874}
 
         '
-  recorded_at: Thu, 04 Feb 2021 04:08:18 GMT
+  recorded_at: Mon, 31 Jul 2023 15:00:46 GMT
 - request:
     method: get
-    uri: https://api.twitch.tv/helix/games?name%5B%5D=Heroes+of+the+Storm&name%5B%5D=Super+Mario+Odyssey
+    uri: https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=277558749
     body:
       encoding: US-ASCII
       string: ''
@@ -57,46 +57,35 @@ http_interactions:
       connection:
       - keep-alive
       content-length:
-      - '303'
+      - '101'
       content-type:
       - application/json; charset=utf-8
       access-control-allow-origin:
       - "*"
-      cache-control:
-      - no-cache, no-store, must-revalidate, private
-      expires:
-      - '0'
-      pragma:
-      - no-cache
       ratelimit-limit:
       - '800'
       ratelimit-remaining:
       - '799'
       ratelimit-reset:
-      - '1612411699'
+      - '1690815647'
       timing-allow-origin:
       - https://www.twitch.tv
-      twitch-trace-id:
-      - 37a6e7bb1ff63b4b4b4054b30517e581
-      x-ctxlog-logid:
-      - 1-601b7332-0552c64372d3524726b92cda
       date:
-      - Thu, 04 Feb 2021 04:08:18 GMT
+      - Mon, 31 Jul 2023 15:00:46 GMT
       x-served-by:
-      - cache-sea4425-SEA, cache-bma1620-BMA
+      - cache-bfi-kbfi7400026-BFI, cache-lhr7365-LHR
       x-cache:
       - MISS, MISS
       x-cache-hits:
       - 0, 0
       x-timer:
-      - S1612411698.416649,VS0,VS0,VE181
+      - S1690815646.341761,VS0,VS0,VE169
       vary:
       - Accept-Encoding
       strict-transport-security:
       - max-age=300
     body:
       encoding: UTF-8
-      string: '{"data":[{"id":"32959","name":"Heroes of the Storm","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Heroes%20of%20the%20Storm-{width}x{height}.jpg"},{"id":"493997","name":"Super
-        Mario Odyssey","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Super%20Mario%20Odyssey-{width}x{height}.jpg"}]}'
-  recorded_at: Thu, 04 Feb 2021 04:08:18 GMT
-recorded_with: VCR 6.0.0
+      string: '{"data":[{"user_id":"117474239","user_login":"alexwayfer","user_name":"AlexWayfer"}],"pagination":{}}'
+  recorded_at: Mon, 31 Jul 2023 15:00:46 GMT
+recorded_with: VCR 6.2.0
