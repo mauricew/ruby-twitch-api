@@ -19,12 +19,12 @@ Guaranteed supported APIs include:
 The future may bring:
 
 *   PubSub
-*   TMI/chat
 
 These will not be considered:
 
 *   [Twitch Kraken API](https://github.com/dustinlakin/twitch-rb)
 *   [Twitch GraphQL API](https://github.com/mauricew/twitch-graphql-api)
+*   [Twitch Chat (IRC/TMI)](https://github.com/EnotPoloskun/twitch-chat)
 
 ## Installation
 
