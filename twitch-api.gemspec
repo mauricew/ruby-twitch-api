@@ -5,8 +5,8 @@ require_relative 'lib/twitch/version'
 Gem::Specification.new do |spec|
   spec.name          = 'twitch-api'
   spec.version       = Twitch::VERSION
-  spec.authors       = ['Maurice Wahba']
-  spec.email         = ['maurice.wahba@gmail.com']
+  spec.authors       = ['Maurice Wahba', 'Alexander Popov']
+  spec.email         = ['maurice.wahba@gmail.com', 'alex.wayfer@gmail.com']
 
   spec.summary       = 'Ruby client for the Twitch Helix API.'
   spec.homepage      = 'https://github.com/mauricew/ruby-twitch-api'
