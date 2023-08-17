@@ -122,6 +122,11 @@ module Twitch
       response.body
     end
 
+    ## https://dev.twitch.tv/docs/api/reference/#start-commercial
+    def start_commercial(options = {})
+      initialize_response nil, post('channels/commercial', options)
+    end
+
     ## https://dev.twitch.tv/docs/api/reference/#search-categories
     def search_categories(options = {})
       initialize_response Category, get('search/categories', options)
