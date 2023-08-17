@@ -807,4 +807,97 @@ RSpec.describe Twitch::Client, :vcr do
       end
     end
   end
+
+  describe '#get_cheermotes' do
+    subject(:request) { client.get_cheermotes(options) }
+
+    shared_examples 'successful data' do
+      describe 'data' do
+        subject { super().data }
+
+        let(:expected_cheermote_attributes) do
+          an_object_having_attributes(
+            prefix: a_string_matching(/^[a-z]{3,}$/i),
+            tiers: including(
+              an_object_having_attributes(
+                min_bits: an_instance_of(Integer),
+                id: a_string_matching(/^\d+$/),
+                color: hex_color_string,
+                images: an_object_having_attributes(
+                  dark: an_object_having_attributes(
+                    animated: including(
+                      '1' => url_string,
+                      '2' => url_string,
+                      '4' => url_string
+                    ),
+                    static: including(
+                      '1' => url_string,
+                      '2' => url_string,
+                      '4' => url_string
+                    )
+                  ),
+                  light: an_object_having_attributes(
+                    animated: including(
+                      '1' => url_string,
+                      '2' => url_string,
+                      '4' => url_string
+                    ),
+                    static: including(
+                      '1' => url_string,
+                      '2' => url_string,
+                      '4' => url_string
+                    )
+                  )
+                ),
+                can_cheer: true,
+                show_in_bits_card: true
+              )
+            ),
+            type: 'global_first_party',
+            order: an_instance_of(Integer),
+            last_updated: an_instance_of(Time),
+            is_charitable: false
+          )
+        end
+
+        it { is_expected.to include expected_cheermote_attributes }
+      end
+    end
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        include_examples 'successful data'
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        include_examples 'successful data'
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      ## `AlexWayfer`
+      ## It has to be partner or affiliate.
+      let(:broadcaster_id) { '117474239' }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        include_examples 'successful data'
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        include_examples 'successful data'
+      end
+    end
+  end
 end

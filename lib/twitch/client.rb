@@ -11,6 +11,7 @@ require_relative 'api_error'
 require_relative 'bits_leader'
 require_relative 'category'
 require_relative 'channel'
+require_relative 'cheermote'
 require_relative 'clip'
 require_relative 'custom_reward'
 require_relative 'entitlement_grant_url'
@@ -76,6 +77,10 @@ module Twitch
 
     def get_bits_leaderboard(options = {})
       initialize_response BitsLeader, get('bits/leaderboard', options)
+    end
+
+    def get_cheermotes(options = {})
+      initialize_response Cheermote, get('bits/cheermotes', options)
     end
 
     require_relative 'client/extensions'
