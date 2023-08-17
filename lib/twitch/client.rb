@@ -14,6 +14,7 @@ require_relative 'channel'
 require_relative 'cheermote'
 require_relative 'clip'
 require_relative 'custom_reward'
+require_relative 'editor'
 require_relative 'entitlement_grant_url'
 require_relative 'extension'
 require_relative 'extensions_by_types'
@@ -130,6 +131,11 @@ module Twitch
     ## https://dev.twitch.tv/docs/api/reference/#start-commercial
     def start_commercial(options = {})
       initialize_response nil, post('channels/commercial', options)
+    end
+
+    ## https://dev.twitch.tv/docs/api/reference/#get-channel-editors
+    def get_channel_editors(options = {})
+      initialize_response Editor, get('channels/editors', options)
     end
 
     ## https://dev.twitch.tv/docs/api/reference/#search-categories

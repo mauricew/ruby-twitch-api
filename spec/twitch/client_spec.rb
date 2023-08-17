@@ -900,4 +900,87 @@ RSpec.describe Twitch::Client, :vcr do
       end
     end
   end
+
+  describe '#get_channel_editors' do
+    subject(:request) { client.get_channel_editors(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        ## `StreamAssistantBot`
+        let(:broadcaster_id) { '277558749' }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, <<~MESSAGE.chomp
+              The ID in broadcaster_id must match the user ID found in the request's OAuth token.
+            MESSAGE
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        context 'when broadcaster ID is foreign channel' do
+          ## LIRIK
+          let(:broadcaster_id) { '23161357' }
+
+          specify do
+            expect { request }.to raise_error(
+              Twitch::APIError, <<~MESSAGE.chomp
+                The ID in broadcaster_id must match the user ID found in the request's OAuth token.
+              MESSAGE
+            )
+          end
+        end
+
+        context 'when broadcaster ID is your own' do
+          ## `StreamAssistantBot`
+          let(:broadcaster_id) { '277558749' }
+
+          describe 'data' do
+            subject { super().data }
+
+            let(:expected_attributes) do
+              {
+                user_id: a_string_matching(/^\d+$/),
+                user_name: an_instance_of(String),
+                created_at: an_instance_of(Time)
+              }
+            end
+
+            it { is_expected.to include an_object_having_attributes expected_attributes }
+          end
+        end
+      end
+    end
+  end
 end
