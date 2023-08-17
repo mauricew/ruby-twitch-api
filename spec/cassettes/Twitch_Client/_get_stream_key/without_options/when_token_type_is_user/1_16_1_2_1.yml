@@ -1,0 +1,86 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 17 Aug 2023 11:38:32 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '656'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64de06b8-0b2fe2647b2dc07c78219b96
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"<TOKEN_USER_LOGIN>","scopes":["bits:read","channel:edit:commercial","channel:manage:broadcast","channel:manage:polls","channel:manage:predictions","channel:manage:redemptions","channel:moderate","channel:read:polls","channel:read:predictions","chat:edit","chat:read","clips:edit","moderation:read","moderator:manage:announcements","moderator:manage:banned_users","moderator:manage:chat_messages","moderator:manage:chat_settings","moderator:read:chat_settings","moderator:read:chatters","user:edit","user:manage:blocked_users","user:read:broadcast","user:read:email"],"user_id":"<TOKEN_USER_ID>","expires_in":10192}
+
+        '
+  recorded_at: Thu, 17 Aug 2023 11:38:32 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams/key
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '94'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Thu, 17 Aug 2023 11:38:32 GMT
+      x-served-by:
+      - cache-bfi-kbfi7400090-BFI, cache-lcy-eglc8600073-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1692272313.626920,VS0,VS0,VE146
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Bad Request","status":400,"message":"Missing required parameter
+        \"broadcaster_id\""}'
+  recorded_at: Thu, 17 Aug 2023 11:38:32 GMT
+recorded_with: VCR 6.2.0

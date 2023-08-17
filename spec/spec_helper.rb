@@ -92,6 +92,20 @@ VCR.configure do |vcr_config|
       JSON.parse(interaction.response.body)['user_id']
     end
   end
+
+  vcr_config.filter_sensitive_data('<STREAM_KEY>') do |interaction|
+    if (
+      interaction.request.uri.include?('streams/key') &&
+        interaction.response.headers['content-type']
+          &.any? { |type| type.include?('application/json') }
+    )
+      data = JSON.parse(interaction.response.body)['data']
+
+      next unless data
+
+      data.first['stream_key']
+    end
+  end
 end
 
 require_relative '../lib/twitch-api'

@@ -20,6 +20,10 @@ module Twitch
       def get_streams_metadata(options = {})
         initialize_response StreamMetadata, get('streams/metadata', options)
       end
+
+      def get_stream_key(options = {})
+        initialize_response nil, get('streams/key', options)
+      end
     end
   end
 end

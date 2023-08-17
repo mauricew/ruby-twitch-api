@@ -25,6 +25,9 @@ Naming/FileName:
   Exclude:
     - lib/twitch-api.rb
 
+Style/ParenthesesAroundCondition:
+  AllowInMultilineConditions: true
+
 Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb

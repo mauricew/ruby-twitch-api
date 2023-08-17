@@ -1,0 +1,86 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 17 Aug 2023 11:38:30 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '82'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64de06b6-01d0256f39ccce213d5b69ab
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","scopes":null,"expires_in":3904694}
+
+        '
+  recorded_at: Thu, 17 Aug 2023 11:38:30 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams/key
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '94'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Thu, 17 Aug 2023 11:38:31 GMT
+      x-served-by:
+      - cache-bfi-kbfi7400090-BFI, cache-lcy-eglc8600063-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1692272311.230395,VS0,VS0,VE147
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Bad Request","status":400,"message":"Missing required parameter
+        \"broadcaster_id\""}'
+  recorded_at: Thu, 17 Aug 2023 11:38:31 GMT
+recorded_with: VCR 6.2.0

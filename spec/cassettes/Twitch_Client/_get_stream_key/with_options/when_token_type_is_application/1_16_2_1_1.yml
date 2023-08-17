@@ -1,0 +1,133 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 17 Aug 2023 11:38:33 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '82'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64de06b9-654a008a12795aa06b87559c
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","scopes":null,"expires_in":3904691}
+
+        '
+  recorded_at: Thu, 17 Aug 2023 11:38:33 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams/key?broadcaster_id=277558749
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '74'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Thu, 17 Aug 2023 11:38:34 GMT
+      x-served-by:
+      - cache-bfi-kbfi7400030-BFI, cache-lhr7346-LHR
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1692272314.022513,VS0,VS0,VE180
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Unauthorized","status":401,"message":"Missing User OAUTH
+        Token"}'
+  recorded_at: Thu, 17 Aug 2023 11:38:34 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams/key?broadcaster_id=277558749
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '74'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Thu, 17 Aug 2023 11:38:34 GMT
+      x-served-by:
+      - cache-bfi-kbfi7400030-BFI, cache-lcy-eglc8600073-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1692272314.480682,VS0,VS0,VE280
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"error":"Unauthorized","status":401,"message":"Missing User OAUTH
+        Token"}'
+  recorded_at: Thu, 17 Aug 2023 11:38:34 GMT
+recorded_with: VCR 6.2.0

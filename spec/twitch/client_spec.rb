@@ -744,4 +744,67 @@ RSpec.describe Twitch::Client, :vcr do
       end
     end
   end
+
+  describe '#get_stream_key' do
+    subject(:request) { client.get_stream_key(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "broadcaster_id"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { broadcaster_id: broadcaster_id } }
+
+      ## `StreamAssistantBot`
+      let(:broadcaster_id) { '277558749' }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing User OAUTH Token'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_data) do
+            [
+              {
+                'stream_key' => '<STREAM_KEY>'
+              }
+            ]
+          end
+
+          it { is_expected.to eq expected_data }
+        end
+      end
+    end
+  end
 end

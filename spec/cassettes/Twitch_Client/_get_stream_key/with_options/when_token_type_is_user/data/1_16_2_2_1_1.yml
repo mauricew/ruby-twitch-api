@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 17 Aug 2023 11:47:12 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '690'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64de08c0-16d3409016c0054824b71567
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","login":"<TOKEN_USER_LOGIN>","scopes":["bits:read","channel:edit:commercial","channel:manage:broadcast","channel:manage:polls","channel:manage:predictions","channel:manage:redemptions","channel:moderate","channel:read:polls","channel:read:predictions","channel:read:stream_key","chat:edit","chat:read","clips:edit","moderation:read","moderator:manage:announcements","moderator:manage:banned_users","moderator:manage:chat_messages","moderator:manage:chat_settings","moderator:read:chat_settings","moderator:read:chatters","user:edit","user:manage:blocked_users","user:read:broadcast","user:read:email"],"user_id":"<TOKEN_USER_ID>","expires_in":13206}
+
+        '
+  recorded_at: Thu, 17 Aug 2023 11:47:13 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/streams/key?broadcaster_id=277558749
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '73'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1692272834'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Thu, 17 Aug 2023 11:47:13 GMT
+      x-served-by:
+      - cache-bfi-kbfi7400030-BFI, cache-lhr7371-LHR
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1692272833.306239,VS0,VS0,VE196
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"stream_key":"<STREAM_KEY>"}]}'
+  recorded_at: Thu, 17 Aug 2023 11:47:13 GMT
+recorded_with: VCR 6.2.0
