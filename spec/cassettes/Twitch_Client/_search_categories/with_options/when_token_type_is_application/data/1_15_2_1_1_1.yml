@@ -1,0 +1,99 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://id.twitch.tv/oauth2/validate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 17 Aug 2023 11:02:40 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '82'
+      connection:
+      - keep-alive
+      server:
+      - nginx
+      access-control-allow-origin:
+      - "*"
+      x-ctxlog-logid:
+      - 1-64ddfe50-37aca29a26dc6723030b1519
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<CLIENT_ID>","scopes":null,"expires_in":3906844}
+
+        '
+  recorded_at: Thu, 17 Aug 2023 11:02:41 GMT
+- request:
+    method: get
+    uri: https://api.twitch.tv/helix/search/categories?query=angel+of+death
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-agent:
+      - twitch-api ruby client 0.4.0
+      Client-ID:
+      - "<CLIENT_ID>"
+      Authorization:
+      - "<AUTHORIZATION_HEADER>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '1101'
+      content-type:
+      - application/json; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      ratelimit-limit:
+      - '800'
+      ratelimit-remaining:
+      - '799'
+      ratelimit-reset:
+      - '1692270162'
+      timing-allow-origin:
+      - https://www.twitch.tv
+      date:
+      - Thu, 17 Aug 2023 11:02:41 GMT
+      x-served-by:
+      - cache-bfi-kbfi7400098-BFI, cache-lcy-eglc8600079-LCY
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1692270161.311611,VS0,VS0,VE188
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=300
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/138_IGDB-52x72.jpg","id":"138","name":"Police
+        Quest: In Pursuit of the Death Angel"},{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/7126_IGDB-52x72.jpg","id":"7126","name":"Astaroth:
+        The Angel of Death"},{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/496471_IGDB-52x72.jpg","id":"496471","name":"Angels
+        of Death"},{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/36463168_IGDB-52x72.jpg","id":"36463168","name":"Angels
+        of Death Episode.Eddie"},{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/719631982-52x72.jpg","id":"719631982","name":"Death
+        Angel Nightmare"},{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/1151716863_IGDB-52x72.jpg","id":"1151716863","name":"Gravity
+        Angels Part 4: Death Force"},{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/1341963614_IGDB-52x72.jpg","id":"1341963614","name":"Police
+        Quest: In Pursuit of the Death Angel"},{"box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/1509140451_IGDB-52x72.jpg","id":"1509140451","name":"Death
+        Angel"}],"pagination":{}}'
+  recorded_at: Thu, 17 Aug 2023 11:02:41 GMT
+recorded_with: VCR 6.2.0

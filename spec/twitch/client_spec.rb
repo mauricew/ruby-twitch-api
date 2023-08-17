@@ -682,4 +682,66 @@ RSpec.describe Twitch::Client, :vcr do
       end
     end
   end
+
+  describe '#search_categories' do
+    subject(:request) { client.search_categories(options) }
+
+    context 'without options' do
+      let(:options) { {} }
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "query"'
+          )
+        end
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        specify do
+          expect { request }.to raise_error(
+            Twitch::APIError, 'Missing required parameter "query"'
+          )
+        end
+      end
+    end
+
+    context 'with options' do
+      let(:options) { { query: query } }
+
+      let(:query) { 'angel of death' }
+
+      shared_examples 'successful data' do
+        describe 'data' do
+          subject { super().data }
+
+          let(:expected_category_attributes) do
+            an_object_having_attributes(
+              id: a_string_matching(/^\d+$/),
+              name: a_string_including('Angels of Death'),
+              box_art_url: url_string
+            )
+          end
+
+          it { is_expected.to include expected_category_attributes }
+        end
+      end
+
+      context 'when token type is application' do
+        let(:token_type) { :application }
+
+        include_examples 'successful data'
+      end
+
+      context 'when token type is user' do
+        let(:token_type) { :user }
+
+        include_examples 'successful data'
+      end
+    end
+  end
 end

@@ -9,6 +9,7 @@ require_relative 'response'
 
 require_relative 'api_error'
 require_relative 'bits_leader'
+require_relative 'category'
 require_relative 'channel'
 require_relative 'clip'
 require_relative 'custom_reward'
@@ -119,6 +120,11 @@ module Twitch
       return true if response.body.empty?
 
       response.body
+    end
+
+    ## https://dev.twitch.tv/docs/api/reference/#search-categories
+    def search_categories(options = {})
+      initialize_response Category, get('search/categories', options)
     end
 
     private
