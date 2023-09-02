@@ -33,6 +33,8 @@ module Twitch
     attr_reader :viewable
     # Duration of the video, in the format `0h0m0s`
     attr_reader :duration
+    # ID of the original stream if the `type` is archive; nil otherwise
+    attr_reader :stream_id
 
     def initialize(attributes = {})
       attributes.each do |key, value|
