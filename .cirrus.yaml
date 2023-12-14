@@ -42,13 +42,7 @@ rubocop_task:
     image: ruby:latest
   <<: *bundle_cache
 
-  lint_script: bundle exec rubocop --format=json --out=rubocop.json
-
-  always:
-    rubocop_artifacts:
-      path: rubocop.json
-      type: text/json
-      format: rubocop
+  lint_script: bundle exec rubocop
 
   only_if: ($CIRRUS_BRANCH == 'master') ||
     changesInclude(
@@ -66,7 +60,7 @@ rspec_task:
 
   <<: *bundle_cache
 
-  test_script: bundle exec rspec --format=json --out=rspec.json
+  test_script: bundle exec rspec
 
   codecov_uploader_cache:
     folder: codecov
@@ -78,12 +72,6 @@ rspec_task:
       - chmod +x codecov/uploader
 
   codecov_script: codecov/uploader
-
-  always:
-    rspec_artifacts:
-      path: rspec.json
-      type: text/json
-      format: rspec
 
   only_if: ($CIRRUS_BRANCH == 'master') ||
     changesInclude(
