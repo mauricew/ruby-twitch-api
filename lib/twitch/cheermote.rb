@@ -46,7 +46,7 @@ module Twitch
       attributes.each do |key, value|
         value = value.map { |tier| CheermoteTier.new(tier) } if key == 'tiers'
 
-        instance_variable_set "@#{key}", value
+        instance_variable_set :"@#{key}", value
       end
     end
   end

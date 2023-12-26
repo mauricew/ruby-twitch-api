@@ -21,7 +21,7 @@ module Twitch
     def initialize(attributes = {})
       %w[panel overlay component].each do |type|
         instance_variable_set(
-          "@#{type}",
+          :"@#{type}",
           attributes[type].transform_values do |extension_data|
             Extension.new(extension_data)
           end
