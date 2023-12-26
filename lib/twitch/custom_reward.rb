@@ -14,7 +14,7 @@ module Twitch
 
       def initialize(attributes = {})
         attributes.each do |key, value|
-          instance_variable_set "@#{key}", value
+          instance_variable_set :"@#{key}", value
         end
       end
     end
@@ -84,7 +84,7 @@ module Twitch
       attributes.each do |key, value|
         value = CustomRewardImage.new(value) if IMAGE_ATTRS.include?(key) && !value.nil?
 
-        instance_variable_set "@#{key}", value
+        instance_variable_set :"@#{key}", value
       end
     end
   end
