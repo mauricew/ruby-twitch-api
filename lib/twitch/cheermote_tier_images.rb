@@ -14,7 +14,7 @@ module Twitch
 
     def initialize(attributes = {})
       attributes.each do |key, value|
-        instance_variable_set "@#{key}", CheermoteTierImage.new(value)
+        instance_variable_set :"@#{key}", CheermoteTierImage.new(value)
       end
     end
   end
