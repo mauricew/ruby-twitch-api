@@ -12,7 +12,7 @@ module Twitch
       @status_code = status_code
       @body = body
 
-      super self.body['message']
+      super(self.body['message'])
     end
   end
 end
