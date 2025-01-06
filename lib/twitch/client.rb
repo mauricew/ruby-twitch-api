@@ -31,6 +31,7 @@ require_relative 'user_ban'
 require_relative 'user_follow'
 require_relative 'redemption'
 require_relative 'video'
+require_relative 'webhook_handler'
 
 module Twitch
   # Core class for requests
@@ -108,6 +109,9 @@ module Twitch
 
     require_relative 'client/custom_rewards'
     include CustomRewards
+
+    require_relative 'client/webhooks'
+    include Webhooks
 
     ## https://dev.twitch.tv/docs/api/reference#get-channel-information
     def get_channels(options = {})
