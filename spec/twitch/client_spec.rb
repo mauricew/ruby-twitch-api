@@ -734,13 +734,13 @@ RSpec.describe Twitch::Client, :vcr do
       context 'when token type is application' do
         let(:token_type) { :application }
 
-        include_examples 'successful data'
+        it_behaves_like 'successful data'
       end
 
       context 'when token type is user' do
         let(:token_type) { :user }
 
-        include_examples 'successful data'
+        it_behaves_like 'successful data'
       end
     end
   end
@@ -870,13 +870,13 @@ RSpec.describe Twitch::Client, :vcr do
       context 'when token type is application' do
         let(:token_type) { :application }
 
-        include_examples 'successful data'
+        it_behaves_like 'successful data'
       end
 
       context 'when token type is user' do
         let(:token_type) { :user }
 
-        include_examples 'successful data'
+        it_behaves_like 'successful data'
       end
     end
 
@@ -890,13 +890,13 @@ RSpec.describe Twitch::Client, :vcr do
       context 'when token type is application' do
         let(:token_type) { :application }
 
-        include_examples 'successful data'
+        it_behaves_like 'successful data'
       end
 
       context 'when token type is user' do
         let(:token_type) { :user }
 
-        include_examples 'successful data'
+        it_behaves_like 'successful data'
       end
     end
   end
