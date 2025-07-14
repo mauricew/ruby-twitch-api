@@ -5,7 +5,7 @@
 	"devDependencies": {
 		"remark-cli": "^12.0.0",
 		"remark-gfm": "^4.0.0",
-		"remark-lint-code-block-style": "^3.0.1",
-		"remark-preset-lint-recommended": "^6.0.1"
+		"remark-lint-code-block-style": "^4.0.1",
+		"remark-preset-lint-recommended": "^7.0.1"
 	}
 }
