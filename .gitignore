@@ -17,3 +17,4 @@ Gemfile.lock
 .ruby-gemset
 package-lock.json
 /node_modules/
+yarn.lock

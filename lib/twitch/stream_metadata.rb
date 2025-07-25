@@ -37,7 +37,7 @@ module Twitch
     def respond_to_missing?(name)
       name = name.to_s
 
-      @attributes.key?(name) ? true : super
+      @attributes.key?(name) || super
     end
   end
 end

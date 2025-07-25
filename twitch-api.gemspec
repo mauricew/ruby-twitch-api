@@ -22,12 +22,12 @@ Gem::Specification.new do |spec|
     'source_code_uri' => github_uri
   }
 
-  spec.required_ruby_version = '>= 3.0', '< 4'
+  spec.required_ruby_version = '>= 3.2', '< 4'
 
   spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt']
 
-  spec.add_dependency 'faraday', '~> 2.3'
+  spec.add_dependency 'faraday', '~> 2.13'
   spec.add_dependency 'faraday-parse_dates', '~> 0.1.1'
-  spec.add_dependency 'faraday-retry', '~> 2.0'
+  spec.add_dependency 'faraday-retry', '~> 2.3'
   spec.add_dependency 'twitch_oauth2', '~> 0.5.0'
 end
